@@ -549,20 +549,39 @@ const ContactsPage = () => `
           </form>
         </div>
         <div data-reveal="delay-1">
-          <div class="minimalist-map" style="height:500px; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); position:relative; background:#1a1a1a; display:flex; align-items:center; justify-content:center;">
-             <div class="map-grid-pattern" style="position:absolute; inset:0; opacity:0.15; background-image: radial-gradient(circle, #FFF 1px, transparent 1px); background-size: 30px 30px;"></div>
-             <div class="map-marker-pulse"></div>
-             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="z-index: 2; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                <circle cx="12" cy="10" r="3"></circle>
-             </svg>
-             <div style="position:absolute; bottom:20px; left:50%; transform:translateX(-50%); font-size:11px; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:0.1em; white-space:nowrap;">вул. Баб'яка, 18, Ужгород</div>
-          </div>
+          <div id="map" class="contacts-map" style="height:500px; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); background:#121212;"></div>
         </div>
       </div>
     </div>
   </section>
 `;
+
+const initMap = () => {
+  const mapEl = document.getElementById('map');
+  if (!mapEl) return;
+
+  const map = L.map('map', { scrollWheelZoom: false })
+    .setView([48.613807, 22.263352], 17);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19
+  }).addTo(map);
+
+  const whiteMarkerSvg = `
+    <svg width="42" height="42" viewBox="0 0 24 24" fill="white" stroke="rgba(0,0,0,0.2)" stroke-width="0.5">
+      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+    </svg>
+  `;
+
+  const customIcon = L.divIcon({
+    html: whiteMarkerSvg,
+    className: 'custom-map-marker',
+    iconSize: [42, 42],
+    iconAnchor: [21, 42]
+  });
+
+  L.marker([48.613807, 22.263352], { icon: customIcon }).addTo(map);
+};
 
 
 // --- MOBILE MIRROR RENDERERS ---
@@ -1094,6 +1113,7 @@ window.app = {
       else if (hash === '#contacts') {
         slot.innerHTML = ContactsPage();
         document.body.classList.remove('mobile-configurator-active');
+        setTimeout(initMap, 100);
       }
 
       document.getElementById('app').classList.remove('page-fade-out');

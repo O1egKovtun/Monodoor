@@ -1577,18 +1577,24 @@ footer { padding: 100px 0 60px; }
   .about-cta-h2 { font-size: 28px !important; margin-bottom: 24px; }
   
   /* MINIMALIST MAP & FOOTER */
-  .grid-contacts {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: start;
+  .contacts-map {
+    background: #121212 !important;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.4);
   }
 
-  @media (max-width: 900px) {
-    .grid-contacts {
-      grid-template-columns: 1fr;
-      gap: 60px;
-    }
+  .leaflet-tile-container {
+    filter: grayscale(100%) invert(100%) contrast(1.1) brightness(0.7);
+  }
+
+  .leaflet-container {
+    background: #121212 !important;
+  }
+
+  .custom-map-marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
   }
 
   .map-marker-pulse {
