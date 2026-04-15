@@ -15,6 +15,9 @@ const doorConfig = {
   customFrameColor: '',
   filling: 'honeycomb',
   lock: 'PZ',
+  series: 'Leoni 40',
+  openDir: 'left',
+  handle: 'bar',
   name: '',
   phone: '',
   configStep: 1,
@@ -22,8 +25,18 @@ const doorConfig = {
   isMobile: window.innerWidth <= 768
 };
 
+// Restore persisted config
+try {
+  const _saved = JSON.parse(sessionStorage.getItem('monodoor_config') || '{}');
+  Object.assign(doorConfig, _saved);
+} catch(e) {}
+
 window.addEventListener('resize', () => {
+  const wasMobile = doorConfig.isMobile;
   doorConfig.isMobile = window.innerWidth <= 768;
+  if (wasMobile !== doorConfig.isMobile && window.location.hash.startsWith('#configurator')) {
+    window.app.render(true);
+  }
 });
 
 // --- DATA MAPS FOR SVG ---
@@ -43,6 +56,7 @@ const FRAME_MAP = {
   gold: "#C9A84C",
   bronze: "#8B6035",
   silver: "#A8B4BC",
+  white: "#F2EFE9",
   custom: doorConfig.customFrameColor || "#333333"
 };
 
@@ -59,6 +73,13 @@ const t = (key) => {
 const saveLang = (lang) => {
   currentLang = lang;
   localStorage.setItem('monodoor_lang', lang);
+};
+
+const applyI18nAttributes = (container = document) => {
+  container.querySelectorAll('[data-ua]').forEach(el => {
+    const text = currentLang === 'ua' ? el.dataset.ua : el.dataset.en;
+    if (text) el.textContent = text;
+  });
 };
 
 // --- ANIMATION SYSTEM ---
@@ -185,16 +206,20 @@ const updateSummary = () => {
 
 // --- COMPONENTS ---
 
-const Header = () => `
+const Header = () => {
+  const hash = window.location.hash || '#home';
+  const isActive = (h) => (hash.startsWith(h) ? 'active' : '');
+  
+  return `
     <div class="nav-inner">
       <a href="#" class="nav-logo">
         <img src="/assets/images/logo.png" alt="Monodoor">
       </a>
       <nav class="nav-links">
-        <a href="#catalog">${t('nav.catalog')}</a>
-        <a href="#configurator">${t('nav.configurator')}</a>
-        <a href="#about">${t('nav.about')}</a>
-        <a href="#contacts">${t('nav.contacts')}</a>
+        <a href="#catalog" class="${isActive('#catalog')}">${t('nav.catalog')}</a>
+        <a href="#configurator" class="${isActive('#configurator')}">${t('nav.configurator')}</a>
+        <a href="#about" class="${isActive('#about')}">${t('nav.about')}</a>
+        <a href="#contacts" class="${isActive('#contacts')}">${t('nav.contacts')}</a>
       </nav>
       <div class="nav-right">
         <button class="lang-toggle" onclick="window.app.toggleLang()">${currentLang.toUpperCase()}</button>
@@ -221,6 +246,35 @@ const Header = () => `
     </div>
   </div>
 `;
+};
+
+const MobileNav = () => {
+  const hash = window.location.hash || '#home';
+  const sections = ['#catalog', '#configurator', '#about', '#contacts'];
+  const activeIdx = sections.indexOf(hash);
+  
+  return `
+    <div class="sticky-bar-mobile">
+      <div class="nav-indicator-slider" style="transform: translateX(${activeIdx >= 0 ? activeIdx * 100 : 0}%)"></div>
+      <a href="#catalog" class="sticky-item ${hash === '#catalog' ? 'active' : ''}">
+        <span class="iconify" data-icon="lucide:shopping-cart"></span>
+        <span>${t('nav.catalog')}</span>
+      </a>
+      <a href="#configurator" class="sticky-item ${hash === '#configurator' ? 'active' : ''}">
+        <span class="iconify" data-icon="lucide:settings"></span>
+        <span>${t('nav.configurator')}</span>
+      </a>
+      <a href="#about" class="sticky-item ${hash === '#about' ? 'active' : ''}">
+        <span class="iconify" data-icon="lucide:info"></span>
+        <span>${t('nav.about')}</span>
+      </a>
+      <a href="#contacts" class="sticky-item ${hash === '#contacts' ? 'active' : ''}">
+        <span class="iconify" data-icon="lucide:phone"></span>
+        <span>${t('nav.contacts')}</span>
+      </a>
+    </div>
+  `;
+};
 
 const CatalogCard = (door) => `
   <div class="catalog-card" data-reveal>
@@ -477,12 +531,21 @@ const ContactsPage = () => `
             </div>
           </div>
 
-          <form action="#" class="contacts-form-wrap" style="background:#202020; padding:40px; border-radius:8px;" onsubmit="event.preventDefault(); this.innerHTML='<h3 style=\\'color:#FFF;\\'>Дякуємо! Ми зв\\'яжемося з вами найближчим часом.</h3>';">
+          <form id="contacts-form" action="#" class="contacts-form-wrap" style="background:#202020; padding:40px; border-radius:8px;" onsubmit="window.app.handleContactSubmit(event, this)">
             <h3 style="margin-bottom:16px; color:#FFF;">Залишити заявку</h3>
-            <input type="text" placeholder="Ім'я" required>
-            <input type="tel" placeholder="Телефон" required>
-            <textarea placeholder="Повідомлення"></textarea>
-            <button class="btn btn-primary" type="submit" style="width:100%;">Надіслати</button>
+            <div style="margin-bottom:16px;">
+              <label for="contact-name" class="visually-hidden">Ім'я</label>
+              <input type="text" id="contact-name" name="contact_name" placeholder="Ім'я" required style="width:100%;">
+            </div>
+            <div style="margin-bottom:16px;">
+              <label for="contact-phone" class="visually-hidden">Телефон</label>
+              <input type="tel" id="contact-phone" name="contact_phone" placeholder="Телефон" required style="width:100%;">
+            </div>
+            <div style="margin-bottom:16px;">
+              <label for="contact-message" class="visually-hidden">Повідомлення</label>
+              <textarea id="contact-message" name="contact_message" placeholder="Повідомлення" style="width:100%;"></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit" id="contact-submit" style="width:100%;">Надіслати</button>
           </form>
         </div>
         <div data-reveal="delay-1">
@@ -513,131 +576,223 @@ const initMap = () => {
 
 // --- MOBILE MIRROR RENDERERS ---
 
-const renderDimensionsCompact = () => `
-  <div class="compact-chip-grid" style="grid-template-columns: repeat(2, 1fr); gap:12px;">
-    ${[600, 700, 800, 900].map(w => `<button type="button" class="compact-chip ${doorConfig.width === w ? 'selected' : ''}" style="height:48px;" onclick="window.app.updateConfig('width', ${w})">${w} мм</button>`).join('')}
+// ─── MOBILE 6-STEP RENDERERS ──────────────────────────────────────────────
+
+const SERIES_DATA = [
+  { id: 'Leoni 40',    sub: '40мм · 2400' },
+  { id: 'FiloMuro 45', sub: '45мм · 3000' },
+  { id: 'FiloMuro 50', sub: '50мм · 3000' },
+];
+
+const MATERIAL_DATA = [
+  { id: 'primer',    color: '#E2DDD6', name: 'Грунт' },
+  { id: 'oak_veneer',color: '#C8A568', name: 'Шпон Дуб' },
+  { id: 'walnut',    color: '#7A5C3A', name: 'Шпон Горіх' },
+  { id: 'mirror',    color: '#C0CDD4', name: 'Дзеркало' },
+  { id: 'glass',     color: '#C8DAE8', name: 'Скло' },
+];
+
+const FRAME_COLOR_DATA = [
+  { id: 'black',  color: '#1A1A1A', name: 'Чорний' },
+  { id: 'gold',   color: '#C9A84C', name: 'Золото' },
+  { id: 'bronze', color: '#8B6035', name: 'Бронза' },
+  { id: 'silver', color: '#A8B4BC', name: 'Срібло' },
+  { id: 'white',  color: '#F2EFE9', name: 'Білий' },
+];
+
+const FILLING_DATA = [
+  { id: 'honeycomb',   db: 28, name: 'Гофрокартон',           pct: 35  },
+  { id: 'polystyrene', db: 34, name: 'Екструд. пінополістирол', pct: 65 },
+  { id: 'saurlend',    db: 42, name: 'SAURLEND',               pct: 100 },
+];
+
+const renderSeriesStep = () => `
+  <div class="series-selector-grid">
+    ${SERIES_DATA.map(s => `
+      <button type="button" class="series-card ${doorConfig.series === s.id ? 'selected' : ''}"
+              onclick="window.app.updateConfig('series','${s.id}')">
+        <span class="series-card-name">${s.id}</span>
+        <span class="series-card-sub">${s.sub}</span>
+      </button>
+    `).join('')}
   </div>
-  <div style="margin-top:16px;">
-    <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:12px; color:#aaa;">
-      <span>Висота (до 3000 мм)</span>
-      <span style="color:#FFF;">${doorConfig.height} мм</span>
+`;
+
+const renderDimensionsStep = () => `
+  <div class="compact-chip-grid" style="grid-template-columns:repeat(2,1fr); gap:10px;">
+    ${[600,700,800,900].map(w => `
+      <button type="button" class="compact-chip ${doorConfig.width === w ? 'selected' : ''}"
+              onclick="window.app.updateConfig('width',${w})">${w} мм</button>
+    `).join('')}
+  </div>
+  <div class="range-wrap">
+    <div class="range-labels">
+      <span>Висота</span>
+      <span style="color:#f9fafb;">${doorConfig.height} мм</span>
     </div>
-    <input type="range" class="mobile-range" min="2000" max="3000" step="50" value="${doorConfig.height}" oninput="window.app.updateConfig('height', parseInt(this.value))" style="width:100%; height:40px; accent-color:#f9fafb;">
+    <label for="config-height-mobile" class="visually-hidden">Висота</label>
+    <input type="range" id="config-height-mobile" name="height_mobile" min="2000" max="3000" step="50" value="${doorConfig.height}"
+           oninput="window.app.updateConfig('height',parseInt(this.value))"
+           style="width:100%; accent-color:#f9fafb;">
+    <div class="range-marks"><span>2000</span><span>2500</span><span>3000</span></div>
   </div>
 `;
 
-const renderMaterialCompact = () => `
-  <div class="swatch-compact-grid">
+const renderMaterialColorStep = () => `
+  <div class="material-big-grid">
+    ${MATERIAL_DATA.map(m => `
+      <div class="material-big-item ${doorConfig.material === m.id ? 'selected' : ''}"
+           onclick="window.app.updateConfig('material','${m.id}')">
+        <div class="material-big-swatch" style="background:${m.color};"></div>
+        <span class="material-big-label">${m.name}</span>
+      </div>
+    `).join('')}
+  </div>
+  <hr class="step-divider">
+  <div class="frame-color-grid">
+    ${FRAME_COLOR_DATA.map(f => `
+      <button type="button" class="frame-color-chip ${doorConfig.frameColor === f.id ? 'selected' : ''}"
+              onclick="window.app.updateConfig('frameColor','${f.id}')">
+        <span class="frame-color-dot" style="background:${f.color};${f.id==='white'?'border-color:rgba(255,255,255,0.5);':''}"></span>
+        ${f.name}
+      </button>
+    `).join('')}
+  </div>
+`;
+
+const renderFillingDirStep = () => `
+  <div class="filling-grid">
+    ${FILLING_DATA.map(f => `
+      <button type="button" class="filling-card ${doorConfig.filling === f.id ? 'selected' : ''}"
+              onclick="window.app.updateConfig('filling','${f.id}')">
+        <div style="display:flex; justify-content:space-between; align-items:baseline;">
+          <span class="db-val">${f.db} дБ</span>
+          <span class="fill-name">${f.name}</span>
+        </div>
+        <div class="fill-bar-wrap">
+          <div class="fill-bar-inner" data-target="${f.pct}" style="width:0%"></div>
+        </div>
+      </button>
+    `).join('')}
+  </div>
+  <hr class="step-divider">
+  <div style="display:flex; gap:8px;">
     ${[
-    { id: 'primer', color: '#E2DDD6' },
-    { id: 'oak_veneer', color: '#C8A568' },
-    { id: 'walnut', color: '#7A5C3A' },
-    { id: 'mirror', color: '#C0CDD4' },
-    { id: 'glass', color: '#C8DAE8' }
-  ].map(m => `
-      <button type="button" class="swatch-compact ${doorConfig.material === m.id ? 'selected' : ''}" 
-           style="background:${m.color}" 
-           onclick="window.app.updateConfig('material', '${m.id}')">
+      { id:'left',  label:'Ліворуч',  svg:`<svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="18" y="4" width="10" height="24" rx="2"/><circle cx="19" cy="16" r="1.5" fill="currentColor" stroke="none"/><path d="M18 16H6M10 12l-4 4 4 4"/></svg>` },
+      { id:'right', label:'Праворуч', svg:`<svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="10" height="24" rx="2"/><circle cx="13" cy="16" r="1.5" fill="currentColor" stroke="none"/><path d="M14 16h12M22 12l4 4-4 4"/></svg>` }
+    ].map(d => `
+      <button type="button" class="btn btn-secondary dir-btn ${doorConfig.openDir === d.id ? 'selected' : ''}"
+              style="flex:1; display:flex; flex-direction:column; height:72px; gap:6px; font-size:12px; ${doorConfig.openDir === d.id ? 'border-color:#f9fafb;color:#f9fafb;' : ''}"
+              onclick="window.app.updateConfig('openDir','${d.id}')">
+        ${d.svg}
+        ${d.label}
       </button>
     `).join('')}
   </div>
 `;
 
-const renderFrameCompact = () => `
-  <div class="compact-chip-grid">
-    ${['black', 'gold', 'bronze', 'silver', 'white'].map(c => `
-      <button type="button" class="compact-chip ${doorConfig.frameColor === c ? 'selected' : ''}" onclick="window.app.updateConfig('frameColor', '${c}')">${c.slice(0, 3).toUpperCase()}</button>
-    `).join('')}
-  </div>
-`;
-
-const renderFillingCompact = () => `
-  <div class="compact-chip-grid" style="grid-template-columns: 1fr 1fr;">
-    ${['honeycomb', 'polystyrene', 'saurlend'].map(id => `
-      <button type="button" class="compact-chip ${doorConfig.filling === id ? 'selected' : ''}" style="font-size:9px;" onclick="window.app.updateConfig('filling', '${id}')">
-        ${id.toUpperCase()}
+const renderHardwareStep = () => `
+  <div style="display:flex; gap:8px;">
+    ${[{id:'PZ',sub:'Кімнатний'},{id:'WC',sub:'Ванна'}].map(l => `
+      <button type="button" class="compact-chip ${doorConfig.lock === l.id ? 'selected' : ''}"
+              style="flex:1; display:flex; flex-direction:column; gap:4px; height:60px;"
+              onclick="window.app.updateConfig('lock','${l.id}')">
+        <span style="font-size:14px; font-weight:700;">${l.id}</span>
+        <span style="font-size:10px; opacity:0.5;">${l.sub}</span>
       </button>
     `).join('')}
   </div>
-`;
-
-const renderHardwareCompact = () => `
-  <div class="compact-chip-grid">
-    ${['PZ', 'WC'].map(l => `
-      <button type="button" class="compact-chip ${doorConfig.lock === l ? 'selected' : ''}" onclick="window.app.updateConfig('lock', '${l}')">${l}</button>
+  <hr class="step-divider">
+  <div style="display:flex; gap:8px;">
+    ${[{id:'bar',name:'Планка'},{id:'lever',name:'Натискна'},{id:'knob',name:'Кругла'}].map(h => `
+      <button type="button" class="compact-chip ${doorConfig.handle === h.id ? 'selected' : ''}"
+              style="flex:1; height:52px;"
+              onclick="window.app.updateConfig('handle','${h.id}')">${h.name}</button>
     `).join('')}
   </div>
 `;
 
-const renderProgressStepper = (currentStep) => {
-  const steps = doorConfig.isMobile ? [1, 2, 3, 4] : [1, 2, 3, 4, 5, 6];
-  return `
+const MATERIAL_NAMES = { primer:'Грунт', oak_veneer:'Шпон Дуб', walnut:'Шпон Горіх', mirror:'Дзеркало', glass:'Скло' };
+const FRAME_NAMES   = { black:'Чорний', gold:'Золото', bronze:'Бронза', silver:'Срібло', white:'Білий' };
+const FILLING_NAMES = { honeycomb:'Гофрокартон', polystyrene:'Пінополістирол', saurlend:'SAURLEND' };
+const FILLING_DB    = { honeycomb:28, polystyrene:34, saurlend:42 };
+const HANDLE_NAMES  = { bar:'Планка', lever:'Натискна', knob:'Кругла' };
+const DIR_NAMES     = { left:'Ліворуч', right:'Праворуч' };
+
+const renderSummaryStep = () => `
+  <div class="summary-full-card">
+    ${[
+      ['Серія',       doorConfig.series],
+      ['Розмір',      `${doorConfig.width} × ${doorConfig.height} мм`],
+      ['Матеріал',    MATERIAL_NAMES[doorConfig.material] || doorConfig.material],
+      ['Профіль',     FRAME_NAMES[doorConfig.frameColor] || doorConfig.frameColor],
+      ['Наповнення',  `${FILLING_DB[doorConfig.filling]} дБ · ${FILLING_NAMES[doorConfig.filling]}`],
+      ['Відкривання', DIR_NAMES[doorConfig.openDir]],
+      ['Фурнітура',   `${doorConfig.lock} · ${HANDLE_NAMES[doorConfig.handle]}`],
+    ].map(([label, val], i, arr) => `
+      <div class="summary-row" ${i === arr.length-1 ? 'style="border-bottom:none;"' : ''}>
+        <span class="sum-label">${label}</span>
+        <span class="sum-val">${val}</span>
+      </div>
+    `).join('')}
+  </div>
+  <form id="order-form-mobile" onsubmit="window.app.submitOrder(event)" style="display:flex; flex-direction:column; gap:10px;">
+    <div>
+      <label for="order-name-mobile" class="visually-hidden">Ім'я</label>
+      <input type="text" id="order-name-mobile" name="order_name" placeholder="Ім'я" required minlength="2" style="width:100%; height:48px; background:#1a1a1a; border:1px solid #2a2a2a; border-radius:6px; padding:0 14px; color:#f9fafb; font-size:14px;">
+    </div>
+    <div>
+      <label for="order-phone-mobile" class="visually-hidden">Телефон</label>
+      <input type="tel" id="order-phone-mobile" name="order_phone" placeholder="+380 __ ___ ____" required style="width:100%; height:48px; background:#1a1a1a; border:1px solid #2a2a2a; border-radius:6px; padding:0 14px; color:#f9fafb; font-size:14px;">
+    </div>
+    <button class="btn btn-primary" type="submit" id="order-submit-mobile" style="width:100%; height:52px; min-height:0; font-size:14px; font-weight:600;">
+      Надіслати замовлення
+    </button>
+  </form>
+`;
+
+const renderProgressStepper = (currentStep) => `
   <div class="progress-stepper-mobile">
-    ${steps.map(i => `
-      <div class="step-dot ${currentStep >= i ? 'active' : ''}" 
-           style="cursor:pointer;" 
-           onclick="window.app.setStep(${i})"></div>
-      ${i < steps.length ? `<div class="step-line ${currentStep > i ? 'active' : ''}"></div>` : ''}
+    ${[1,2,3,4,5,6].map(i => `
+      <div class="step-dot ${i < currentStep ? 'completed' : (i === currentStep ? 'active' : '')}"
+           onclick="if(${i} <= ${currentStep}) window.app.setStep(${i})">
+        ${i < currentStep ? '✓' : i}
+      </div>
+      ${i < 6 ? `<div class="step-line ${i < currentStep ? 'active' : ''}"></div>` : ''}
     `).join('')}
   </div>
-  `;
-};
+`;
+
+const renderMobileNav = (step) => `
+  ${step > 1
+    ? `<button class="btn btn-secondary compact" onclick="window.app.configNav(-1)">← НАЗАД</button>`
+    : '<div></div>'
+  }
+  ${step < 6
+    ? `<button class="btn btn-primary compact" onclick="window.app.configNav(1)">
+        ${step === 5 ? 'ПІДСУМОК →' : 'ДАЛІ →'}
+       </button>`
+    : '<div></div>'
+  }
+`;
 
 const renderStepContentMobile = (step) => {
-  switch (step) {
-    case 1:
-      return `
-        <h3 class="mobile-step-title">Крок 1: Оберіть Розміри та Матеріал</h3>
-        <div class="mobile-compact-wrap">
-          ${renderDimensionsCompact()}
-          <hr style="border:none; border-top:1px solid rgba(255,255,255,0.05); margin:16px 0;">
-          <h3 class="mobile-step-title" style="margin-bottom:8px;">МАТЕРІАЛ</h3>
-          ${renderMaterialCompact()}
-        </div>
-      `;
-    case 2:
-      return `
-        <h3 class="mobile-step-title">Крок 2: Оберіть Колір Профілю та Скло</h3>
-        <div class="mobile-compact-wrap">
-          ${renderFrameCompact()}
-          <hr style="border:none; border-top:1px solid rgba(255,255,255,0.05); margin:16px 0;">
-          <h3 class="mobile-step-title" style="margin-bottom:8px;">СКЛО</h3>
-          <div class="swatch-compact-grid" style="display:grid; grid-template-columns: repeat(2, 1fr); gap:12px;">
-            ${[
-              {id:'glass', name:'Прозоре', color:'#C8DAE8'},
-              {id:'mirror', name:'Дзеркало', color:'#C0CDD4'}
-            ].map(m => `
-              <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
-                <button type="button" class="swatch-compact ${doorConfig.material === m.id ? 'selected' : ''}" 
-                     style="background:${m.color}; width:100%; height:48px;" 
-                     onclick="window.app.updateConfig('material', '${m.id}')">
-                </button>
-                <span style="font-size:10px; color:#aaa; text-align:center;">${m.name}</span>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      `;
-    case 3:
-      return `
-        <h3 class="mobile-step-title">Крок 3: Оберіть Ручку та Замок</h3>
-        <div class="mobile-compact-wrap">${renderHardwareCompact()}</div>
-      `;
-    case 4:
-      return `
-        <h3 class="mobile-step-title">Крок 4: Ваше Замовлення</h3>
-        <div class="mobile-summary-view">
-          <div class="summary-card-mini">
-             <div style="font-size:12px; color:#fff;">${doorConfig.material} / Профіль: ${doorConfig.frameColor} / ${doorConfig.lock}</div>
-          </div>
-          <form onsubmit="event.preventDefault(); alert('Order Sent!'); window.location.hash='#home';" class="mini-order-form">
-            <input type="text" placeholder="Ім'я">
-            <input type="tel" placeholder="+380">
-          </form>
-        </div>
-      `;
-    default: return '';
-  }
+  const titles = {
+    1: 'КРОК 1 — СЕРІЯ ДВЕРЕЙ',
+    2: 'КРОК 2 — РОЗМІРИ',
+    3: 'КРОК 3 — МАТЕРІАЛ ТА ПРОФІЛЬ',
+    4: 'КРОК 4 — НАПОВНЕННЯ ТА ВІДКРИВАННЯ',
+    5: 'КРОК 5 — ФУРНІТУРА',
+    6: 'КРОК 6 — ПІДСУМОК',
+  };
+  const renderers = [renderSeriesStep, renderDimensionsStep, renderMaterialColorStep,
+                     renderFillingDirStep, renderHardwareStep, renderSummaryStep];
+  return `
+    <h3 class="mobile-step-title">${titles[step] || ''}</h3>
+    <div class="mobile-compact-wrap">
+      ${(renderers[step - 1] || (() => ''))()}
+    </div>
+  `;
 };
 
 const ConfiguratorPage = () => {
@@ -646,25 +801,11 @@ const ConfiguratorPage = () => {
 
   if (isMobile) {
     return `
-      <div class="config-layout mobile-split">
-        <div class="config-preview-panel">
-          <div id="config-svg-mount"></div>
-        </div>
-        <div class="config-steps-panel">
-          <button onclick="window.location.hash='#home'" style="position:absolute; top:20px; right:20px; background:none; border:none; z-index:50;">
-            <span class="iconify" data-icon="lucide:x" style="color:#FFF; font-size:32px; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.5));"></span>
-          </button>
-          ${renderProgressStepper(step)}
-          <div class="step-content-mobile">
-            ${renderStepContentMobile(step)}
-          </div>
-          <div class="sticky-nav-mobile">
-            ${step > 1 ? `<button class="btn btn-secondary compact" onclick="window.app.configNav(-1)">[ НАЗАД ]</button>` : '<div></div>'}
-            <button class="btn btn-primary compact" onclick="window.app.configNav(1)">
-              <span>${step < 4 ? '[ НАСТУПНИЙ КРОК ]' : '[ ВІДПРАВИТИ ЗАЯВКУ ]'}</span>
-            </button>
-          </div>
-        </div>
+      <div class="mobile-configurator-message">
+        <div class="mcm-icon">🖥</div>
+        <h2 class="mcm-title" data-ua="Конструктор доступний лише на комп'ютері" data-en="The configurator is available on desktop only"></h2>
+        <p class="mcm-sub" data-ua="Для зручного підбору дверей скористайтесь конструктором на ноутбуці або ПК." data-en="For a comfortable door configuration experience, please use a laptop or desktop computer."></p>
+        <a href="#contacts" class="mcm-btn" data-ua="Залишити заявку" data-en="Leave a request"></a>
       </div>
     `;
   }
@@ -715,8 +856,8 @@ const renderStepContent = () => {
           </div>
         </div>
         <div class="input-wrap">
-          <label style="display:block; font-size:12px; opacity:0.5; margin-bottom:16px;">${t('config.height')}: <b style="color:#FFF;">${doorConfig.height} мм</b></label>
-          <input type="range" min="2000" max="3000" step="50" value="${doorConfig.height}" oninput="window.app.updateConfig('height', parseInt(this.value))" style="width:100%; accent-color:#FFF;">
+          <label for="config-height-desktop" style="display:block; font-size:12px; opacity:0.5; margin-bottom:16px;">${t('config.height')}: <b style="color:#FFF;">${doorConfig.height} мм</b></label>
+          <input type="range" id="config-height-desktop" name="height_desktop" min="2000" max="3000" step="50" value="${doorConfig.height}" oninput="window.app.updateConfig('height', parseInt(this.value))" style="width:100%; accent-color:#FFF;">
         </div>
       `;
     case 2:
@@ -785,10 +926,16 @@ const renderStepContent = () => {
         <div class="config-summary-card">
            <p>${t('config.summary')}</p>
         </div>
-        <form class="config-order-form" onsubmit="event.preventDefault(); alert('Order Sent!');">
-           <input type="text" placeholder="Name">
-           <input type="tel" placeholder="+380">
-           <button class="btn btn-primary" type="submit">${t('config.submit')}</button>
+        <form id="order-form-desktop" class="config-order-form" onsubmit="window.app.submitOrder(event)">
+           <div style="margin-bottom:12px;">
+             <label for="order-name-desktop" class="visually-hidden">Name</label>
+             <input type="text" id="order-name-desktop" name="order_name" placeholder="Name" required>
+           </div>
+           <div style="margin-bottom:12px;">
+             <label for="order-phone-desktop" class="visually-hidden">Phone</label>
+             <input type="tel" id="order-phone-desktop" name="order_phone" placeholder="+380" required>
+           </div>
+           <button class="btn btn-primary" type="submit" id="order-submit-desktop">${t('config.submit')}</button>
         </form>
         <div class="config-step6-actions">
            <button class="btn btn-secondary" onclick="window.app.configNav(-1)">${t('config.prev')}</button>
@@ -836,23 +983,28 @@ window.app = {
   },
 
   updateConfig: (key, val) => {
-    console.log(`Update: ${key} -> ${val}`);
     doorConfig[key] = val;
-    
-    // Fast partial render without full page DOM replacement
-    drawDoor();
+
+    // Persist to sessionStorage
+    const _persist = ['series','width','height','material','frameColor','filling','openDir','lock','handle'];
+    const _saved = {};
+    _persist.forEach(k => _saved[k] = doorConfig[k]);
+    sessionStorage.setItem('monodoor_config', JSON.stringify(_saved));
+
+    // Always redraw SVG immediately
+    requestAnimationFrame(() => drawDoor());
     const sum = document.getElementById('config-summary-live');
     if (sum) updateSummary();
-    
-    // If mobile, quickly replace just the options area so buttons update active state instantly
+
+    // Partial re-render of step content only (mobile)
     if (doorConfig.isMobile) {
       const stepContent = document.querySelector('.step-content-mobile');
-      if (stepContent) {
-        stepContent.innerHTML = renderStepContentMobile(doorConfig.configStep);
-      }
-      const summaryMini = document.querySelector('.summary-card-mini');
-      if (summaryMini && doorConfig.configStep === 4) {
-         summaryMini.innerHTML = `<div style="font-size:12px; color:#fff;">${doorConfig.material} / Профіль: ${doorConfig.frameColor} / ${doorConfig.lock}</div>`;
+      if (stepContent) stepContent.innerHTML = renderStepContentMobile(doorConfig.configStep);
+      // Trigger fill-bar animation on step 4
+      if (doorConfig.configStep === 4) {
+        requestAnimationFrame(() => {
+          document.querySelectorAll('.fill-bar-inner').forEach(el => { el.style.width = el.dataset.target + '%'; });
+        });
       }
     } else {
       window.app.render(true);
@@ -860,27 +1012,31 @@ window.app = {
   },
 
   setStep: (step) => {
+    if (step < 1) step = 1;
     doorConfig.configStep = step;
     if (doorConfig.isMobile) {
-      const stepper = document.querySelector('.progress-stepper-mobile');
-      if (stepper) {
-        stepper.outerHTML = renderProgressStepper(step);
+      // Use a temporary container to avoid outerHTML detachment bug
+      const stepperContainer = document.querySelector('.progress-stepper-mobile');
+      if (stepperContainer) {
+        const tmp = document.createElement('div');
+        tmp.innerHTML = renderProgressStepper(step);
+        stepperContainer.innerHTML = tmp.querySelector('.progress-stepper-mobile')?.innerHTML || '';
       }
-      drawDoor();
-      
+
       const stepContent = document.querySelector('.step-content-mobile');
-      if (stepContent) {
-        stepContent.innerHTML = renderStepContentMobile(step);
-      }
-      
-      const stickyNav = document.querySelector('.sticky-nav-mobile');
-      if (stickyNav) {
-        stickyNav.innerHTML = `
-          ${step > 1 ? '<button class="btn btn-secondary compact" onclick="window.app.configNav(-1)">[ НАЗАД ]</button>' : '<div></div>'}
-          <button class="btn btn-primary compact" onclick="window.app.configNav(1)">
-            <span>${step < 4 ? '[ НАСТУПНИЙ КРОК ]' : '[ ВІДПРАВИТИ ЗАЯВКУ ]'}</span>
-          </button>
-        `;
+      if (stepContent) stepContent.innerHTML = renderStepContentMobile(step);
+
+      const nav = document.querySelector('.sticky-nav-mobile');
+      if (nav) nav.innerHTML = renderMobileNav(step);
+
+      // RAF-based SVG redraw
+      requestAnimationFrame(() => drawDoor());
+
+      // Animate fill-bars on step 4
+      if (step === 4) {
+        requestAnimationFrame(() => {
+          document.querySelectorAll('.fill-bar-inner').forEach(el => { el.style.width = el.dataset.target + '%'; });
+        });
       }
     } else {
       window.app.render(true);
@@ -888,11 +1044,32 @@ window.app = {
   },
 
   configNav: (dir) => {
-    const maxSteps = doorConfig.isMobile ? 4 : 6;
-    let nextStep = doorConfig.configStep + dir;
-    if (nextStep < 1) nextStep = 1;
-    if (nextStep > maxSteps) nextStep = maxSteps;
-    window.app.setStep(nextStep);
+    const maxSteps = 6;
+    let next = doorConfig.configStep + dir;
+    if (next < 1) next = 1;
+    if (next > maxSteps) return;
+    window.app.setStep(next);
+  },
+
+  submitOrder: (e) => {
+    e.preventDefault();
+    const btn = e.target.querySelector('[type=submit]');
+    if (btn) { btn.disabled = true; btn.textContent = 'Надсилаємо...'; }
+    setTimeout(() => {
+      e.target.innerHTML = `
+        <div style="text-align:center; padding:24px 0; color:#f9fafb;">
+          <div style="font-size:40px; margin-bottom:12px;">✓</div>
+          <p style="font-size:16px; font-weight:600; margin-bottom:8px;">Дякуємо!</p>
+          <p style="font-size:13px; color:#9ca3af;">Ми зв'яжемося з вами найближчим часом.</p>
+        </div>
+      `;
+      setTimeout(() => { window.location.hash = '#home'; }, 2500);
+    }, 1200);
+  },
+
+  handleContactSubmit: (e, form) => {
+    e.preventDefault();
+    form.innerHTML = '<h3 style="color:#FFF;">Дякуємо! Ми зв\'яжемося з вами найближчим часом.</h3>';
   },
 
   render: (skipAnim = false) => {
@@ -925,6 +1102,7 @@ window.app = {
       }
 
       document.getElementById('app').classList.remove('page-fade-out');
+      applyI18nAttributes(slot);
       initRevealSystem();
 
       const counters = document.querySelectorAll('.counter');
@@ -955,29 +1133,7 @@ window.app = {
 
       const mobileBar = document.getElementById('mobile-bar');
       if (mobileBar) {
-        const sections = ['#catalog', '#configurator', '#about', '#contacts'];
-        const activeIdx = sections.indexOf(hash);
-        mobileBar.innerHTML = `
-          <div class="sticky-bar-mobile">
-            <div class="nav-indicator-slider" style="transform: translateX(${activeIdx >= 0 ? activeIdx * 100 : 0}%)"></div>
-            <a href="#catalog" class="sticky-item ${hash === '#catalog' ? 'active' : ''}">
-              <span class="iconify" data-icon="lucide:shopping-cart"></span>
-              <span>${t('nav.catalog')}</span>
-            </a>
-            <a href="#configurator" class="sticky-item ${hash === '#configurator' ? 'active' : ''}">
-              <span class="iconify" data-icon="lucide:settings"></span>
-              <span>${t('nav.configurator')}</span>
-            </a>
-            <a href="#about" class="sticky-item ${hash === '#about' ? 'active' : ''}">
-              <span class="iconify" data-icon="lucide:info"></span>
-              <span>${t('nav.about')}</span>
-            </a>
-            <a href="#contacts" class="sticky-item ${hash === '#contacts' ? 'active' : ''}">
-              <span class="iconify" data-icon="lucide:phone"></span>
-              <span>${t('nav.contacts')}</span>
-            </a>
-          </div>
-        `;
+        mobileBar.innerHTML = MobileNav();
       }
     };
 

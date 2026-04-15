@@ -239,6 +239,7 @@ header {
 }
 
 .nav-links a:hover { color: #FFFFFF; }
+.nav-links a.active { color: #FFFFFF; font-weight: 600; }
 
 .nav-right {
   flex-shrink: 0;
@@ -780,6 +781,47 @@ h1 {
   z-index: 500;
 }
 
+/* MOBILE CONFIGURATOR MESSAGE */
+.mobile-configurator-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding: 40px 28px;
+  text-align: center;
+}
+.mcm-icon {
+  font-size: 48px;
+  margin-bottom: 24px;
+  opacity: 0.6;
+}
+.mcm-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.mcm-sub {
+  font-size: 15px;
+  color: #989490;
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+.mcm-btn {
+  display: inline-block;
+  height: 52px;
+  line-height: 52px;
+  padding: 0 32px;
+  background: #FFFFFF;
+  color: #111111;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
 
 
 .sticky-item {
@@ -1218,10 +1260,7 @@ footer { padding: 100px 0 60px; }
     background: #000;
   }
 
-  /* Hide header + bottom bar when configurator is active */
-  body.mobile-configurator-active #main-header,
-  body.mobile-configurator-active .sticky-bar-mobile,
-  body.mobile-configurator-active #mobile-overlay,
+  /* Hide footer when configurator is active */
   body.mobile-configurator-active #main-footer {
     display: none !important;
   }
@@ -1452,16 +1491,19 @@ footer { padding: 100px 0 60px; }
     position: fixed;
     bottom: 0;
     left: 0;
+    right: 0;
     width: 100%;
-    height: 64px;
+    height: auto;
+    min-height: 64px;
     background: rgba(24, 24, 24, 0.95);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-top: 1px solid rgba(255, 255, 255, 0.08);
-    z-index: 2500;
+    z-index: 9999;
     justify-content: space-between;
     align-items: center;
     padding: 0;
+    padding-bottom: env(safe-area-inset-bottom);
   }
   
   /* Sliding Background Indicator - Centered White Pill */
@@ -1512,33 +1554,91 @@ footer { padding: 100px 0 60px; }
 
   .sticky-item:active { transform: scale(0.92); }
 
-  /* Stepper Logic */
+  /* Stepper Logic — 6 steps with numbers/checkmarks */
   .step-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.2);
-    transition: all 0.3s;
+    width: 24px; height: 24px; border-radius: 50%; min-width: 24px;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.3);
+    transition: all 0.3s; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
-  .step-dot.active {
-    background: #f9fafb;
-    box-shadow: 0 0 10px rgba(255,255,255,0.5);
-  }
-  .step-line {
-    width: 20px;
-    height: 1px;
-    background: rgba(255,255,255,0.1);
-  }
-  .step-line.active {
-    background: rgba(255,255,255,0.4);
-  }
+  .step-dot.active { background: #f9fafb; color: #111; border-color: #f9fafb; box-shadow: 0 0 8px rgba(255,255,255,0.25); }
+  .step-dot.completed { background: rgba(255,255,255,0.12); color: #f9fafb; border-color: rgba(255,255,255,0.2); }
+
+  .step-line { flex: 1; height: 1px; background: rgba(255,255,255,0.1); max-width: 20px; }
+  .step-line.active { background: rgba(255,255,255,0.35); }
 
   /* --- ABOUT & CONTACTS --- */
   .about-logo { max-height: 60px !important; margin: 0 auto 24px; filter: brightness(100); }
   .about-h1 { font-size: 32px !important; margin-bottom: 12px; color: #FFF; font-weight: 700; }
   .about-h2 { font-size: 28px !important; margin-bottom: 24px; color: #FFF; }
   .about-cta-h2 { font-size: 28px !important; margin-bottom: 24px; }
-  
   #map { height: 320px !important; }
+
+  /* ── Series selector ── */
+  .series-selector-grid { display: flex; flex-direction: column; gap: 8px; }
+  .series-card {
+    width: 100%; padding: 14px 16px;
+    background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 8px;
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer; text-align: left; color: #f9fafb; font-family: inherit;
+    transition: all 0.15s; -webkit-tap-highlight-color: transparent;
+    min-height: 0;
+  }
+  .series-card.selected { background: rgba(255,255,255,0.06); border-color: #f9fafb; }
+  .series-card-name { font-size: 14px; font-weight: 600; }
+  .series-card-sub { font-size: 11px; color: #6b7280; }
+
+  /* ── Dimensions range ── */
+  .range-wrap { margin-top: 16px; }
+  .range-labels { display: flex; justify-content: space-between; font-size: 12px; color: #9ca3af; margin-bottom: 8px; }
+  .range-marks { display: flex; justify-content: space-between; font-size: 10px; color: #4b5563; margin-top: 6px; }
+
+  /* ── Material grid ── */
+  .material-big-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .material-big-item { display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .material-big-swatch { width: 100%; height: 52px; border-radius: 6px; border: 1.5px solid transparent; transition: all 0.15s; }
+  .material-big-item.selected .material-big-swatch { border-color: #f9fafb; box-shadow: 0 0 0 2px rgba(249,250,251,0.15); }
+  .material-big-label { font-size: 10px; color: #9ca3af; text-align: center; }
+
+  /* ── Frame color chips ── */
+  .frame-color-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .frame-color-chip {
+    display: flex; align-items: center; gap: 6px; padding: 10px 12px;
+    background: #1a1a1a; border: 1px solid #2a2a2a; border-radius: 6px;
+    cursor: pointer; font-size: 12px; color: #9ca3af; font-family: inherit;
+    transition: all 0.15s; -webkit-tap-highlight-color: transparent; min-height: 0;
+  }
+  .frame-color-chip.selected { border-color: #f9fafb; color: #f9fafb; }
+  .frame-color-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; border: 1px solid rgba(255,255,255,0.15); }
+
+  /* ── Filling cards ── */
+  .filling-grid { display: flex; flex-direction: column; gap: 8px; }
+  .filling-card {
+    width: 100%; padding: 12px 14px; background: #1a1a1a; border: 1px solid #2a2a2a;
+    border-radius: 8px; cursor: pointer; text-align: left; font-family: inherit;
+    display: flex; flex-direction: column; gap: 4px; transition: all 0.15s;
+    -webkit-tap-highlight-color: transparent; min-height: 0;
+  }
+  .filling-card.selected { background: rgba(255,255,255,0.05); border-color: #f9fafb; }
+  .db-val { font-size: 22px; font-weight: 700; color: #f9fafb; line-height: 1; }
+  .fill-name { font-size: 12px; color: #9ca3af; }
+  .fill-bar-wrap { width: 100%; height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; margin-top: 4px; overflow: hidden; }
+  .fill-bar-inner { height: 100%; background: #f9fafb; border-radius: 2px; width: 0; transition: width 0.5s ease; }
+
+  /* ── Step divider ── */
+  .step-divider { border: none; border-top: 1px solid rgba(255,255,255,0.06); margin: 16px 0; }
+
+  /* ── Summary ── */
+  .summary-full-card { background: #1a1a1a; border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 16px; margin-bottom: 16px; }
+  .summary-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; }
+  .summary-row:last-child { border-bottom: none; }
+  .sum-label { color: #6b7280; }
+  .sum-val { color: #f9fafb; font-weight: 500; }
+
+  /* ── Touch target fixes ── */
+  .swatch-compact { width: 48px !important; height: 48px !important; }
+  .compact-chip { min-height: 52px; }
 }
 
