@@ -522,7 +522,7 @@ const ContactsPage = () => `
             <div style="display:flex; gap:20px; align-items:flex-start;">
               <span style="font-size:24px;">🕐</span>
               <div>
-                <p style="color:#989490;">Пн–Пт: 9:00–18:00 · Сб: 10:00–15:00</p>
+                <p style="color:#989490;">Пн–Пт: 09:00 – 18:00</p>
               </div>
             </div>
             <div style="display:flex; gap:20px; align-items:flex-start;">
@@ -549,30 +549,21 @@ const ContactsPage = () => `
           </form>
         </div>
         <div data-reveal="delay-1">
-          <div id="map" class="contacts-map" style="height:500px; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,0.1);"></div>
+          <div class="minimalist-map" style="height:500px; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); position:relative; background:#1a1a1a; display:flex; align-items:center; justify-content:center;">
+             <div class="map-grid-pattern" style="position:absolute; inset:0; opacity:0.15; background-image: radial-gradient(circle, #FFF 1px, transparent 1px); background-size: 30px 30px;"></div>
+             <div class="map-marker-pulse"></div>
+             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="z-index: 2; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+             </svg>
+             <div style="position:absolute; bottom:20px; left:50%; transform:translateX(-50%); font-size:11px; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:0.1em; white-space:nowrap;">вул. Баб'яка, 18, Ужгород</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 `;
 
-const initMap = () => {
-  const mapEl = document.getElementById('map');
-  if (!mapEl) return;
-
-  const map = L.map('map', { scrollWheelZoom: false })
-    .setView([48.613807, 22.263352], 17);
-
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '© CartoDB',
-    maxZoom: 19
-  }).addTo(map);
-
-  L.marker([48.613807, 22.263352])
-    .addTo(map)
-    .bindPopup("<b>Monodoor</b><br>вул. Баб'яка, 18<br>Ужгород, 88000<br>050 444 0030")
-    .openPopup();
-};
 
 // --- MOBILE MIRROR RENDERERS ---
 
@@ -1078,16 +1069,21 @@ window.app = {
     const footer = document.getElementById('main-footer');
     const hash = window.location.hash || '#home';
 
-    const finalize = () => {
-      header.innerHTML = Header();
-      footer.innerHTML = `
-        <div class="container footer-grid">
-          <div><h3 style="margin-bottom:20px;">MONODOOR</h3><p>${t('footer.address')}</p></div>
-          <div><p>${t('footer.rights')}</p></div>
-        </div>
-      `;
+      const finalize = () => {
+        header.innerHTML = Header();
+        footer.innerHTML = `
+          <div class="container footer-grid">
+            <div style="display:grid; gap:24px;">
+              <h3 style="margin-bottom:12px; letter-spacing:0.1em;">MONODOOR</h3>
+              <p style="font-size:14px; color:#989490; line-height:1.6;">${t('footer.address')}<br>Пн–Пт: 09:00 – 18:00</p>
+            </div>
+            <div style="display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-end;">
+              <p style="font-size:12px; color:rgba(152,148,144,0.5);">${t('footer.rights')}</p>
+            </div>
+          </div>
+        `;
 
-      if (hash === '#home') { slot.innerHTML = HomePage(); document.body.classList.remove('mobile-configurator-active'); }
+        if (hash === '#home') { slot.innerHTML = HomePage(); document.body.classList.remove('mobile-configurator-active'); }
       else if (hash === '#catalog') { slot.innerHTML = CatalogPage(); document.body.classList.remove('mobile-configurator-active'); }
       else if (hash.startsWith('#configurator')) {
         document.body.classList.add('mobile-configurator-active');
@@ -1098,7 +1094,6 @@ window.app = {
       else if (hash === '#contacts') {
         slot.innerHTML = ContactsPage();
         document.body.classList.remove('mobile-configurator-active');
-        setTimeout(initMap, 100);
       }
 
       document.getElementById('app').classList.remove('page-fade-out');

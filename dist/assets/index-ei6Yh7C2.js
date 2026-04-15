@@ -2,7 +2,7 @@
 яких не видно.`,sub:`Приховані двері прихованого монтажу.
 Геометрія без компромісів.`,btn_catalog:"Переглянути каталог",btn_config:"Зібрати двері"},concept:{title:"Що таке прихований монтаж?",item1:"Без коробки і наличників",item2:"Приховані петлі SIMONSWERK",item3:"Полотно врівень зі стіною"},stats:{years:"Років на ринку",projects:"Завершених проєктів",hidden:"Прихований монтаж",guarantee:"Років гарантії"},catalog:{title:"Наші моделі",all:"Переглянути всі →",view_all_btn:"Дивитись весь каталог →",more:"Детальніше",order:"Замовити",series:"Серія",filters:{series:"Серія",material:"Матеріал"},specs:{width:"Ширина",height:"Висота",mat:"Матеріал",frame:"Каркас",filling:"Наповнення",lock:"Замок"}},how_it_works:{title:"Як ми працюємо",step1:{name:"Замір",desc:"Безкоштовно, виїзд до вас"},step2:{name:"Виробництво",desc:"Власний цех 14–21 день"},step3:{name:"Доставка",desc:"Ужгород і Закарпаття"},step4:{name:"Монтаж",desc:"Під ключ, гарантія 5 років"}},gallery:{title:"Приклади робіт",view_works:"Переглянути роботи",all_works:"Всі роботи →"},config:{title:"Конструктор дверей",prev:"← Назад",next:"Далі →",step1:"РОЗМІРИ",step2:"МАТЕРІАЛ",step3:"РАМА ТА ТОРЦІ",step4:"НАПОВНЕННЯ",step5:"ЗАМОК",step6:"ЗАМОВЛЕННЯ",width:"Ширина",height:"Висота",thickness:"Товщина",summary:"Ваша конфігурація готова",submit:"Надіслати замовлення",success:"Дякуємо! Ми зв'яжемося з вами найближчим часом."},about:{title:"Ми робимо двері, які зникають",sub:"Monodoor — виробник дверей прихованого монтажу з Ужгорода.",production:"Власне виробництво",values:{v1:"Точність",v1_desc:"Кожен міліметр має значення.",v2:"Чесність",v2_desc:"Ніяких прихованих умов.",v3:"Сервіс",v3_desc:"Безкоштовний замір та консультація."}},footer:{address:"вул. Баб'яка, 18, Ужгород",rights:"© 2024 Monodoor. Всі права захищені."}},en:{nav:{catalog:"Catalog",configurator:"Configurator",about:"About",contacts:"Contacts",call:"Call Us",apply:"Leave a Request"},hero:{eyebrow:"Uzhhorod · Internal Production",h1:`Doors
 that are invisible.`,sub:`Hidden flush-mount doors.
-Geometry without compromise.`,btn_catalog:"Browse Catalog",btn_config:"Build a Door"},concept:{title:"What is flush installation?",item1:"No frames or architraves",item2:"Concealed SIMONSWERK hinges",item3:"Door leaf flush with the wall"},stats:{years:"Years on market",projects:"Finished projects",hidden:"Hidden installation",guarantee:"Years guarantee"},catalog:{title:"Our Models",all:"See all →",view_all_btn:"View entire catalog →",more:"Details",order:"Order",series:"Series",filters:{series:"Series",material:"Material"},specs:{width:"Width",height:"Height",mat:"Material",frame:"Frame",filling:"Filling",lock:"Lock"}},how_it_works:{title:"How we work",step1:{name:"Measurement",desc:"Free on-site visit"},step2:{name:"Production",desc:"Own workshop 14–21 days"},step3:{name:"Delivery",desc:"Uzhhorod and Zakarpattia"},step4:{name:"Installation",desc:"Turnkey, 5-year warranty"}},gallery:{title:"Gallery",view_works:"View details",all_works:"All works →"},config:{title:"Door Configurator",prev:"← Back",next:"Next →",step1:"DIMENSIONS",step2:"MATERIAL",step3:"FRAME & EDGES",step4:"FILLING",step5:"LOCK",step6:"ORDER",width:"Width",height:"Height",thickness:"Thickness",summary:"Your Configuration is Ready",submit:"Submit Order",success:"Thank you! We'll contact you shortly."},about:{title:"We make doors that disappear",sub:"Monodoor is a hidden door manufacturer from Uzhhorod.",production:"Internal Production",values:{v1:"Precision",v1_desc:"Every millimeter counts.",v2:"Honesty",v2_desc:"No hidden conditions.",v3:"Service",v3_desc:"Free measurement and consultation."}},footer:{address:"18 Babyaka St, Uzhhorod",rights:"© 2024 Monodoor. All rights reserved."}}},b=[{id:1,name:"Mono S1",series:"Leoni 40",material_group:"primer",desc:"Гладке полотно під фарбування",desc_en:"Smooth leaf for painting",image:"/assets/images/catalog_1.png",specs:{width:"600-900mm",height:"2000-2400mm",mat:"Primer",frame:"Aluminum",filling:"Honeycomb",lock:"Magnetic"}},{id:2,name:"Mono S2",series:"Leoni 40",material_group:"primer",desc:"Текстурована поверхня під фарбування",desc_en:"Textured surface for painting",image:"/assets/images/catalog_2.png",specs:{width:"600-900mm",height:"2000-2400mm",mat:"Textured Primer",frame:"Aluminum",filling:"Honeycomb",lock:"Magnetic"}},{id:3,name:"Mono S3",series:"Leoni 40",material_group:"primer",desc:"Мінімалістична горизонтальна фактура",desc_en:"Minimalist horizontal texture",image:"/assets/images/catalog_3.png",specs:{width:"600-900mm",height:"2000-2400mm",mat:"Horizontal Primer",frame:"Aluminum",filling:"Honeycomb",lock:"Magnetic"}},{id:4,name:"Mono L1",series:"FiloMuro 45",material_group:"veneer",desc:"Шпон дуб, преміум серія",desc_en:"Oak veneer, premium series",image:"/assets/images/catalog_4.png",specs:{width:"600-1000mm",height:"2000-3000mm",mat:"Oak Veneer",frame:"Aluminum",filling:"Polystyrene",lock:"Magnetic"}},{id:5,name:"Mono L2",series:"FiloMuro 45",material_group:"veneer",desc:"Шпон горіх, теплий тон",desc_en:"Walnut veneer, warm tone",image:"/assets/images/catalog_5.png",specs:{width:"600-1000mm",height:"2000-3000mm",mat:"Walnut Veneer",frame:"Aluminum",filling:"Polystyrene",lock:"Magnetic"}},{id:6,name:"Mono Pro",series:"FiloMuro 50",material_group:"composite",desc:"Максимальна ізоляція 42дБ",desc_en:"Maximum insulation 42dB",image:"/assets/images/catalog_6.png",specs:{width:"600-1100mm",height:"2000-3000mm",mat:"Composite",frame:"Aluminum",filling:"Saurlend",lock:"Magnetic"}},{id:7,name:"Mono Glass",series:"FiloMuro 45",material_group:"glass",desc:"Скляна вставка на всю висоту",desc_en:"Full-height glass insert",image:"/assets/images/catalog_7.png",specs:{width:"600-900mm",height:"2000-2700mm",mat:"Safety Glass",frame:"Aluminum",filling:"Glass",lock:"Magnetic"}},{id:8,name:"Mono Mirror",series:"FiloMuro 45",material_group:"mirror",desc:"Дзеркальна панель, повна висота",desc_en:"Full-height mirror panel",image:"/assets/images/catalog_8.png",specs:{width:"600-900mm",height:"2000-2700mm",mat:"Mirror",frame:"Aluminum",filling:"Mirror",lock:"Magnetic"}},{id:9,name:"Mono Oak",series:"FiloMuro 50",material_group:"veneer",desc:"Натуральний шпон дуб",desc_en:"Natural oak veneer",image:"/assets/images/catalog_9.png",specs:{width:"600-1100mm",height:"2000-3000mm",mat:"Premium Oak",frame:"Aluminum",filling:"Saurlend",lock:"Magnetic"}},{id:10,name:"Mono Walnut",series:"FiloMuro 50",material_group:"veneer",desc:"Шпон горіх, преміум",desc_en:"Walnut veneer, premium",image:"/assets/images/catalog_10.png",specs:{width:"600-1100mm",height:"2000-3000mm",mat:"Premium Walnut",frame:"Aluminum",filling:"Saurlend",lock:"Magnetic"}},{id:11,name:"Mono Nero",series:"Leoni 40",material_group:"matte",desc:"Чорне матове полотно",desc_en:"Black matte leaf",image:"/assets/images/catalog_11.png",specs:{width:"600-900mm",height:"2000-2400mm",mat:"Black Matte",frame:"Aluminum",filling:"Honeycomb",lock:"Magnetic"}},{id:12,name:"Mono Bianco",series:"Leoni 40",material_group:"matte",desc:"Біле матове полотно",desc_en:"White matte leaf",image:"/assets/images/catalog_12.png",specs:{width:"600-900mm",height:"2000-2400mm",mat:"White Matte",frame:"Aluminum",filling:"Honeycomb",lock:"Magnetic"}}];let m=localStorage.getItem("monodoor_lang")||"ua";const a={width:800,height:2100,thickness:40,material:"primer",customColor:"",frameType:"aluminium",frameColor:"black",customFrameColor:"",filling:"honeycomb",lock:"PZ",series:"Leoni 40",openDir:"left",handle:"bar",name:"",phone:"",configStep:1,barsAnimated:!1,isMobile:window.innerWidth<=768};try{const e=JSON.parse(sessionStorage.getItem("monodoor_config")||"{}");Object.assign(a,e)}catch{}window.addEventListener("resize",()=>{const e=a.isMobile;a.isMobile=window.innerWidth<=768,e!==a.isMobile&&window.location.hash.startsWith("#configurator")&&window.app.render(!0)});const $={primer:"#E2DDD6",oak_veneer:"#C8A568",walnut:"#7A5C3A",dsp:"#D0CAC0",mirror:"#C0CDD4",glass:"#C8DAE8",custom:a.customColor||"#AAAAAA",other:"#AAAAAA"},k={black:"#1A1A1A",gold:"#C9A84C",bronze:"#8B6035",silver:"#A8B4BC",white:"#F2EFE9",custom:a.customFrameColor||"#333333"},i=e=>{const t=e.split(".");let s=x[m];for(const l of t)s&&(s=s[l]);return s||e},v=e=>{m=e,localStorage.setItem("monodoor_lang",e)},M=(e=document)=>{e.querySelectorAll("[data-ua]").forEach(t=>{const s=m==="ua"?t.dataset.ua:t.dataset.en;s&&(t.textContent=s)})},_=()=>{const e=new IntersectionObserver(t=>{t.forEach(s=>{s.isIntersecting&&s.target.classList.add("in")})},{threshold:.1});document.querySelectorAll("[data-reveal]").forEach(t=>e.observe(t))},A=(e,t,s=1200)=>{let l=null;const o=e.dataset.suffix||"",n=r=>{l||(l=r);const c=Math.min((r-l)/s,1),d=1-Math.pow(1-c,4);e.textContent=Math.floor(d*t)+o,c<1&&requestAnimationFrame(n)};requestAnimationFrame(n)},F=()=>{if(sessionStorage.getItem("monodoor_intro_seen"))return;const e=document.createElement("div");e.className="intro-overlay pulse",e.innerHTML=`
+Geometry without compromise.`,btn_catalog:"Browse Catalog",btn_config:"Build a Door"},concept:{title:"What is flush installation?",item1:"No frames or architraves",item2:"Concealed SIMONSWERK hinges",item3:"Door leaf flush with the wall"},stats:{years:"Years on market",projects:"Finished projects",hidden:"Hidden installation",guarantee:"Years guarantee"},catalog:{title:"Our Models",all:"See all →",view_all_btn:"View entire catalog →",more:"Details",order:"Order",series:"Series",filters:{series:"Series",material:"Material"},specs:{width:"Width",height:"Height",mat:"Material",frame:"Frame",filling:"Filling",lock:"Lock"}},how_it_works:{title:"How we work",step1:{name:"Measurement",desc:"Free on-site visit"},step2:{name:"Production",desc:"Own workshop 14–21 days"},step3:{name:"Delivery",desc:"Uzhhorod and Zakarpattia"},step4:{name:"Installation",desc:"Turnkey, 5-year warranty"}},gallery:{title:"Gallery",view_works:"View details",all_works:"All works →"},config:{title:"Door Configurator",prev:"← Back",next:"Next →",step1:"DIMENSIONS",step2:"MATERIAL",step3:"FRAME & EDGES",step4:"FILLING",step5:"LOCK",step6:"ORDER",width:"Width",height:"Height",thickness:"Thickness",summary:"Your Configuration is Ready",submit:"Submit Order",success:"Thank you! We'll contact you shortly."},about:{title:"We make doors that disappear",sub:"Monodoor is a hidden door manufacturer from Uzhhorod.",production:"Internal Production",values:{v1:"Precision",v1_desc:"Every millimeter counts.",v2:"Honesty",v2_desc:"No hidden conditions.",v3:"Service",v3_desc:"Free measurement and consultation."}},footer:{address:"18 Babyaka St, Uzhhorod",rights:"© 2024 Monodoor. All rights reserved."}}},b=[{id:1,name:"Mono S1",series:"Leoni 40",material_group:"primer",desc:"Гладке полотно під фарбування",desc_en:"Smooth leaf for painting",image:"/assets/images/catalog_1.png",specs:{width:"600-900mm",height:"2000-2400mm",mat:"Primer",frame:"Aluminum",filling:"Honeycomb",lock:"Magnetic"}},{id:2,name:"Mono S2",series:"Leoni 40",material_group:"primer",desc:"Текстурована поверхня під фарбування",desc_en:"Textured surface for painting",image:"/assets/images/catalog_2.png",specs:{width:"600-900mm",height:"2000-2400mm",mat:"Textured Primer",frame:"Aluminum",filling:"Honeycomb",lock:"Magnetic"}},{id:3,name:"Mono S3",series:"Leoni 40",material_group:"primer",desc:"Мінімалістична горизонтальна фактура",desc_en:"Minimalist horizontal texture",image:"/assets/images/catalog_3.png",specs:{width:"600-900mm",height:"2000-2400mm",mat:"Horizontal Primer",frame:"Aluminum",filling:"Honeycomb",lock:"Magnetic"}},{id:4,name:"Mono L1",series:"FiloMuro 45",material_group:"veneer",desc:"Шпон дуб, преміум серія",desc_en:"Oak veneer, premium series",image:"/assets/images/catalog_4.png",specs:{width:"600-1000mm",height:"2000-3000mm",mat:"Oak Veneer",frame:"Aluminum",filling:"Polystyrene",lock:"Magnetic"}},{id:5,name:"Mono L2",series:"FiloMuro 45",material_group:"veneer",desc:"Шпон горіх, теплий тон",desc_en:"Walnut veneer, warm tone",image:"/assets/images/catalog_5.png",specs:{width:"600-1000mm",height:"2000-3000mm",mat:"Walnut Veneer",frame:"Aluminum",filling:"Polystyrene",lock:"Magnetic"}},{id:6,name:"Mono Pro",series:"FiloMuro 50",material_group:"composite",desc:"Максимальна ізоляція 42дБ",desc_en:"Maximum insulation 42dB",image:"/assets/images/catalog_6.png",specs:{width:"600-1100mm",height:"2000-3000mm",mat:"Composite",frame:"Aluminum",filling:"Saurlend",lock:"Magnetic"}},{id:7,name:"Mono Glass",series:"FiloMuro 45",material_group:"glass",desc:"Скляна вставка на всю висоту",desc_en:"Full-height glass insert",image:"/assets/images/catalog_7.png",specs:{width:"600-900mm",height:"2000-2700mm",mat:"Safety Glass",frame:"Aluminum",filling:"Glass",lock:"Magnetic"}},{id:8,name:"Mono Mirror",series:"FiloMuro 45",material_group:"mirror",desc:"Дзеркальна панель, повна висота",desc_en:"Full-height mirror panel",image:"/assets/images/catalog_8.png",specs:{width:"600-900mm",height:"2000-2700mm",mat:"Mirror",frame:"Aluminum",filling:"Mirror",lock:"Magnetic"}},{id:9,name:"Mono Oak",series:"FiloMuro 50",material_group:"veneer",desc:"Натуральний шпон дуб",desc_en:"Natural oak veneer",image:"/assets/images/catalog_9.png",specs:{width:"600-1100mm",height:"2000-3000mm",mat:"Premium Oak",frame:"Aluminum",filling:"Saurlend",lock:"Magnetic"}},{id:10,name:"Mono Walnut",series:"FiloMuro 50",material_group:"veneer",desc:"Шпон горіх, преміум",desc_en:"Walnut veneer, premium",image:"/assets/images/catalog_10.png",specs:{width:"600-1100mm",height:"2000-3000mm",mat:"Premium Walnut",frame:"Aluminum",filling:"Saurlend",lock:"Magnetic"}},{id:11,name:"Mono Nero",series:"Leoni 40",material_group:"matte",desc:"Чорне матове полотно",desc_en:"Black matte leaf",image:"/assets/images/catalog_11.png",specs:{width:"600-900mm",height:"2000-2400mm",mat:"Black Matte",frame:"Aluminum",filling:"Honeycomb",lock:"Magnetic"}},{id:12,name:"Mono Bianco",series:"Leoni 40",material_group:"matte",desc:"Біле матове полотно",desc_en:"White matte leaf",image:"/assets/images/catalog_12.png",specs:{width:"600-900mm",height:"2000-2400mm",mat:"White Matte",frame:"Aluminum",filling:"Honeycomb",lock:"Magnetic"}}];let m=localStorage.getItem("monodoor_lang")||"ua";const a={width:800,height:2100,thickness:40,material:"primer",customColor:"",frameType:"aluminium",frameColor:"black",customFrameColor:"",filling:"honeycomb",lock:"PZ",series:"Leoni 40",openDir:"left",handle:"bar",name:"",phone:"",configStep:1,barsAnimated:!1,isMobile:window.innerWidth<=768};try{const e=JSON.parse(sessionStorage.getItem("monodoor_config")||"{}");Object.assign(a,e)}catch{}window.addEventListener("resize",()=>{const e=a.isMobile;a.isMobile=window.innerWidth<=768,e!==a.isMobile&&window.location.hash.startsWith("#configurator")&&window.app.render(!0)});const $={primer:"#E2DDD6",oak_veneer:"#C8A568",walnut:"#7A5C3A",dsp:"#D0CAC0",mirror:"#C0CDD4",glass:"#C8DAE8",custom:a.customColor||"#AAAAAA",other:"#AAAAAA"},k={black:"#1A1A1A",gold:"#C9A84C",bronze:"#8B6035",silver:"#A8B4BC",white:"#F2EFE9",custom:a.customFrameColor||"#333333"},i=e=>{const t=e.split(".");let s=x[m];for(const l of t)s&&(s=s[l]);return s||e},v=e=>{m=e,localStorage.setItem("monodoor_lang",e)},M=(e=document)=>{e.querySelectorAll("[data-ua]").forEach(t=>{const s=m==="ua"?t.dataset.ua:t.dataset.en;s&&(t.textContent=s)})},_=()=>{const e=new IntersectionObserver(t=>{t.forEach(s=>{s.isIntersecting&&s.target.classList.add("in")})},{threshold:.1});document.querySelectorAll("[data-reveal]").forEach(t=>e.observe(t))},F=(e,t,s=1200)=>{let l=null;const o=e.dataset.suffix||"",n=r=>{l||(l=r);const c=Math.min((r-l)/s,1),d=1-Math.pow(1-c,4);e.textContent=Math.floor(d*t)+o,c<1&&requestAnimationFrame(n)};requestAnimationFrame(n)},A=()=>{if(sessionStorage.getItem("monodoor_intro_seen"))return;const e=document.createElement("div");e.className="intro-overlay pulse",e.innerHTML=`
     <div class="intro-panel intro-panel-left"></div>
     <div class="intro-panel intro-panel-right"></div>
   `,document.body.appendChild(e);const t=document.getElementById("app");t.classList.add("site-reveal"),setTimeout(()=>{e.remove(),t.classList.remove("site-reveal"),sessionStorage.setItem("monodoor_intro_seen","1")},2200)},u=()=>{const e=document.getElementById("config-svg-mount");if(!e)return;const{isMobile:t}=a,s={600:80,700:100,800:120,900:140},l=t?s[a.width]||120:s[a.width]||174,o=t?180:280,n=t?260:400,r=o+(a.height-2e3)*(n-o)/1e3,c=(400-l)/2,d=(520-r)/2,p=$[a.material]||"#AAA",g=k[a.frameColor]||"#333",w=a.material==="mirror"?.82:a.material==="glass"?.58:1;e.innerHTML=`
@@ -225,7 +225,7 @@ Geometry without compromise.`,btn_catalog:"Browse Catalog",btn_config:"Build a D
       </div>
     </div>
   </section>
-`,E=()=>`
+`,L=()=>`
   <section class="section" style="padding-top:160px;">
     <div class="container">
       <h1 data-reveal style="font-size:56px; margin-bottom:20px;">${i("catalog.title")}</h1>
@@ -245,7 +245,7 @@ Geometry without compromise.`,btn_catalog:"Browse Catalog",btn_config:"Build a D
       </div>
     </div>
   </section>
-`,z=()=>`
+`,E=()=>`
   <section class="section" style="background:#1E1E1E; padding:100px 0; text-align:center;">
     <div class="container">
       <img src="/assets/images/logo.png" style="max-height:80px; filter:brightness(100); margin:0 auto 24px;" alt="Monodoor">
@@ -311,7 +311,7 @@ Geometry without compromise.`,btn_catalog:"Browse Catalog",btn_config:"Build a D
       <a href="#contacts" class="btn btn-primary">Зв'яжіться з нами</a>
     </div>
   </section>
-`,D=()=>`
+`,z=()=>`
   <section class="section" style="padding-top:160px; padding-bottom:100px;">
     <div class="container">
       <h1 data-reveal style="font-size:56px; margin-bottom:12px;">Контакти</h1>
@@ -336,7 +336,7 @@ Geometry without compromise.`,btn_catalog:"Browse Catalog",btn_config:"Build a D
             <div style="display:flex; gap:20px; align-items:flex-start;">
               <span style="font-size:24px;">🕐</span>
               <div>
-                <p style="color:#989490;">Пн–Пт: 9:00–18:00 · Сб: 10:00–15:00</p>
+                <p style="color:#989490;">Пн–Пт: 09:00 – 18:00</p>
               </div>
             </div>
             <div style="display:flex; gap:20px; align-items:flex-start;">
@@ -363,14 +363,22 @@ Geometry without compromise.`,btn_catalog:"Browse Catalog",btn_config:"Build a D
           </form>
         </div>
         <div data-reveal="delay-1">
-          <div id="map" class="contacts-map" style="height:500px; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,0.1);"></div>
+          <div class="minimalist-map" style="height:500px; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); position:relative; background:#1a1a1a; display:flex; align-items:center; justify-content:center;">
+             <div class="map-grid-pattern" style="position:absolute; inset:0; opacity:0.15; background-image: radial-gradient(circle, #FFF 1px, transparent 1px); background-size: 30px 30px;"></div>
+             <div class="map-marker-pulse"></div>
+             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="z-index: 2; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+             </svg>
+             <div style="position:absolute; bottom:20px; left:50%; transform:translateX(-50%); font-size:11px; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:0.1em; white-space:nowrap;">вул. Баб'яка, 18, Ужгород</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
-`,H=()=>{if(!document.getElementById("map"))return;const t=L.map("map",{scrollWheelZoom:!1}).setView([48.613807,22.263352],17);L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",{attribution:"© CartoDB",maxZoom:19}).addTo(t),L.marker([48.613807,22.263352]).addTo(t).bindPopup("<b>Monodoor</b><br>вул. Баб'яка, 18<br>Ужгород, 88000<br>050 444 0030").openPopup()},B=[{id:"Leoni 40",sub:"40мм · 2400"},{id:"FiloMuro 45",sub:"45мм · 3000"},{id:"FiloMuro 50",sub:"50мм · 3000"}],T=[{id:"primer",color:"#E2DDD6",name:"Грунт"},{id:"oak_veneer",color:"#C8A568",name:"Шпон Дуб"},{id:"walnut",color:"#7A5C3A",name:"Шпон Горіх"},{id:"mirror",color:"#C0CDD4",name:"Дзеркало"},{id:"glass",color:"#C8DAE8",name:"Скло"}],P=[{id:"black",color:"#1A1A1A",name:"Чорний"},{id:"gold",color:"#C9A84C",name:"Золото"},{id:"bronze",color:"#8B6035",name:"Бронза"},{id:"silver",color:"#A8B4BC",name:"Срібло"},{id:"white",color:"#F2EFE9",name:"Білий"}],N=[{id:"honeycomb",db:28,name:"Гофрокартон",pct:35},{id:"polystyrene",db:34,name:"Екструд. пінополістирол",pct:65},{id:"saurlend",db:42,name:"SAURLEND",pct:100}],O=()=>`
+`,D=[{id:"Leoni 40",sub:"40мм · 2400"},{id:"FiloMuro 45",sub:"45мм · 3000"},{id:"FiloMuro 50",sub:"50мм · 3000"}],H=[{id:"primer",color:"#E2DDD6",name:"Грунт"},{id:"oak_veneer",color:"#C8A568",name:"Шпон Дуб"},{id:"walnut",color:"#7A5C3A",name:"Шпон Горіх"},{id:"mirror",color:"#C0CDD4",name:"Дзеркало"},{id:"glass",color:"#C8DAE8",name:"Скло"}],B=[{id:"black",color:"#1A1A1A",name:"Чорний"},{id:"gold",color:"#C9A84C",name:"Золото"},{id:"bronze",color:"#8B6035",name:"Бронза"},{id:"silver",color:"#A8B4BC",name:"Срібло"},{id:"white",color:"#F2EFE9",name:"Білий"}],T=[{id:"honeycomb",db:28,name:"Гофрокартон",pct:35},{id:"polystyrene",db:34,name:"Екструд. пінополістирол",pct:65},{id:"saurlend",db:42,name:"SAURLEND",pct:100}],N=()=>`
   <div class="series-selector-grid">
-    ${B.map(e=>`
+    ${D.map(e=>`
       <button type="button" class="series-card ${a.series===e.id?"selected":""}"
               onclick="window.app.updateConfig('series','${e.id}')">
         <span class="series-card-name">${e.id}</span>
@@ -378,7 +386,7 @@ Geometry without compromise.`,btn_catalog:"Browse Catalog",btn_config:"Build a D
       </button>
     `).join("")}
   </div>
-`,j=()=>`
+`,P=()=>`
   <div class="compact-chip-grid" style="grid-template-columns:repeat(2,1fr); gap:10px;">
     ${[600,700,800,900].map(e=>`
       <button type="button" class="compact-chip ${a.width===e?"selected":""}"
@@ -396,9 +404,9 @@ Geometry without compromise.`,btn_catalog:"Browse Catalog",btn_config:"Build a D
            style="width:100%; accent-color:#f9fafb;">
     <div class="range-marks"><span>2000</span><span>2500</span><span>3000</span></div>
   </div>
-`,R=()=>`
+`,j=()=>`
   <div class="material-big-grid">
-    ${T.map(e=>`
+    ${H.map(e=>`
       <div class="material-big-item ${a.material===e.id?"selected":""}"
            onclick="window.app.updateConfig('material','${e.id}')">
         <div class="material-big-swatch" style="background:${e.color};"></div>
@@ -408,7 +416,7 @@ Geometry without compromise.`,btn_catalog:"Browse Catalog",btn_config:"Build a D
   </div>
   <hr class="step-divider">
   <div class="frame-color-grid">
-    ${P.map(e=>`
+    ${B.map(e=>`
       <button type="button" class="frame-color-chip ${a.frameColor===e.id?"selected":""}"
               onclick="window.app.updateConfig('frameColor','${e.id}')">
         <span class="frame-color-dot" style="background:${e.color};${e.id==="white"?"border-color:rgba(255,255,255,0.5);":""}"></span>
@@ -416,9 +424,9 @@ Geometry without compromise.`,btn_catalog:"Browse Catalog",btn_config:"Build a D
       </button>
     `).join("")}
   </div>
-`,W=()=>`
+`,O=()=>`
   <div class="filling-grid">
-    ${N.map(e=>`
+    ${T.map(e=>`
       <button type="button" class="filling-card ${a.filling===e.id?"selected":""}"
               onclick="window.app.updateConfig('filling','${e.id}')">
         <div style="display:flex; justify-content:space-between; align-items:baseline;">
@@ -442,7 +450,7 @@ Geometry without compromise.`,btn_catalog:"Browse Catalog",btn_config:"Build a D
       </button>
     `).join("")}
   </div>
-`,q=()=>`
+`,R=()=>`
   <div style="display:flex; gap:8px;">
     ${[{id:"PZ",sub:"Кімнатний"},{id:"WC",sub:"Ванна"}].map(e=>`
       <button type="button" class="compact-chip ${a.lock===e.id?"selected":""}"
@@ -461,9 +469,9 @@ Geometry without compromise.`,btn_catalog:"Browse Catalog",btn_config:"Build a D
               onclick="window.app.updateConfig('handle','${e.id}')">${e.name}</button>
     `).join("")}
   </div>
-`,G={primer:"Грунт",oak_veneer:"Шпон Дуб",walnut:"Шпон Горіх",mirror:"Дзеркало",glass:"Скло"},Z={black:"Чорний",gold:"Золото",bronze:"Бронза",silver:"Срібло",white:"Білий"},U={honeycomb:"Гофрокартон",polystyrene:"Пінополістирол",saurlend:"SAURLEND"},J={honeycomb:28,polystyrene:34,saurlend:42},V={bar:"Планка",lever:"Натискна",knob:"Кругла"},Y={left:"Ліворуч",right:"Праворуч"},Q=()=>`
+`,q={primer:"Грунт",oak_veneer:"Шпон Дуб",walnut:"Шпон Горіх",mirror:"Дзеркало",glass:"Скло"},W={black:"Чорний",gold:"Золото",bronze:"Бронза",silver:"Срібло",white:"Білий"},G={honeycomb:"Гофрокартон",polystyrene:"Пінополістирол",saurlend:"SAURLEND"},Z={honeycomb:28,polystyrene:34,saurlend:42},U={bar:"Планка",lever:"Натискна",knob:"Кругла"},J={left:"Ліворуч",right:"Праворуч"},V=()=>`
   <div class="summary-full-card">
-    ${[["Серія",a.series],["Розмір",`${a.width} × ${a.height} мм`],["Матеріал",G[a.material]||a.material],["Профіль",Z[a.frameColor]||a.frameColor],["Наповнення",`${J[a.filling]} дБ · ${U[a.filling]}`],["Відкривання",Y[a.openDir]],["Фурнітура",`${a.lock} · ${V[a.handle]}`]].map(([e,t],s,l)=>`
+    ${[["Серія",a.series],["Розмір",`${a.width} × ${a.height} мм`],["Матеріал",q[a.material]||a.material],["Профіль",W[a.frameColor]||a.frameColor],["Наповнення",`${Z[a.filling]} дБ · ${G[a.filling]}`],["Відкривання",J[a.openDir]],["Фурнітура",`${a.lock} · ${U[a.handle]}`]].map(([e,t],s,l)=>`
       <div class="summary-row" ${s===l.length-1?'style="border-bottom:none;"':""}>
         <span class="sum-label">${e}</span>
         <span class="sum-val">${t}</span>
@@ -483,7 +491,7 @@ Geometry without compromise.`,btn_catalog:"Browse Catalog",btn_config:"Build a D
       Надіслати замовлення
     </button>
   </form>
-`,K=e=>`
+`,Y=e=>`
   <div class="progress-stepper-mobile">
     ${[1,2,3,4,5,6].map(t=>`
       <div class="step-dot ${t<e?"completed":t===e?"active":""}"
@@ -493,17 +501,17 @@ Geometry without compromise.`,btn_catalog:"Browse Catalog",btn_config:"Build a D
       ${t<6?`<div class="step-line ${t<e?"active":""}"></div>`:""}
     `).join("")}
   </div>
-`,X=e=>`
+`,Q=e=>`
   ${e>1?'<button class="btn btn-secondary compact" onclick="window.app.configNav(-1)">← НАЗАД</button>':"<div></div>"}
   ${e<6?`<button class="btn btn-primary compact" onclick="window.app.configNav(1)">
         ${e===5?"ПІДСУМОК →":"ДАЛІ →"}
        </button>`:"<div></div>"}
-`,f=e=>{const t={1:"КРОК 1 — СЕРІЯ ДВЕРЕЙ",2:"КРОК 2 — РОЗМІРИ",3:"КРОК 3 — МАТЕРІАЛ ТА ПРОФІЛЬ",4:"КРОК 4 — НАПОВНЕННЯ ТА ВІДКРИВАННЯ",5:"КРОК 5 — ФУРНІТУРА",6:"КРОК 6 — ПІДСУМОК"},s=[O,j,R,W,q,Q];return`
+`,f=e=>{const t={1:"КРОК 1 — СЕРІЯ ДВЕРЕЙ",2:"КРОК 2 — РОЗМІРИ",3:"КРОК 3 — МАТЕРІАЛ ТА ПРОФІЛЬ",4:"КРОК 4 — НАПОВНЕННЯ ТА ВІДКРИВАННЯ",5:"КРОК 5 — ФУРНІТУРА",6:"КРОК 6 — ПІДСУМОК"},s=[N,P,j,O,R,V];return`
     <h3 class="mobile-step-title">${t[e]||""}</h3>
     <div class="mobile-compact-wrap">
       ${(s[e-1]||(()=>""))()}
     </div>
-  `},ee=()=>{a.configStep;const{isMobile:e}=a;return e?`
+  `},X=()=>{a.configStep;const{isMobile:e}=a;return e?`
       <div class="mobile-configurator-message">
         <div class="mcm-icon">🖥</div>
         <h2 class="mcm-title" data-ua="Конструктор доступний лише на комп'ютері" data-en="The configurator is available on desktop only"></h2>
@@ -525,7 +533,7 @@ Geometry without compromise.`,btn_catalog:"Browse Catalog",btn_config:"Build a D
 
         <div class="config-step-container">
           <div class="config-step" id="step-content">
-            ${te()}
+            ${K()}
           </div>
         </div>
 
@@ -540,7 +548,7 @@ Geometry without compromise.`,btn_catalog:"Browse Catalog",btn_config:"Build a D
         <div id="config-summary-live" style="margin-top:40px; font-size:12px; color:var(--text-secondary); letter-spacing:0.05em; text-transform:uppercase;"></div>
       </div>
     </div>
-  `},te=()=>{const e=a.configStep;switch(e){case 1:return`
+  `},K=()=>{const e=a.configStep;switch(e){case 1:return`
         <h2 class="step-title">${i("config.step1")}</h2>
         <div class="input-wrap" style="margin-bottom:40px;">
           <label style="display:block; font-size:12px; opacity:0.5; margin-bottom:16px;">${i("config.width")}</label>
@@ -613,15 +621,20 @@ Geometry without compromise.`,btn_catalog:"Browse Catalog",btn_config:"Build a D
         <div class="config-step6-actions">
            <button class="btn btn-secondary" onclick="window.app.configNav(-1)">${i("config.prev")}</button>
         </div>
-      `;default:return`<div>Option step: ${e}</div>`}};window.app={catalogFilter:{series:"All"},activeAccordion:"dimensions",toggleLang:()=>{v(m==="ua"?"en":"ua"),window.location.reload()},setLangMobile:e=>{v(e),window.location.reload()},toggleMenu:e=>{document.getElementById("mobile-overlay").classList.toggle("active",e),document.body.style.overflow=e?"hidden":""},setAccordion:e=>{app.activeAccordion===e?app.activeAccordion=null:app.activeAccordion=e,window.app.render()},toggleSpecs:e=>{document.getElementById(`specs-${e}`).classList.toggle("active")},setFilter:(e,t)=>{window.app.catalogFilter[e]=t,window.app.render()},updateConfig:(e,t)=>{a[e]=t;const s=["series","width","height","material","frameColor","filling","openDir","lock","handle"],l={};if(s.forEach(n=>l[n]=a[n]),sessionStorage.setItem("monodoor_config",JSON.stringify(l)),requestAnimationFrame(()=>u()),document.getElementById("config-summary-live")&&h(),a.isMobile){const n=document.querySelector(".step-content-mobile");n&&(n.innerHTML=f(a.configStep)),a.configStep===4&&requestAnimationFrame(()=>{document.querySelectorAll(".fill-bar-inner").forEach(r=>{r.style.width=r.dataset.target+"%"})})}else window.app.render(!0)},setStep:e=>{var t;if(e<1&&(e=1),a.configStep=e,a.isMobile){const s=document.querySelector(".progress-stepper-mobile");if(s){const n=document.createElement("div");n.innerHTML=K(e),s.innerHTML=((t=n.querySelector(".progress-stepper-mobile"))==null?void 0:t.innerHTML)||""}const l=document.querySelector(".step-content-mobile");l&&(l.innerHTML=f(e));const o=document.querySelector(".sticky-nav-mobile");o&&(o.innerHTML=X(e)),requestAnimationFrame(()=>u()),e===4&&requestAnimationFrame(()=>{document.querySelectorAll(".fill-bar-inner").forEach(n=>{n.style.width=n.dataset.target+"%"})})}else window.app.render(!0)},configNav:e=>{let s=a.configStep+e;s<1&&(s=1),!(s>6)&&window.app.setStep(s)},submitOrder:e=>{e.preventDefault();const t=e.target.querySelector("[type=submit]");t&&(t.disabled=!0,t.textContent="Надсилаємо..."),setTimeout(()=>{e.target.innerHTML=`
+      `;default:return`<div>Option step: ${e}</div>`}};window.app={catalogFilter:{series:"All"},activeAccordion:"dimensions",toggleLang:()=>{v(m==="ua"?"en":"ua"),window.location.reload()},setLangMobile:e=>{v(e),window.location.reload()},toggleMenu:e=>{document.getElementById("mobile-overlay").classList.toggle("active",e),document.body.style.overflow=e?"hidden":""},setAccordion:e=>{app.activeAccordion===e?app.activeAccordion=null:app.activeAccordion=e,window.app.render()},toggleSpecs:e=>{document.getElementById(`specs-${e}`).classList.toggle("active")},setFilter:(e,t)=>{window.app.catalogFilter[e]=t,window.app.render()},updateConfig:(e,t)=>{a[e]=t;const s=["series","width","height","material","frameColor","filling","openDir","lock","handle"],l={};if(s.forEach(n=>l[n]=a[n]),sessionStorage.setItem("monodoor_config",JSON.stringify(l)),requestAnimationFrame(()=>u()),document.getElementById("config-summary-live")&&h(),a.isMobile){const n=document.querySelector(".step-content-mobile");n&&(n.innerHTML=f(a.configStep)),a.configStep===4&&requestAnimationFrame(()=>{document.querySelectorAll(".fill-bar-inner").forEach(r=>{r.style.width=r.dataset.target+"%"})})}else window.app.render(!0)},setStep:e=>{var t;if(e<1&&(e=1),a.configStep=e,a.isMobile){const s=document.querySelector(".progress-stepper-mobile");if(s){const n=document.createElement("div");n.innerHTML=Y(e),s.innerHTML=((t=n.querySelector(".progress-stepper-mobile"))==null?void 0:t.innerHTML)||""}const l=document.querySelector(".step-content-mobile");l&&(l.innerHTML=f(e));const o=document.querySelector(".sticky-nav-mobile");o&&(o.innerHTML=Q(e)),requestAnimationFrame(()=>u()),e===4&&requestAnimationFrame(()=>{document.querySelectorAll(".fill-bar-inner").forEach(n=>{n.style.width=n.dataset.target+"%"})})}else window.app.render(!0)},configNav:e=>{let s=a.configStep+e;s<1&&(s=1),!(s>6)&&window.app.setStep(s)},submitOrder:e=>{e.preventDefault();const t=e.target.querySelector("[type=submit]");t&&(t.disabled=!0,t.textContent="Надсилаємо..."),setTimeout(()=>{e.target.innerHTML=`
         <div style="text-align:center; padding:24px 0; color:#f9fafb;">
           <div style="font-size:40px; margin-bottom:12px;">✓</div>
           <p style="font-size:16px; font-weight:600; margin-bottom:8px;">Дякуємо!</p>
           <p style="font-size:13px; color:#9ca3af;">Ми зв'яжемося з вами найближчим часом.</p>
         </div>
       `,setTimeout(()=>{window.location.hash="#home"},2500)},1200)},handleContactSubmit:(e,t)=>{e.preventDefault(),t.innerHTML=`<h3 style="color:#FFF;">Дякуємо! Ми зв'яжемося з вами найближчим часом.</h3>`},render:(e=!1)=>{const t=document.getElementById("content-slot"),s=document.getElementById("main-header"),l=document.getElementById("main-footer"),o=window.location.hash||"#home",n=()=>{s.innerHTML=C(),l.innerHTML=`
-        <div class="container footer-grid">
-          <div><h3 style="margin-bottom:20px;">MONODOOR</h3><p>${i("footer.address")}</p></div>
-          <div><p>${i("footer.rights")}</p></div>
-        </div>
-      `,o==="#home"?(t.innerHTML=I(),document.body.classList.remove("mobile-configurator-active")):o==="#catalog"?(t.innerHTML=E(),document.body.classList.remove("mobile-configurator-active")):o.startsWith("#configurator")?(document.body.classList.add("mobile-configurator-active"),t.innerHTML=ee(),setTimeout(()=>window.dispatchEvent(new Event("resize")),50)):o==="#about"?(t.innerHTML=z(),document.body.classList.remove("mobile-configurator-active")):o==="#contacts"&&(t.innerHTML=D(),document.body.classList.remove("mobile-configurator-active"),setTimeout(H,100)),document.getElementById("app").classList.remove("page-fade-out"),M(t),_();const r=document.querySelectorAll(".counter");if(r.length>0){const d=new IntersectionObserver(p=>{p.forEach(g=>{g.isIntersecting&&(A(g.target,parseInt(g.target.dataset.target)),d.unobserve(g.target))})});r.forEach(p=>d.observe(p))}o.startsWith("#configurator")&&(u(),h(),a.configStep===4&&setTimeout(()=>{document.querySelectorAll(".sound-bar").forEach(p=>{p.style.width=p.dataset.target+"%"})},50));const c=document.getElementById("mobile-bar");c&&(c.innerHTML=S())};e?n():(document.getElementById("app").classList.add("page-fade-out"),setTimeout(n,350))}};window.addEventListener("hashchange",()=>{window.app.render(),window.scrollTo(0,0)});window.addEventListener("scroll",()=>{const e=document.querySelector("header");e&&e.classList.toggle("scrolled",window.scrollY>80)});F();window.app.render();
+          <div class="container footer-grid">
+            <div style="display:grid; gap:24px;">
+              <h3 style="margin-bottom:12px; letter-spacing:0.1em;">MONODOOR</h3>
+              <p style="font-size:14px; color:#989490; line-height:1.6;">${i("footer.address")}<br>Пн–Пт: 09:00 – 18:00</p>
+            </div>
+            <div style="display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-end;">
+              <p style="font-size:12px; color:rgba(152,148,144,0.5);">${i("footer.rights")}</p>
+            </div>
+          </div>
+        `,o==="#home"?(t.innerHTML=I(),document.body.classList.remove("mobile-configurator-active")):o==="#catalog"?(t.innerHTML=L(),document.body.classList.remove("mobile-configurator-active")):o.startsWith("#configurator")?(document.body.classList.add("mobile-configurator-active"),t.innerHTML=X(),setTimeout(()=>window.dispatchEvent(new Event("resize")),50)):o==="#about"?(t.innerHTML=E(),document.body.classList.remove("mobile-configurator-active")):o==="#contacts"&&(t.innerHTML=z(),document.body.classList.remove("mobile-configurator-active")),document.getElementById("app").classList.remove("page-fade-out"),M(t),_();const r=document.querySelectorAll(".counter");if(r.length>0){const d=new IntersectionObserver(p=>{p.forEach(g=>{g.isIntersecting&&(F(g.target,parseInt(g.target.dataset.target)),d.unobserve(g.target))})});r.forEach(p=>d.observe(p))}o.startsWith("#configurator")&&(u(),h(),a.configStep===4&&setTimeout(()=>{document.querySelectorAll(".sound-bar").forEach(p=>{p.style.width=p.dataset.target+"%"})},50));const c=document.getElementById("mobile-bar");c&&(c.innerHTML=S())};e?n():(document.getElementById("app").classList.add("page-fade-out"),setTimeout(n,350))}};window.addEventListener("hashchange",()=>{window.app.render(),window.scrollTo(0,0)});window.addEventListener("scroll",()=>{const e=document.querySelector("header");e&&e.classList.toggle("scrolled",window.scrollY>80)});A();window.app.render();
