@@ -1340,6 +1340,7 @@ footer { padding: 100px 0 60px; }
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
     gap: 16px;
     padding: 0 11vw 8px 11vw; /* Allow first/last cards to center perfectly, plus drop shadow space */
   }
@@ -1735,7 +1736,7 @@ footer { padding: 100px 0 60px; }
   .contacts-form-wrap { padding: 20px !important; }
 
   /* --- FOOTER --- */
-  footer { padding: 48px 0 90px; }
+  footer { padding: 48px 0 140px; }
   .footer-grid { grid-template-columns: 1fr; gap: 24px; }
 
   /* --- STICKY / FLOATING BAR --- */

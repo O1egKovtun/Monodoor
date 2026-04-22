@@ -1038,15 +1038,35 @@ window.app = {
   },
 
   scrollCatalog: (btn, dir) => {
+    if (window.app._isScrolling) return;
     const grid = btn.parentElement.querySelector('.catalog-grid');
-    if (grid) {
-      const card = grid.querySelector('.catalog-card');
-      if (card) {
-        // card width + gap (16px)
-        const scrollAmount = card.offsetWidth + 16;
-        grid.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
-      }
-    }
+    if (!grid) return;
+    const card = grid.querySelector('.catalog-card');
+    if (!card) return;
+
+    const gap = 16;
+    const cardWidth = card.offsetWidth + gap;
+    
+    // Get current index based on scroll position
+    const currentIndex = Math.round(grid.scrollLeft / cardWidth);
+    let nextIndex = currentIndex + dir;
+    
+    // Hard Boundaries
+    const totalCards = grid.querySelectorAll('.catalog-card').length;
+    if (nextIndex < 0) nextIndex = 0;
+    if (nextIndex >= totalCards) nextIndex = totalCards - 1;
+    
+    if (nextIndex === currentIndex) return;
+
+    window.app._isScrolling = true;
+    grid.scrollTo({ 
+      left: nextIndex * cardWidth, 
+      behavior: 'smooth' 
+    });
+    
+    setTimeout(() => {
+      window.app._isScrolling = false;
+    }, 250); // Debounce to prevent click spamming
   },
 
   initParallax: () => {
