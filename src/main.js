@@ -286,7 +286,7 @@ const CatalogCard = (door) => `
       <h3 class="card-name">${door.name}</h3>
       <p class="card-desc">${currentLang === 'ua' ? door.desc : door.desc_en}</p>
       <div class="spec-tags">
-        <span class="spec-tag">${door.specs.thickness}</span>
+        <span class="spec-tag">Aluminum</span>
         <span class="spec-tag">${door.specs.mat}</span>
       </div>
       <div class="card-btns">
@@ -377,8 +377,16 @@ const HomePage = () => `
         <h2 class="section-title reveal" data-reveal>${t('catalog.title')}</h2>
         <a href="#catalog" style="border-bottom:1px solid #FFF; padding-bottom:4px; font-size:14px;">${t('catalog.all')}</a>
       </div>
-      <div class="catalog-grid">
-        ${catalog.slice(0, 3).map(door => CatalogCard(door)).join('')}
+      <div class="catalog-grid-wrapper" style="position:relative;">
+        <div class="catalog-nav-arrow left mobile-only" onclick="window.app.scrollCatalog(this, -1)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </div>
+        <div class="catalog-grid">
+          ${catalog.slice(0, 3).map(door => CatalogCard(door)).join('')}
+        </div>
+        <div class="catalog-nav-arrow right mobile-only" onclick="window.app.scrollCatalog(this, 1)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </div>
       </div>
       <div style="text-align:center; margin-top:60px;" data-reveal>
         <a href="#catalog" class="btn btn-secondary">${t('catalog.view_all_btn')}</a>
@@ -418,8 +426,16 @@ const CatalogPage = () => `
         </div>
       </div>
 
-      <div class="catalog-grid" id="catalog-grid-full">
-        ${catalog.filter(d => (window.app.catalogFilter.series === 'All' || d.series === window.app.catalogFilter.series)).map(door => CatalogCard(door)).join('')}
+      <div class="catalog-grid-wrapper" style="position:relative;">
+        <div class="catalog-nav-arrow left mobile-only" onclick="window.app.scrollCatalog(this, -1)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </div>
+        <div class="catalog-grid" id="catalog-grid-full">
+          ${catalog.filter(d => (window.app.catalogFilter.series === 'All' || d.series === window.app.catalogFilter.series)).map(door => CatalogCard(door)).join('')}
+        </div>
+        <div class="catalog-nav-arrow right mobile-only" onclick="window.app.scrollCatalog(this, 1)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </div>
       </div>
     </div>
   </section>
@@ -617,6 +633,9 @@ const FILLING_DATA = [
 ];
 
 const renderSeriesStep = () => `
+  <div class="mobile-step1-hero">
+    <img src="/assets/images/hero_door_right.png" alt="Monodoor Series">
+  </div>
   <div class="series-selector-grid">
     ${SERIES_DATA.map(s => `
       <button type="button" class="series-card ${doorConfig.series === s.id ? 'selected' : ''}"
@@ -969,6 +988,14 @@ window.app = {
   setLangMobile: (lang) => {
     saveLang(lang);
     window.location.reload();
+  },
+
+  scrollCatalog: (btn, dir) => {
+    const grid = btn.parentElement.querySelector('.catalog-grid');
+    if (grid) {
+      const scrollAmount = grid.clientWidth * 0.8;
+      grid.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+    }
   },
 
   toggleMenu: (show) => {

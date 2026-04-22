@@ -482,6 +482,8 @@ h1 {
 
 
 /* CATALOG CARDS */
+.catalog-nav-arrow { display: none; } /* Hidden by default on desktop */
+
 .catalog-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1057,8 +1059,15 @@ footer { padding: 100px 0 60px; }
     padding-bottom: 25vh;
     display: flex;
     align-items: flex-end;
+    background-image: 
+      linear-gradient(to right, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.2) 100%),
+      url('/assets/images/hero_door_right.png');
+    background-size: cover;
+    background-position: 70% center; /* Ensure door and handle on the right are visible */
+    background-repeat: no-repeat;
   }
   
+  .hero-bg-overlay { display: none; } /* Hide the default desktop gradient overlay on mobile */
   .hero-image { display: none !important; }
 
   .hero-content {
@@ -1155,7 +1164,43 @@ footer { padding: 100px 0 60px; }
     gap: 16px;
     padding-bottom: 8px; /* space for drop shadow */
   }
-  .catalog-grid::-webkit-scrollbar { display: none; }
+  .catalog-nav-arrow {
+    display: flex;
+    position: absolute;
+    top: 50%; /* Middle of the product card's overall height */
+    transform: translateY(-50%);
+    width: 64px; /* Larger touch target */
+    height: 64px;
+    background: transparent;
+    align-items: center;
+    justify-content: center;
+    color: #111;
+    z-index: 10;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .catalog-nav-arrow::before {
+    content: '';
+    position: absolute;
+    width: 40px; /* Visible circle size */
+    height: 40px;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: -1;
+  }
+
+  .catalog-nav-arrow svg {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Move past container padding (20px) to the absolute screen edges */
+  .catalog-nav-arrow.left { left: -20px; }
+  .catalog-nav-arrow.right { right: -20px; }
+
   .catalog-card {
     flex: 0 0 78vw;
     scroll-snap-align: start;
@@ -1337,6 +1382,23 @@ footer { padding: 100px 0 60px; }
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+
+  .mobile-step1-hero {
+    width: 100%;
+    height: 45vh; /* specific height to fit screen with buttons */
+    margin-bottom: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+  
+  .mobile-step1-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 
   .sticky-nav-mobile {
