@@ -9,14 +9,14 @@ export const translations = {
       apply: "Залишити заявку"
     },
     hero: {
-      eyebrow: "Львів · Завод PortaNova",
-      h1: "Двері,\nяких не видно.",
-      sub: "Двері прихованого монтажу від львівського заводу PortaNova. Геометрія без компромісів.",
+      eyebrow: "УЖГОРОД · ЗАВОД PORTANOVA",
+      h1: "<div>Двері,</div><div>яких не видно.</div>",
+      sub: "Геометрія без компромісів. Двері прихованого монтажу.",
       btn_catalog: "Переглянути каталог",
       btn_config: "Зібрати двері"
     },
     concept: {
-      title: "Що таке прихований монтаж?",
+      title: "<div>Що таке</div><div>прихований монтаж?</div>",
       item1: "Без коробки і наличників",
       item2: "Приховані петлі SIMONSWERK",
       item3: "Полотно врівень зі стіною"
@@ -28,7 +28,7 @@ export const translations = {
       guarantee: "Років гарантії"
     },
     catalog: {
-      title: "Наші моделі",
+      title: "<div>Наші</div><div>моделі</div>",
       all: "Переглянути всі →",
       view_all_btn: "Дивитись весь каталог →",
       more: "Детальніше",
@@ -48,7 +48,7 @@ export const translations = {
       }
     },
     how_it_works: {
-      title: "Як ми працюємо",
+      title: "<div>Як ми</div><div>працюємо</div>",
       step1: { name: "Замір", desc: "Безкоштовно, виїзд до вас" },
       step2: { name: "Виробництво", desc: "Власний цех 14–21 день" },
       step3: { name: "Доставка", desc: "Ужгород і Закарпаття" },
@@ -77,8 +77,8 @@ export const translations = {
       success: "Дякуємо! Ми зв'яжемося з вами найближчим часом."
     },
     about: {
-      title: "Ми робимо двері, які зникають",
-      sub: "Monodoor — офіційний партнер заводу PortaNova (м. Львів). Ми спеціалізуємося на високоякісних дверях прихованого монтажу.",
+      title: "<div>Ми робимо двері,</div><div>які зникають</div>",
+      sub: "Monodoor — офіційний партнер заводу PortaNova. Наш магазин знаходиться в Ужгороді. Ми спеціалізуємося на високоякісних дверях прихованого монтажу.",
       production: "Партнерство з PortaNova",
       values: {
         v1: "Точність",
@@ -104,14 +104,14 @@ export const translations = {
       apply: "Leave a Request"
     },
     hero: {
-      eyebrow: "Lviv · PortaNova Factory",
-      h1: "Doors\nthat are invisible.",
-      sub: "Flush-mounted doors from the PortaNova factory in Lviv. Geometry without compromise.",
+      eyebrow: "UZHHOROD · PORTANOVA FACTORY",
+      h1: "<div>Doors</div><div>that are invisible.</div>",
+      sub: "Geometry without compromise. Flush-mounted doors.",
       btn_catalog: "Browse Catalog",
       btn_config: "Build a Door"
     },
     concept: {
-      title: "What is flush installation?",
+      title: "<div>What is</div><div>flush installation?</div>",
       item1: "No frames or architraves",
       item2: "Concealed SIMONSWERK hinges",
       item3: "Door leaf flush with the wall"
@@ -123,7 +123,7 @@ export const translations = {
       guarantee: "Years guarantee"
     },
     catalog: {
-      title: "Our Models",
+      title: "<div>Our</div><div>Models</div>",
       all: "See all →",
       view_all_btn: "View entire catalog →",
       more: "Details",
@@ -143,7 +143,7 @@ export const translations = {
       }
     },
     how_it_works: {
-      title: "How we work",
+      title: "<div>How we</div><div>work</div>",
       step1: { name: "Measurement", desc: "Free on-site visit" },
       step2: { name: "Production", desc: "Own workshop 14–21 days" },
       step3: { name: "Delivery", desc: "Uzhhorod and Zakarpattia" },
@@ -172,8 +172,8 @@ export const translations = {
       success: "Thank you! We'll contact you shortly."
     },
     about: {
-      title: "We make doors that disappear",
-      sub: "Monodoor is the official partner of the PortaNova factory (Lviv). We specialize in high-quality flush-mounted doors.",
+      title: "<div>We make doors</div><div>that disappear</div>",
+      sub: "Monodoor is the official partner of the PortaNova factory. Our store is located in Uzhhorod. We specialize in high-quality flush-mounted doors.",
       production: "PortaNova Partnership",
       values: {
         v1: "Precision",

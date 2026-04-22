@@ -29,7 +29,7 @@ const doorConfig = {
 try {
   const _saved = JSON.parse(sessionStorage.getItem('monodoor_config') || '{}');
   Object.assign(doorConfig, _saved);
-} catch(e) {}
+} catch (e) { }
 
 window.addEventListener('resize', () => {
   const wasMobile = doorConfig.isMobile;
@@ -209,7 +209,7 @@ const updateSummary = () => {
 const Header = () => {
   const hash = window.location.hash || '#home';
   const isActive = (h) => (hash.startsWith(h) ? 'active' : '');
-  
+
   return `
     <div class="nav-inner">
       <a href="#" class="nav-logo">
@@ -252,9 +252,9 @@ const MobileNav = () => {
   const hash = window.location.hash || '#home';
   const sections = ['#catalog', '#configurator', '#home', '#about', '#contacts'];
   const activeIdx = sections.indexOf(hash);
-  
+
   const homeLabel = window.currentLang === 'en' ? 'Home' : 'Головна';
-  
+
   return `
     <div class="sticky-bar-mobile">
       <div class="nav-indicator-slider" style="transform: translateX(${activeIdx >= 0 ? activeIdx * 100 : 0}%)"></div>
@@ -295,7 +295,7 @@ const CatalogCard = (door) => `
         <span class="spec-tag">Aluminum</span>
         <span class="spec-tag">${door.specs.mat}</span>
       </div>
-      <div class="card-btns">
+      <div class="button-group" style="margin-top:32px; gap:12px;">
         <button class="btn btn-secondary" onclick="window.app.toggleSpecs(${door.id})">${t('catalog.more')}</button>
         <button class="btn btn-primary" onclick="window.location.hash = '#configurator'">${t('catalog.order')}</button>
       </div>
@@ -315,22 +315,22 @@ const CatalogCard = (door) => `
 
 const HomePage = () => {
   const isEn = currentLang === 'en';
-  const heroSub = isEn 
-    ? `Flush-mounted doors from the <span class="text-highlight">PortaNova</span> factory in Lviv. Geometry without compromise.`
-    : `Двері прихованого монтажу від львівського заводу <span class="text-highlight">PortaNova</span>. Геометрія без компромісів.`;
+  const heroSubLine1 = isEn ? "Geometry without compromise" : "Геометрія без компромісів";
+  const heroSubLine2 = isEn ? "Flush-mounted doors" : "Двері прихованого монтажу";
 
   return `
   <section id="hero" style="position:relative; overflow:hidden; background:#181818;">
     <!-- Parallax Background for Desktop & Mobile -->
-    <div class="hero-bg-parallax" style="position:absolute; top:-10%; left:-10%; width:120%; height:120%; background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 100%), url('/assets/images/hero_door_right.png'); background-size:cover; background-position:center; z-index:0; transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);"></div>
+    <div class="hero-bg-parallax" style="position:absolute; top:-10%; left:-10%; width:120%; height:120%; background-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 40%, rgba(0, 0, 0, 0.4) 100%), url('/assets/images/hero_door_right.png'); background-size:cover; background-position:center; z-index:0; transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);"></div>
     
     <div class="container hero-content" style="position:relative; z-index:10;">
       <div class="hero-text-block">
         <span class="eyebrow" data-reveal>${t('hero.eyebrow')}</span>
-        <h1 class="hero-h1-animate" style="font-weight:700; line-height:1.1;">${t('hero.h1')}</h1>
-        <p class="hero-sub" data-reveal="delay-2" style="font-size:1.1rem; max-width:500px; color:rgba(255,255,255,0.7); margin-bottom:40px; letter-spacing:0.02em;">
-          ${heroSub}
-        </p>
+        <h1 class="hero-h1-animate" data-reveal="delay-1">${t('hero.h1')}</h1>
+        <div class="hero-sub" data-reveal="delay-2">
+          <div>${heroSubLine1}</div>
+          <div>${heroSubLine2}</div>
+        </div>
         <div class="hero-btns" data-reveal="delay-3" style="display:flex; gap:20px;">
           <a href="#catalog" class="btn btn-primary">${t('hero.btn_catalog')}</a>
           <a href="#configurator" class="btn btn-secondary">${t('hero.btn_config')}</a>
@@ -404,7 +404,7 @@ const HomePage = () => {
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
         </div>
       </div>
-      <div style="text-align:center; margin-top:60px;" data-reveal>
+      <div style="margin-top:60px;" data-reveal>
         <a href="#catalog" class="btn btn-secondary">${t('catalog.view_all_btn')}</a>
       </div>
     </div>
@@ -412,7 +412,7 @@ const HomePage = () => {
 
   <section class="section section-alt">
     <div class="container">
-      <h2 class="section-title reveal" data-reveal style="text-align:center; margin-bottom:80px;">${t('how_it_works.title')}</h2>
+      <h2 class="section-title reveal" data-reveal style="margin-bottom:80px;">${t('how_it_works.title')}</h2>
       <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:40px;">
         ${[1, 2, 3, 4].map(i => `
           <div class="step-card" data-reveal="delay-${i}" style="position:relative; padding:40px; background:var(--bg-card); border-radius:6px;">
@@ -460,15 +460,15 @@ const CatalogPage = () => `
 
 const AboutPage = () => {
   const isEn = currentLang === 'en';
-  
+
   return `
   <!-- Cinematic Header -->
-  <section class="section" style="background:#121212; padding:120px 0 60px; text-align:center;">
+  <section class="section" style="background:#121212; padding:120px 0 60px;">
     <div class="container">
-      <img src="/assets/images/logo.png" style="max-height:60px; filter:brightness(100); margin:0 auto 24px;" alt="Monodoor">
+      <img src="/assets/images/logo.png" style="max-height:60px; filter:brightness(100); margin:0 0 24px 0;" alt="Monodoor">
       <h1 data-reveal style="font-size: clamp(40px, 8vw, 80px); color:#FFF; font-weight:800; margin-bottom:10px; letter-spacing:-0.04em;">MONODOOR</h1>
       <p data-reveal="delay-1" style="font-size:14px; color:#989490; letter-spacing:0.3em; text-transform:uppercase;">
-        ${isEn ? 'Cinematic Engineering · Lviv' : 'Синематична Інженерія · Львів'}
+        ${isEn ? 'Cinematic Engineering · Uzhhorod' : 'Синематична Інженерія · Ужгород'}
       </p>
     </div>
   </section>
@@ -485,10 +485,10 @@ const AboutPage = () => {
           <div class="cinematic-card" data-reveal>
             <h2>${isEn ? 'Direct Partnership.' : 'Пряме партнерство.'}</h2>
             <p>
-              ${isEn 
-                ? `Monodoor works directly with the <span class="text-highlight">PortaNova</span> factory in Lviv. This ensures perfect quality control at every stage and fast delivery.` 
-                : `Monodoor працює безпосередньо з львівським заводом <span class="text-highlight">PortaNova</span>. Це гарантує бездоганний контроль якості на кожному етапі виробництва та забезпечує швидку доставку.`
-              }
+              ${isEn
+      ? `Monodoor works directly with the <span class="text-highlight">PortaNova</span> factory. This ensures perfect quality control at every stage and fast delivery.`
+      : `Monodoor працює безпосередньо з заводом <span class="text-highlight">PortaNova</span>. Це гарантує бездоганний контроль якості на кожному етапі виробництва та забезпечує швидку доставку.`
+    }
             </p>
           </div>
         </div>
@@ -500,10 +500,10 @@ const AboutPage = () => {
           <div class="cinematic-card" data-reveal>
             <h2>${isEn ? 'Invisible Technology.' : 'Технологія Invisible.'}</h2>
             <p>
-              ${isEn 
-                ? `Our <span class="text-highlight">flush-mounted doors</span> are designed to be "invisible" — they blend perfectly with the wall. The core structure is a durable <span class="text-highlight">aluminum profile</span>.` 
-                : `Наші двері <span class="text-highlight">прихованого монтажу</span> створені бути «невидимими» — вони ідеально зливаються зі стіною. В основі конструкції лежить міцний <span class="text-highlight">алюмінієвий профіль</span>.`
-              }
+              ${isEn
+      ? `Our <span class="text-highlight">flush-mounted doors</span> are designed to be "invisible" — they blend perfectly with the wall. The core structure is a durable <span class="text-highlight">aluminum profile</span>.`
+      : `Наші двері <span class="text-highlight">прихованого монтажу</span> створені бути «невидимими» — вони ідеально зливаються зі стіною. В основі конструкції лежить міцний <span class="text-highlight">алюмінієвий профіль</span>.`
+    }
             </p>
           </div>
         </div>
@@ -516,9 +516,9 @@ const AboutPage = () => {
             <h2>${isEn ? 'Philosophy.' : 'Філософія.'}</h2>
             <p>
               ${isEn
-                ? `Minimalism and modern Ukrainian production. We remove the unnecessary, leaving only perfect geometry and clean lines for your space.`
-                : `Мінімалізм та сучасне українське виробництво. Ми прибираємо зайве, залишаючи лише бездоганну геометрію та чисті лінії вашого простору.`
-              }
+      ? `Minimalism and modern Ukrainian production. We remove the unnecessary, leaving only perfect geometry and clean lines for your space.`
+      : `Мінімалізм та сучасне українське виробництво. Ми прибираємо зайве, залишаючи лише бездоганну геометрію та чисті лінії вашого простору.`
+    }
             </p>
           </div>
         </div>
@@ -547,10 +547,12 @@ const AboutPage = () => {
     </div>
   </div>
 
-  <section class="section" style="background:var(--grad-cta); text-align:center; padding:120px 0;">
+  <section class="section" style="background:var(--grad-cta); padding:120px 0;">
     <div class="container" data-reveal>
       <h2 style="font-size:40px; margin-bottom:32px;">${isEn ? 'Ready for invisible change?' : 'Готові до невидимих змін?'}</h2>
-      <a href="#contacts" class="btn btn-primary">${isEn ? 'Contact Us' : 'Зв\'яжіться з нами'}</a>
+      <div class="button-group">
+        <a href="#contacts" class="btn btn-primary">${isEn ? 'Contact Us' : 'Зв\'яжіться з нами'}</a>
+      </div>
     </div>
   </section>
 `;
@@ -604,7 +606,9 @@ const ContactsPage = () => `
               <label for="contact-message" class="visually-hidden">Повідомлення</label>
               <textarea id="contact-message" name="contact_message" placeholder="Повідомлення" style="width:100%;"></textarea>
             </div>
-            <button class="btn btn-primary" type="submit" id="contact-submit" style="width:100%;">Надіслати</button>
+          <div class="button-group" style="margin-top:32px;">
+            <button class="btn btn-primary" type="submit" id="contact-submit" style="width:100%;">${isEn ? 'Send Message' : 'Надіслати'}</button>
+          </div>
           </form>
         </div>
         <div data-reveal="delay-1">
@@ -648,31 +652,31 @@ const initMap = () => {
 // ─── MOBILE 6-STEP RENDERERS ──────────────────────────────────────────────
 
 const SERIES_DATA = [
-  { id: 'Leoni 40',    sub: '40мм · 2400' },
+  { id: 'Leoni 40', sub: '40мм · 2400' },
   { id: 'FiloMuro 45', sub: '45мм · 3000' },
   { id: 'FiloMuro 50', sub: '50мм · 3000' },
 ];
 
 const MATERIAL_DATA = [
-  { id: 'primer',    color: '#E2DDD6', name: 'Грунт' },
-  { id: 'oak_veneer',color: '#C8A568', name: 'Шпон Дуб' },
-  { id: 'walnut',    color: '#7A5C3A', name: 'Шпон Горіх' },
-  { id: 'mirror',    color: '#C0CDD4', name: 'Дзеркало' },
-  { id: 'glass',     color: '#C8DAE8', name: 'Скло' },
+  { id: 'primer', color: '#E2DDD6', name: 'Грунт' },
+  { id: 'oak_veneer', color: '#C8A568', name: 'Шпон Дуб' },
+  { id: 'walnut', color: '#7A5C3A', name: 'Шпон Горіх' },
+  { id: 'mirror', color: '#C0CDD4', name: 'Дзеркало' },
+  { id: 'glass', color: '#C8DAE8', name: 'Скло' },
 ];
 
 const FRAME_COLOR_DATA = [
-  { id: 'black',  color: '#1A1A1A', name: 'Чорний' },
-  { id: 'gold',   color: '#C9A84C', name: 'Золото' },
+  { id: 'black', color: '#1A1A1A', name: 'Чорний' },
+  { id: 'gold', color: '#C9A84C', name: 'Золото' },
   { id: 'bronze', color: '#8B6035', name: 'Бронза' },
   { id: 'silver', color: '#A8B4BC', name: 'Срібло' },
-  { id: 'white',  color: '#F2EFE9', name: 'Білий' },
+  { id: 'white', color: '#F2EFE9', name: 'Білий' },
 ];
 
 const FILLING_DATA = [
-  { id: 'honeycomb',   db: 28, name: 'Гофрокартон',           pct: 35  },
+  { id: 'honeycomb', db: 28, name: 'Гофрокартон', pct: 35 },
   { id: 'polystyrene', db: 34, name: 'Екструд. пінополістирол', pct: 65 },
-  { id: 'saurlend',    db: 42, name: 'SAURLEND',               pct: 100 },
+  { id: 'saurlend', db: 42, name: 'SAURLEND', pct: 100 },
 ];
 
 const renderSeriesStep = () => `
@@ -692,7 +696,7 @@ const renderSeriesStep = () => `
 
 const renderDimensionsStep = () => `
   <div class="compact-chip-grid" style="grid-template-columns:repeat(2,1fr); gap:10px;">
-    ${[600,700,800,900].map(w => `
+    ${[600, 700, 800, 900].map(w => `
       <button type="button" class="compact-chip ${doorConfig.width === w ? 'selected' : ''}"
               onclick="window.app.updateConfig('width',${w})">${w} мм</button>
     `).join('')}
@@ -725,7 +729,7 @@ const renderMaterialColorStep = () => `
     ${FRAME_COLOR_DATA.map(f => `
       <button type="button" class="frame-color-chip ${doorConfig.frameColor === f.id ? 'selected' : ''}"
               onclick="window.app.updateConfig('frameColor','${f.id}')">
-        <span class="frame-color-dot" style="background:${f.color};${f.id==='white'?'border-color:rgba(255,255,255,0.5);':''}"></span>
+        <span class="frame-color-dot" style="background:${f.color};${f.id === 'white' ? 'border-color:rgba(255,255,255,0.5);' : ''}"></span>
         ${f.name}
       </button>
     `).join('')}
@@ -750,9 +754,9 @@ const renderFillingDirStep = () => `
   <hr class="step-divider">
   <div style="display:flex; gap:8px;">
     ${[
-      { id:'left',  label:'Ліворуч',  svg:`<svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="18" y="4" width="10" height="24" rx="2"/><circle cx="19" cy="16" r="1.5" fill="currentColor" stroke="none"/><path d="M18 16H6M10 12l-4 4 4 4"/></svg>` },
-      { id:'right', label:'Праворуч', svg:`<svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="10" height="24" rx="2"/><circle cx="13" cy="16" r="1.5" fill="currentColor" stroke="none"/><path d="M14 16h12M22 12l4 4-4 4"/></svg>` }
-    ].map(d => `
+    { id: 'left', label: 'Ліворуч', svg: `<svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="18" y="4" width="10" height="24" rx="2"/><circle cx="19" cy="16" r="1.5" fill="currentColor" stroke="none"/><path d="M18 16H6M10 12l-4 4 4 4"/></svg>` },
+    { id: 'right', label: 'Праворуч', svg: `<svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="10" height="24" rx="2"/><circle cx="13" cy="16" r="1.5" fill="currentColor" stroke="none"/><path d="M14 16h12M22 12l4 4-4 4"/></svg>` }
+  ].map(d => `
       <button type="button" class="btn btn-secondary dir-btn ${doorConfig.openDir === d.id ? 'selected' : ''}"
               style="flex:1; display:flex; flex-direction:column; height:72px; gap:6px; font-size:12px; ${doorConfig.openDir === d.id ? 'border-color:#f9fafb;color:#f9fafb;' : ''}"
               onclick="window.app.updateConfig('openDir','${d.id}')">
@@ -765,7 +769,7 @@ const renderFillingDirStep = () => `
 
 const renderHardwareStep = () => `
   <div style="display:flex; gap:8px;">
-    ${[{id:'PZ',sub:'Кімнатний'},{id:'WC',sub:'Ванна'}].map(l => `
+    ${[{ id: 'PZ', sub: 'Кімнатний' }, { id: 'WC', sub: 'Ванна' }].map(l => `
       <button type="button" class="compact-chip ${doorConfig.lock === l.id ? 'selected' : ''}"
               style="flex:1; display:flex; flex-direction:column; gap:4px; height:60px;"
               onclick="window.app.updateConfig('lock','${l.id}')">
@@ -776,7 +780,7 @@ const renderHardwareStep = () => `
   </div>
   <hr class="step-divider">
   <div style="display:flex; gap:8px;">
-    ${[{id:'bar',name:'Планка'},{id:'lever',name:'Натискна'},{id:'knob',name:'Кругла'}].map(h => `
+    ${[{ id: 'bar', name: 'Планка' }, { id: 'lever', name: 'Натискна' }, { id: 'knob', name: 'Кругла' }].map(h => `
       <button type="button" class="compact-chip ${doorConfig.handle === h.id ? 'selected' : ''}"
               style="flex:1; height:52px;"
               onclick="window.app.updateConfig('handle','${h.id}')">${h.name}</button>
@@ -784,25 +788,25 @@ const renderHardwareStep = () => `
   </div>
 `;
 
-const MATERIAL_NAMES = { primer:'Грунт', oak_veneer:'Шпон Дуб', walnut:'Шпон Горіх', mirror:'Дзеркало', glass:'Скло' };
-const FRAME_NAMES   = { black:'Чорний', gold:'Золото', bronze:'Бронза', silver:'Срібло', white:'Білий' };
-const FILLING_NAMES = { honeycomb:'Гофрокартон', polystyrene:'Пінополістирол', saurlend:'SAURLEND' };
-const FILLING_DB    = { honeycomb:28, polystyrene:34, saurlend:42 };
-const HANDLE_NAMES  = { bar:'Планка', lever:'Натискна', knob:'Кругла' };
-const DIR_NAMES     = { left:'Ліворуч', right:'Праворуч' };
+const MATERIAL_NAMES = { primer: 'Грунт', oak_veneer: 'Шпон Дуб', walnut: 'Шпон Горіх', mirror: 'Дзеркало', glass: 'Скло' };
+const FRAME_NAMES = { black: 'Чорний', gold: 'Золото', bronze: 'Бронза', silver: 'Срібло', white: 'Білий' };
+const FILLING_NAMES = { honeycomb: 'Гофрокартон', polystyrene: 'Пінополістирол', saurlend: 'SAURLEND' };
+const FILLING_DB = { honeycomb: 28, polystyrene: 34, saurlend: 42 };
+const HANDLE_NAMES = { bar: 'Планка', lever: 'Натискна', knob: 'Кругла' };
+const DIR_NAMES = { left: 'Ліворуч', right: 'Праворуч' };
 
 const renderSummaryStep = () => `
   <div class="summary-full-card">
     ${[
-      ['Серія',       doorConfig.series],
-      ['Розмір',      `${doorConfig.width} × ${doorConfig.height} мм`],
-      ['Матеріал',    MATERIAL_NAMES[doorConfig.material] || doorConfig.material],
-      ['Профіль',     FRAME_NAMES[doorConfig.frameColor] || doorConfig.frameColor],
-      ['Наповнення',  `${FILLING_DB[doorConfig.filling]} дБ · ${FILLING_NAMES[doorConfig.filling]}`],
-      ['Відкривання', DIR_NAMES[doorConfig.openDir]],
-      ['Фурнітура',   `${doorConfig.lock} · ${HANDLE_NAMES[doorConfig.handle]}`],
-    ].map(([label, val], i, arr) => `
-      <div class="summary-row" ${i === arr.length-1 ? 'style="border-bottom:none;"' : ''}>
+    ['Серія', doorConfig.series],
+    ['Розмір', `${doorConfig.width} × ${doorConfig.height} мм`],
+    ['Матеріал', MATERIAL_NAMES[doorConfig.material] || doorConfig.material],
+    ['Профіль', FRAME_NAMES[doorConfig.frameColor] || doorConfig.frameColor],
+    ['Наповнення', `${FILLING_DB[doorConfig.filling]} дБ · ${FILLING_NAMES[doorConfig.filling]}`],
+    ['Відкривання', DIR_NAMES[doorConfig.openDir]],
+    ['Фурнітура', `${doorConfig.lock} · ${HANDLE_NAMES[doorConfig.handle]}`],
+  ].map(([label, val], i, arr) => `
+      <div class="summary-row" ${i === arr.length - 1 ? 'style="border-bottom:none;"' : ''}>
         <span class="sum-label">${label}</span>
         <span class="sum-val">${val}</span>
       </div>
@@ -825,7 +829,7 @@ const renderSummaryStep = () => `
 
 const renderProgressStepper = (currentStep) => `
   <div class="progress-stepper-mobile">
-    ${[1,2,3,4,5,6].map(i => `
+    ${[1, 2, 3, 4, 5, 6].map(i => `
       <div class="step-dot ${i < currentStep ? 'completed' : (i === currentStep ? 'active' : '')}"
            onclick="if(${i} <= ${currentStep}) window.app.setStep(${i})">
         ${i < currentStep ? '✓' : i}
@@ -858,7 +862,7 @@ const renderStepContentMobile = (step) => {
     6: 'КРОК 6 — ПІДСУМОК',
   };
   const renderers = [renderSeriesStep, renderDimensionsStep, renderMaterialColorStep,
-                     renderFillingDirStep, renderHardwareStep, renderSummaryStep];
+    renderFillingDirStep, renderHardwareStep, renderSummaryStep];
   return `
     <h3 class="mobile-step-title">${titles[step] || ''}</h3>
     <div class="mobile-compact-wrap">
@@ -1057,14 +1061,14 @@ window.app = {
 
     const handleOrientation = (e) => {
       if (e.gamma === null || e.beta === null) return;
-      const x = Math.max(-10, Math.min(10, e.gamma / 2)); 
+      const x = Math.max(-10, Math.min(10, e.gamma / 2));
       const y = Math.max(-10, Math.min(10, (e.beta - 45) / 2));
       parallaxEl.style.transform = `translate3d(${-x}px, ${-y}px, 0)`;
     };
 
     window.removeEventListener('mousemove', window._parallaxMouse);
     window.removeEventListener('deviceorientation', window._parallaxDevice);
-    
+
     window.addEventListener('mousemove', window._parallaxMouse);
     window.addEventListener('deviceorientation', window._parallaxDevice);
   },
@@ -1077,7 +1081,7 @@ window.app = {
     const handleScroll = () => {
       const rect = container.getBoundingClientRect();
       const viewHeight = window.innerHeight;
-      
+
       if (rect.top < viewHeight && rect.bottom > 0) {
         // Calculate progress relative to the entire container height
         // Progress 0 when top enters, 1 when bottom leaves
@@ -1118,7 +1122,7 @@ window.app = {
     doorConfig[key] = val;
 
     // Persist to sessionStorage
-    const _persist = ['series','width','height','material','frameColor','filling','openDir','lock','handle'];
+    const _persist = ['series', 'width', 'height', 'material', 'frameColor', 'filling', 'openDir', 'lock', 'handle'];
     const _saved = {};
     _persist.forEach(k => _saved[k] = doorConfig[k]);
     sessionStorage.setItem('monodoor_config', JSON.stringify(_saved));
@@ -1189,7 +1193,7 @@ window.app = {
     if (btn) { btn.disabled = true; btn.textContent = 'Надсилаємо...'; }
     setTimeout(() => {
       e.target.innerHTML = `
-        <div style="text-align:center; padding:24px 0; color:#f9fafb;">
+        <div style="padding:24px 0; color:#f9fafb;">
           <div style="font-size:40px; margin-bottom:12px;">✓</div>
           <p style="font-size:16px; font-weight:600; margin-bottom:8px;">Дякуємо!</p>
           <p style="font-size:13px; color:#9ca3af;">Ми зв'яжемося з вами найближчим часом.</p>
@@ -1210,9 +1214,9 @@ window.app = {
     const footer = document.getElementById('main-footer');
     const hash = window.location.hash || '#home';
 
-      const finalize = () => {
-        header.innerHTML = Header();
-        footer.innerHTML = `
+    const finalize = () => {
+      header.innerHTML = Header();
+      footer.innerHTML = `
           <div class="container footer-grid">
             <div style="display:grid; gap:24px;">
               <h3 style="margin-bottom:12px; letter-spacing:0.1em;">MONODOOR</h3>
@@ -1224,7 +1228,7 @@ window.app = {
           </div>
         `;
 
-        if (hash === '#home') { slot.innerHTML = HomePage(); document.body.classList.remove('mobile-configurator-active'); }
+      if (hash === '#home') { slot.innerHTML = HomePage(); document.body.classList.remove('mobile-configurator-active'); }
       else if (hash === '#catalog') { slot.innerHTML = CatalogPage(); document.body.classList.remove('mobile-configurator-active'); }
       else if (hash.startsWith('#configurator')) {
         document.body.classList.add('mobile-configurator-active');
