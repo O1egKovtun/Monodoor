@@ -9,9 +9,9 @@ export const translations = {
       apply: "Залишити заявку"
     },
     hero: {
-      eyebrow: "Ужгород · Власне виробництво",
+      eyebrow: "Львів · Завод PortaNova",
       h1: "Двері,\nяких не видно.",
-      sub: "Приховані двері прихованого монтажу.\nГеометрія без компромісів.",
+      sub: "Двері прихованого монтажу від львівського заводу PortaNova. Геометрія без компромісів.",
       btn_catalog: "Переглянути каталог",
       btn_config: "Зібрати двері"
     },
@@ -78,8 +78,8 @@ export const translations = {
     },
     about: {
       title: "Ми робимо двері, які зникають",
-      sub: "Monodoor — виробник дверей прихованого монтажу з Ужгорода.",
-      production: "Власне виробництво",
+      sub: "Monodoor — офіційний партнер заводу PortaNova (м. Львів). Ми спеціалізуємося на високоякісних дверях прихованого монтажу.",
+      production: "Партнерство з PortaNova",
       values: {
         v1: "Точність",
         v1_desc: "Кожен міліметр має значення.",
@@ -104,9 +104,9 @@ export const translations = {
       apply: "Leave a Request"
     },
     hero: {
-      eyebrow: "Uzhhorod · Internal Production",
+      eyebrow: "Lviv · PortaNova Factory",
       h1: "Doors\nthat are invisible.",
-      sub: "Hidden flush-mount doors.\nGeometry without compromise.",
+      sub: "Flush-mounted doors from the PortaNova factory in Lviv. Geometry without compromise.",
       btn_catalog: "Browse Catalog",
       btn_config: "Build a Door"
     },
@@ -173,8 +173,8 @@ export const translations = {
     },
     about: {
       title: "We make doors that disappear",
-      sub: "Monodoor is a hidden door manufacturer from Uzhhorod.",
-      production: "Internal Production",
+      sub: "Monodoor is the official partner of the PortaNova factory (Lviv). We specialize in high-quality flush-mounted doors.",
+      production: "PortaNova Partnership",
       values: {
         v1: "Precision",
         v1_desc: "Every millimeter counts.",

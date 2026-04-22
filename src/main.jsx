@@ -313,29 +313,39 @@ const CatalogCard = (door) => `
   </div>
 `;
 
-// --- PAGES ---
+const HomePage = () => {
+  const isEn = currentLang === 'en';
+  const heroSub = isEn 
+    ? `Flush-mounted doors from the <span class="text-highlight">PortaNova</span> factory in Lviv. Geometry without compromise.`
+    : `Двері прихованого монтажу від львівського заводу <span class="text-highlight">PortaNova</span>. Геометрія без компромісів.`;
 
-const HomePage = () => `
-  <section id="hero">
-    <div class="hero-bg-overlay"></div>
-    <div class="container hero-content">
+  return `
+  <section id="hero" style="position:relative; overflow:hidden; background:#181818;">
+    <!-- Parallax Background for Desktop & Mobile -->
+    <div class="hero-bg-parallax" style="position:absolute; top:-10%; left:-10%; width:120%; height:120%; background-image: linear-gradient(to right, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 100%), url('/assets/images/hero_door_right.png'); background-size:cover; background-position:center; z-index:0; transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);"></div>
+    
+    <div class="container hero-content" style="position:relative; z-index:10;">
       <div class="hero-text-block">
         <span class="eyebrow" data-reveal>${t('hero.eyebrow')}</span>
-        <h1 data-reveal="delay-1">${t('hero.h1')}</h1>
-        <img src="/assets/images/hero_door_right.png" class="hero-image" alt="Luxury Door">
-        <p class="hero-sub" data-reveal="delay-2">${t('hero.sub')}</p>
-        <div class="hero-btns" data-reveal="delay-3">
+        <h1 class="hero-h1-animate" style="font-weight:700; line-height:1.1;">${t('hero.h1')}</h1>
+        <p class="hero-sub" data-reveal="delay-2" style="font-size:1.1rem; max-width:500px; color:rgba(255,255,255,0.7); margin-bottom:40px; letter-spacing:0.02em;">
+          ${heroSub}
+        </p>
+        <div class="hero-btns" data-reveal="delay-3" style="display:flex; gap:20px;">
           <a href="#catalog" class="btn btn-primary">${t('hero.btn_catalog')}</a>
           <a href="#configurator" class="btn btn-secondary">${t('hero.btn_config')}</a>
         </div>
       </div>
     </div>
-    <div class="scroll-indicator" style="position:absolute; bottom:40px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center;">
+    
+    <!-- Desktop-only hero image on the right -->
+    <img src="/assets/images/hero_door_right.png" class="hero-image desktop-only" alt="Luxury Door" style="position:absolute; top:0; right:0; width:50%; height:100%; object-fit:cover; z-index:1; mask-image: linear-gradient(to right, transparent 0%, black 20%);">
+    
+    <div class="scroll-indicator" style="position:absolute; bottom:40px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; z-index:10;">
        <div style="width:1px; height:40px; background:rgba(255,255,255,0.2); position:relative; overflow:hidden;">
           <div style="position:absolute; top:0; left:0; width:100%; height:4px; background:#FFF; animation: scrollDot 2s infinite;"></div>
        </div>
     </div>
-    <style>@keyframes scrollDot { 0% { top: -4px; } 100% { top: 40px; } }</style>
   </section>
 
   <section class="section section-alt">
@@ -416,6 +426,7 @@ const HomePage = () => `
     </div>
   </section>
 `;
+};
 
 const CatalogPage = () => `
   <section class="section" style="padding-top:160px;">
@@ -447,77 +458,103 @@ const CatalogPage = () => `
   </section>
 `;
 
-const AboutPage = () => `
-  <section class="section" style="background:#1E1E1E; padding:100px 0; text-align:center;">
+const AboutPage = () => {
+  const isEn = currentLang === 'en';
+  
+  return `
+  <!-- Cinematic Header -->
+  <section class="section" style="background:#121212; padding:120px 0 60px; text-align:center;">
     <div class="container">
-      <img src="/assets/images/logo.png" style="max-height:80px; filter:brightness(100); margin:0 auto 24px;" alt="Monodoor">
-      <div style="width:60px; height:1px; background:rgba(255,255,255,0.2); margin:0 auto 32px;"></div>
-      <h1 data-reveal style="font-size:56px; color:#FFF; font-weight:700; margin-bottom:12px;">Monodoor</h1>
-      <p data-reveal="delay-1" style="font-size:16px; color:#989490; letter-spacing:0.12em; text-transform:uppercase;">Двері прихованого монтажу · Ужгород</p>
+      <img src="/assets/images/logo.png" style="max-height:60px; filter:brightness(100); margin:0 auto 24px;" alt="Monodoor">
+      <h1 data-reveal style="font-size: clamp(40px, 8vw, 80px); color:#FFF; font-weight:800; margin-bottom:10px; letter-spacing:-0.04em;">MONODOOR</h1>
+      <p data-reveal="delay-1" style="font-size:14px; color:#989490; letter-spacing:0.3em; text-transform:uppercase;">
+        ${isEn ? 'Cinematic Engineering · Lviv' : 'Синематична Інженерія · Львів'}
+      </p>
     </div>
   </section>
 
-  <section class="section" style="background:#202020; padding:80px 0;">
-    <div class="container grid-about-story">
-      <div data-reveal>
-        <h2 style="font-size:36px; color:#FFF; margin-bottom:32px;">Наша історія</h2>
-        <div style="font-size:14px; color:#989490; line-height:1.8; display:grid; gap:20px;">
-          <p>Monodoor розпочав роботу в Ужгороді понад 7 років тому з простої ідеї — двері не мають привертати увагу. Вони мають зникати. Власний цех, власне виробництво, власний підхід до кожного проєкту.</p>
-          <p>Ми спеціалізуємося виключно на дверях прихованого монтажу. Без коробок, без наличників, без видимих петель. Полотно врівень зі стіною — єдиний спосіб, яким ми працюємо.</p>
-          <p>За ці роки ми реалізували понад 200 проєктів у Ужгороді та Закарпатті. Від приватних будинків до комерційних просторів. Кожен проєкт — індивідуальний замір, виробництво і монтаж під ключ.</p>
+  <!-- Cinematic Scroller Section -->
+  <div class="about-cinematic-section" id="about-cinematic">
+    <!-- Fail-Safe Background Layer -->
+    <div class="about-bg-absolute-layer"></div>
+
+    <div class="cinematic-content">
+      <!-- Block 1: Partnership -->
+      <section class="cinematic-block">
+        <div class="container">
+          <div class="cinematic-card" data-reveal>
+            <h2>${isEn ? 'Direct Partnership.' : 'Пряме партнерство.'}</h2>
+            <p>
+              ${isEn 
+                ? `Monodoor works directly with the <span class="text-highlight">PortaNova</span> factory in Lviv. This ensures perfect quality control at every stage and fast delivery.` 
+                : `Monodoor працює безпосередньо з львівським заводом <span class="text-highlight">PortaNova</span>. Це гарантує бездоганний контроль якості на кожному етапі виробництва та забезпечує швидку доставку.`
+              }
+            </p>
+          </div>
         </div>
-      </div>
-      <div data-reveal="delay-1">
-        <img src="/assets/images/gallery_3.png" style="width:100%; border-radius:8px; height:560px; object-fit:cover;" alt="Production">
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <div class="stats-strip" style="background:#181818;">
+      <!-- Block 2: Technology -->
+      <section class="cinematic-block">
+        <div class="container">
+          <div class="cinematic-card" data-reveal>
+            <h2>${isEn ? 'Invisible Technology.' : 'Технологія Invisible.'}</h2>
+            <p>
+              ${isEn 
+                ? `Our <span class="text-highlight">flush-mounted doors</span> are designed to be "invisible" — they blend perfectly with the wall. The core structure is a durable <span class="text-highlight">aluminum profile</span>.` 
+                : `Наші двері <span class="text-highlight">прихованого монтажу</span> створені бути «невидимими» — вони ідеально зливаються зі стіною. В основі конструкції лежить міцний <span class="text-highlight">алюмінієвий профіль</span>.`
+              }
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Block 3: Philosophy -->
+      <section class="cinematic-block">
+        <div class="container">
+          <div class="cinematic-card" data-reveal>
+            <h2>${isEn ? 'Philosophy.' : 'Філософія.'}</h2>
+            <p>
+              ${isEn
+                ? `Minimalism and modern Ukrainian production. We remove the unnecessary, leaving only perfect geometry and clean lines for your space.`
+                : `Мінімалізм та сучасне українське виробництво. Ми прибираємо зайве, залишаючи лише бездоганну геометрію та чисті лінії вашого простору.`
+              }
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="stats-strip" style="background:#000; border-top: 1px solid rgba(255,255,255,0.05);">
     <div class="container stats-grid">
       <div class="stat-item" data-reveal>
         <span class="stat-val counter" data-target="7" data-suffix="+">0</span>
-        <span class="stat-label">Років на ринку</span>
+        <span class="stat-label">${t('stats.years')}</span>
       </div>
       <div class="stat-item" data-reveal="delay-1">
         <span class="stat-val counter" data-target="200" data-suffix="+">0</span>
-        <span class="stat-label">Завершених проєктів</span>
+        <span class="stat-label">${t('stats.projects')}</span>
       </div>
       <div class="stat-item" data-reveal="delay-2">
         <span class="stat-val counter" data-target="100" data-suffix="%">0</span>
-        <span class="stat-label">Прихований монтаж</span>
+        <span class="stat-label">${t('stats.hidden')}</span>
       </div>
       <div class="stat-item" data-reveal="delay-3">
         <span class="stat-val counter" data-target="5">0</span>
-        <span class="stat-label">Років гарантії</span>
+        <span class="stat-label">${t('stats.guarantee')}</span>
       </div>
     </div>
   </div>
 
-  <section class="section" style="background:#202020;">
-    <div class="container">
-      <div class="grid-values">
-        ${[
-    { t: 'Точність', d: 'Кожен міліметр має значення.' },
-    { t: 'Чесність', d: 'Ніяких прихованих умов. Ціна після заміру — фінальна.' },
-    { t: 'Сервіс', d: 'Безкоштовний замір, консультація і гарантійне обслуговування.' }
-  ].map((v, i) => `
-          <div data-reveal="delay-${i}" style="padding:40px; background:#282828; border-radius:8px; border:1px solid rgba(255,255,255,0.05);">
-            <h3 style="margin-bottom:16px; color:#FFF;">${v.t}</h3>
-            <p style="font-size:14px; color:#989490;">${v.d}</p>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-  </section>
-
   <section class="section" style="background:var(--grad-cta); text-align:center; padding:120px 0;">
     <div class="container" data-reveal>
-      <h2 style="font-size:40px; margin-bottom:32px;">${t('how_it_works.title')}?</h2>
-      <a href="#contacts" class="btn btn-primary">Зв'яжіться з нами</a>
+      <h2 style="font-size:40px; margin-bottom:32px;">${isEn ? 'Ready for invisible change?' : 'Готові до невидимих змін?'}</h2>
+      <a href="#contacts" class="btn btn-primary">${isEn ? 'Contact Us' : 'Зв\'яжіться з нами'}</a>
     </div>
   </section>
 `;
+};
 
 const ContactsPage = () => `
   <section class="section" style="padding-top:160px; padding-bottom:100px;">
@@ -1008,6 +1045,54 @@ window.app = {
     }
   },
 
+  initParallax: () => {
+    const parallaxEl = document.querySelector('.hero-bg-parallax');
+    if (!parallaxEl) return;
+
+    const handleMouseMove = (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 20; // max 10px shift
+      const y = (e.clientY / window.innerHeight - 0.5) * 20;
+      parallaxEl.style.transform = `translate3d(${-x}px, ${-y}px, 0)`;
+    };
+
+    const handleOrientation = (e) => {
+      if (e.gamma === null || e.beta === null) return;
+      const x = Math.max(-10, Math.min(10, e.gamma / 2)); 
+      const y = Math.max(-10, Math.min(10, (e.beta - 45) / 2));
+      parallaxEl.style.transform = `translate3d(${-x}px, ${-y}px, 0)`;
+    };
+
+    window.removeEventListener('mousemove', window._parallaxMouse);
+    window.removeEventListener('deviceorientation', window._parallaxDevice);
+    
+    window.addEventListener('mousemove', window._parallaxMouse);
+    window.addEventListener('deviceorientation', window._parallaxDevice);
+  },
+
+  initCinematicScroll: () => {
+    const bg = document.getElementById('about-bg-zoom');
+    const container = document.getElementById('about-cinematic');
+    if (!bg || !container) return;
+
+    const handleScroll = () => {
+      const rect = container.getBoundingClientRect();
+      const viewHeight = window.innerHeight;
+      
+      if (rect.top < viewHeight && rect.bottom > 0) {
+        // Calculate progress relative to the entire container height
+        // Progress 0 when top enters, 1 when bottom leaves
+        const progress = Math.min(1, Math.max(0, (viewHeight - rect.top) / (rect.height + viewHeight)));
+        const scale = 1 + (progress * 0.15); // Subtle zoom from 1.0 to 1.15
+        bg.style.transform = `scale(${scale})`;
+      }
+    };
+
+    window.removeEventListener('scroll', window._cinematicScroll);
+    window._cinematicScroll = handleScroll;
+    window.addEventListener('scroll', window._cinematicScroll);
+    handleScroll(); // Initial call
+  },
+
   toggleMenu: (show) => {
     document.getElementById('mobile-overlay').classList.toggle('active', show);
     document.body.style.overflow = show ? 'hidden' : '';
@@ -1156,6 +1241,8 @@ window.app = {
       document.getElementById('app').classList.remove('page-fade-out');
       applyI18nAttributes(slot);
       initRevealSystem();
+      window.app.initParallax();
+      window.app.initCinematicScroll();
 
       const counters = document.querySelectorAll('.counter');
       if (counters.length > 0) {

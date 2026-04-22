@@ -40,12 +40,27 @@ html {
   background-color: var(--bg-page);
   color: var(--text-primary);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+body {
+  overflow-x: clip;
 }
 
 body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+}
+
+p {
+  letter-spacing: 0.02em; /* tracking-wide for premium feel */
+}
+
+/* Subtle contrast highlight for technical terms */
+.text-highlight {
+  color: #FFFFFF;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  padding-bottom: 2px;
 }
 
 h1, h2, h3, h4, .heading {
@@ -68,8 +83,8 @@ img {
 /* GLOBAL ANIMATIONS */
 [data-reveal] {
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity var(--transition-smooth), transform var(--transition-smooth);
+  transform: translateY(20px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 [data-reveal].in {
@@ -82,7 +97,35 @@ img {
 [data-reveal="delay-3"] { transition-delay: 0.3s; }
 [data-reveal="delay-4"] { transition-delay: 0.4s; }
 
+/* Hero H1 Explicit Entrance Animation */
+@keyframes heroEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.hero-h1-animate {
+  animation: heroEntrance 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+}
+
+@keyframes scrollDot {
+  0% { top: -4px; }
+  100% { top: 40px; }
+}
+
 /* UTILITIES */
+.mobile-only { display: none !important; }
+.desktop-only { display: block !important; }
+
+@media (max-width: 768px) {
+  .mobile-only { display: block !important; }
+  .desktop-only { display: none !important; }
+}
+
 .container {
   max-width: 1440px;
   margin: 0 auto;
@@ -99,6 +142,91 @@ img {
 
 
 .section-alt { background-color: var(--bg-section); }
+
+/* FAIL-SAFE FIXED BACKGROUND */
+.about-cinematic-section {
+  position: relative;
+  background: #000;
+  overflow: hidden;
+}
+
+.about-bg-absolute-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/assets/images/gallery_3.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Fixed relative to viewport */
+}
+
+/* iOS Fix: background-attachment: fixed is broken on iOS */
+@supports (-webkit-touch-callout: none) {
+  .about-bg-absolute-layer {
+    background-attachment: scroll;
+    /* On iOS, we let it scroll but ensure it covers the whole area */
+  }
+}
+
+.cinematic-content {
+  position: relative;
+  z-index: 10;
+  background: transparent !important;
+}
+
+.cinematic-block {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5vw;
+  background: transparent !important; /* Ensure no overlapping black blocks */
+}
+
+.cinematic-card {
+  max-width: 700px;
+  background: transparent !important;
+}
+
+@media (max-width: 768px) {
+  .cinematic-card {
+    background: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 40px 24px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.cinematic-block h2 {
+  font-size: clamp(34px, 7vw, 72px);
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  color: #FFF;
+}
+
+.cinematic-block p {
+  font-size: clamp(16px, 1.4vw, 22px);
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+.cinematic-block .text-highlight {
+  color: #FFF;
+  border-bottom: 2px solid #FFF;
+}
 
 /* GLOBAL FORM FIELDS */
 input, textarea, select {
@@ -1059,12 +1187,6 @@ footer { padding: 100px 0 60px; }
     padding-bottom: 25vh;
     display: flex;
     align-items: flex-end;
-    background-image: 
-      linear-gradient(to right, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.2) 100%),
-      url('/assets/images/hero_door_right.png');
-    background-size: cover;
-    background-position: 70% center; /* Ensure door and handle on the right are visible */
-    background-repeat: no-repeat;
   }
   
   .hero-bg-overlay { display: none; } /* Hide the default desktop gradient overlay on mobile */
@@ -1165,41 +1287,52 @@ footer { padding: 100px 0 60px; }
     padding: 0 11vw 8px 11vw; /* Allow first/last cards to center perfectly, plus drop shadow space */
   }
   .catalog-nav-arrow {
-    display: flex;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     position: absolute;
-    top: 50%; /* Middle of the product card's overall height */
-    transform: translateY(-50%);
-    width: 64px; /* Larger touch target */
-    height: 64px;
-    background: transparent;
-    align-items: center;
-    justify-content: center;
-    color: #111;
-    z-index: 10;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 48px !important; /* Perfect tap size */
+    height: 48px !important;
+    background: rgba(255, 255, 255, 0.4) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 50% !important;
+    color: #FFFFFF !important;
+    z-index: 50 !important;
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
-  }
-
-  .catalog-nav-arrow::before {
-    content: '';
-    position: absolute;
-    width: 40px; /* Visible circle size */
-    height: 40px;
-    background: rgba(255, 255, 255, 0.4);
-    backdrop-filter: blur(4px);
-    border-radius: 50%;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    z-index: -1;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
+    transition: transform 0.2s ease, background 0.2s ease;
   }
 
   .catalog-nav-arrow svg {
-    position: relative;
-    z-index: 1;
+    width: 24px;
+    height: 24px;
+    stroke: #FFFFFF;
+    stroke-width: 2.5px;
+    /* Reset any inherited alignment */
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
-  /* Move past container padding (20px) to the absolute screen edges */
-  .catalog-nav-arrow.left { left: -20px; }
-  .catalog-nav-arrow.right { right: -20px; }
+  .catalog-nav-arrow.left { left: 4px !important; }
+  .catalog-nav-arrow.right { right: 4px !important; }
+
+  .catalog-nav-arrow:active {
+    transform: translateY(-50%) scale(0.9) !important;
+    background: rgba(255, 255, 255, 0.6) !important;
+  }
+
+  /* Ensure the grid doesn't clip the arrows and has enough side space */
+  .catalog-grid {
+    padding-left: 14vw !important;
+    padding-right: 14vw !important;
+  }
 
   .catalog-card {
     flex: 0 0 78vw;
