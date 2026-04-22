@@ -1162,7 +1162,7 @@ footer { padding: 100px 0 60px; }
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
     gap: 16px;
-    padding-bottom: 8px; /* space for drop shadow */
+    padding: 0 11vw 8px 11vw; /* Allow first/last cards to center perfectly, plus drop shadow space */
   }
   .catalog-nav-arrow {
     display: flex;
@@ -1203,7 +1203,7 @@ footer { padding: 100px 0 60px; }
 
   .catalog-card {
     flex: 0 0 78vw;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
     height: auto;
   }
   .card-image-wrap { height: 240px; }
@@ -1575,7 +1575,7 @@ footer { padding: 100px 0 60px; }
     position: absolute;
     top: 50%;
     left: 6px; /* Match bar padding */
-    width: calc(25% - 3px); /* Exact segment width */
+    width: calc(20% - 2.4px); /* Exact segment width for 5 items */
     height: 48px;
     margin-top: -24px; /* Center vertically */
     background: rgba(255, 255, 255, 0.08);

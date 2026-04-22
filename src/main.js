@@ -250,8 +250,10 @@ const Header = () => {
 
 const MobileNav = () => {
   const hash = window.location.hash || '#home';
-  const sections = ['#catalog', '#configurator', '#about', '#contacts'];
+  const sections = ['#catalog', '#configurator', '#home', '#about', '#contacts'];
   const activeIdx = sections.indexOf(hash);
+  
+  const homeLabel = window.currentLang === 'en' ? 'Home' : 'Головна';
   
   return `
     <div class="sticky-bar-mobile">
@@ -263,6 +265,10 @@ const MobileNav = () => {
       <a href="#configurator" class="sticky-item ${hash === '#configurator' ? 'active' : ''}">
         <span class="iconify" data-icon="lucide:settings"></span>
         <span>${t('nav.configurator')}</span>
+      </a>
+      <a href="#home" class="sticky-item ${hash === '#home' ? 'active' : ''}" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+        <span class="iconify" data-icon="lucide:home"></span>
+        <span>${homeLabel}</span>
       </a>
       <a href="#about" class="sticky-item ${hash === '#about' ? 'active' : ''}">
         <span class="iconify" data-icon="lucide:info"></span>
@@ -993,8 +999,12 @@ window.app = {
   scrollCatalog: (btn, dir) => {
     const grid = btn.parentElement.querySelector('.catalog-grid');
     if (grid) {
-      const scrollAmount = grid.clientWidth * 0.8;
-      grid.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+      const card = grid.querySelector('.catalog-card');
+      if (card) {
+        // card width + gap (16px)
+        const scrollAmount = card.offsetWidth + 16;
+        grid.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+      }
     }
   },
 
