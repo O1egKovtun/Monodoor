@@ -972,11 +972,25 @@ h1.hero-h1-animate {
 .catalog-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 40px;
+  background: #050505;
 }
 
-@media (max-width: 1024px) { .catalog-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .catalog-grid { grid-template-columns: 1fr; } }
+@media (max-width: 1024px) {
+  .catalog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .catalog-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: static !important;
+    background: #050505;
+  }
+}
 
 .catalog-card {
   background: var(--bg-card);
@@ -2076,7 +2090,7 @@ footer { padding: 100px 0 60px; }
     top: 0;
     left: 0;
     z-index: 9999;
-    background: #000;
+    background: #050505;
   }
 
   /* Hide footer when configurator is active */
@@ -2089,7 +2103,7 @@ footer { padding: 100px 0 60px; }
     width: 100%;
     z-index: 100;
     padding: 0;
-    background: #000;
+    background: #050505;
     display: flex;
     flex-direction: column;
     justify-content: center;

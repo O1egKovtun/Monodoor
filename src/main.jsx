@@ -329,7 +329,7 @@ const MobileNav = () => {
 
 const CatalogCard = (door) => `
   <div class="catalog-card" data-series="${door?.series}">
-    <div class="card-image-wrap" style="aspect-ratio: 1/1; background: #000; overflow: hidden;">
+    <div class="card-image-wrap" style="aspect-ratio: 1/1; background: #050505; overflow: hidden;">
       <img src="${door?.image || ''}" alt="${door?.name || ''}" style="width:100%; height:100%; object-fit:cover;">
       <span class="series-badge">${door?.series || ''}</span>
     </div>
@@ -457,7 +457,7 @@ const HomePage = () => {
 };
 
 const CatalogPage = () => `
-  <section class="section catalog-page-section" style="padding-top:160px;">
+  <section class="section catalog-page-section" style="padding-top:160px; background: #050505;">
     <div class="container">
       <div class="catalog-header-pc" style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 48px; text-align: left;">
         <h1 data-reveal style="font-size: 64px !important; font-weight: 800; white-space: nowrap; margin: 0;">${t('catalog.title')}</h1>
@@ -478,7 +478,7 @@ const CatalogPage = () => `
         <div class="catalog-grid catalog-grid-responsive" id="catalog-grid-full" onscroll="window.app.updateCatalogArrows(this)">
           ${(!catalog || catalog.length === 0) 
             ? `<div style="padding:100px 0; text-align:center; width:100%; color:var(--text-secondary);">${t('catalog.loading') || 'Loading...'}</div>` 
-            : (catalog || []).filter(d => (window.app.catalogFilter?.series === 'All' || d?.series === window.app.catalogFilter?.series)).map(door => CatalogCard(door)).join('')}
+            : (catalog || []).filter(d => (window.app.catalogFilter?.series === 'All' || d?.category === window.app.catalogFilter?.series)).map(door => CatalogCard(door)).join('')}
         </div>
       </div>
     </div>
@@ -1276,7 +1276,7 @@ window.app = {
 
   setFilter: (key, val) => {
     window.app.catalogFilter[key] = val;
-    window.app.render();
+    window.app.render(true);
   },
 
   updateConfig: (key, val) => {
