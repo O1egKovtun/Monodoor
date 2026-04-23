@@ -501,31 +501,83 @@ const AboutPage = () => {
   </section>
 
   <!-- About Story Section -->
+  <style>
+    .about-story {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+      background: #050505;
+    }
+    .about-story__image-wrap {
+      position: sticky;
+      top: 80px;
+      height: calc(100vh - 120px);
+      order: 2;
+    }
+    .about-story__text {
+      order: 1;
+    }
+    .about-story__image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    @media (max-width: 768px) {
+      .about-story {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+      .about-story__image-wrap {
+        position: static !important;
+        height: 260px;
+        width: 100%;
+        order: 1;
+      }
+      .about-story__text {
+        order: 2;
+        padding: 0 24px;
+      }
+      .about-story__image-wrap img {
+        border-radius: 0;
+      }
+    }
+  </style>
+
   <div class="about-story container" id="about-story-section">
     <!-- Scrolling Content Side -->
     <div class="about-story__text">
-      <div class="value-block" data-reveal>
+      <div class="value-block" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center;" data-reveal>
         <span class="value-accent">01 / STORY</span>
         <h2 class="value-title">${t('about.title')}</h2>
         <p class="value-desc" style="margin-bottom: 40px;">${t('about.sub')}</p>
         <div class="value-line"></div>
       </div>
 
-      <div class="value-block" data-reveal="delay-1">
+      <div class="value-block" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center;" data-reveal>
+        <span class="value-accent">PORTOFINO / FACTORY</span>
+        <h2 class="value-title">Власне виробництво у Львові</h2>
+        <p class="value-desc">Наше серце — завод PortoFino у Львові. Це сучасний виробничий комплекс, де поєднуються італійські технології та українська майстерність для створення ідеальних дверей прихованого монтажу.</p>
+        <div class="value-line"></div>
+      </div>
+
+      <div class="value-block" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center;" data-reveal>
         <span class="value-accent">02 / VALUES</span>
         <h2 class="value-title">${t('about.values.v1')}</h2>
         <p class="value-desc">${t('about.values.v1_desc')}</p>
         <div class="value-line"></div>
       </div>
 
-      <div class="value-block" data-reveal="delay-2">
+      <div class="value-block" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center;" data-reveal>
         <span class="value-accent">03 / MATERIALS</span>
         <h2 class="value-title">${t('about.values.v2')}</h2>
         <p class="value-desc">${t('about.values.v2_desc')}</p>
         <div class="value-line"></div>
       </div>
 
-      <div class="value-block" data-reveal="delay-3">
+      <div class="value-block" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center;" data-reveal>
         <span class="value-accent">04 / DESIGN</span>
         <h2 class="value-title">${t('about.values.v3')}</h2>
         <p class="value-desc">${t('about.values.v3_desc')}</p>
@@ -535,7 +587,7 @@ const AboutPage = () => {
 
     <!-- Pinned Visual Side -->
     <div class="about-story__image-wrap">
-      <img src="/assets/images/visible_concealed_door_bedroom.png" alt="Monodoor Luxury Interior">
+      <img src="/assets/images/visible_concealed_door_bedroom.png" alt="Monodoor PortoFino Factory">
     </div>
   </div>
 
