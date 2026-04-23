@@ -140,6 +140,11 @@ img {
   padding: 140px 0;
   position: relative;
   text-align: left;
+  z-index: 1; /* Default z-index for sections */
+}
+
+.catalog-page-section {
+  z-index: 10 !important; /* Explicitly elevate catalog view per user request */
 }
 
 
@@ -1334,69 +1339,44 @@ footer { padding: 100px 0 60px; }
   .stat-label { font-size: 12px; letter-spacing: 0.1em; }
 
   /* --- CATALOG & GALLERY HORIZONTAL SCROLL --- */
+  .catalog-grid-outer-wrap {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+
   .catalog-grid {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: scroll !important;
+    scroll-snap-type: x mandatory !important;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-x: contain;
     gap: 16px;
-    padding: 0 11vw 8px 11vw; /* Allow first/last cards to center perfectly, plus drop shadow space */
-  }
-  .catalog-nav-arrow {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    position: absolute;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    width: 48px !important; /* Perfect tap size */
-    height: 48px !important;
-    background: rgba(255, 255, 255, 0.4) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    border-radius: 50% !important;
-    color: #FFFFFF !important;
-    z-index: 50 !important;
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-    padding: 0 !important;
-    margin: 0 !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
-    transition: transform 0.2s ease, background 0.2s ease;
+    padding-left: 7.5% !important; /* (100 - 85) / 2 */
+    padding-right: 7.5% !important;
+    padding-bottom: 24px;
+    z-index: 20 !important;
+    width: 100% !important;
   }
 
-  .catalog-nav-arrow svg {
-    width: 24px;
-    height: 24px;
-    stroke: #FFFFFF;
-    stroke-width: 2.5px;
-    /* Reset any inherited alignment */
-    margin: 0 !important;
-    padding: 0 !important;
-  }
 
-  .catalog-nav-arrow.left { left: 4px !important; }
-  .catalog-nav-arrow.right { right: 4px !important; }
 
-  .catalog-nav-arrow:active {
-    transform: translateY(-50%) scale(0.9) !important;
-    background: rgba(255, 255, 255, 0.6) !important;
-  }
 
-  /* Ensure the grid doesn't clip the arrows and has enough side space */
-  .catalog-grid {
-    padding-left: 14vw !important;
-    padding-right: 14vw !important;
-  }
+
 
   .catalog-card {
-    flex: 0 0 78vw;
-    scroll-snap-align: center;
+    flex: 0 0 85vw !important;
+    width: 85vw !important;
+    margin: 0 auto !important;
+    scroll-snap-align: center !important;
     height: auto;
   }
+
+
   .card-image-wrap { height: 240px; }
   .card-body { padding: 16px; }
   .card-name { font-size: 16px; }
@@ -1886,6 +1866,14 @@ footer { padding: 100px 0 60px; }
       align-items: center !important;
     }
   }
+
+  /* Forced Mobile Footer Address Padding */
+  .footer-address-block {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    text-align: left !important;
+  }
+
 
   /* ── Series selector ── */
   .series-selector-grid { display: flex; flex-direction: column; gap: 8px; }

@@ -258,23 +258,23 @@ const MobileNav = () => {
   return `
     <div class="sticky-bar-mobile">
       <div class="nav-indicator-slider" style="transform: translateX(${activeIdx >= 0 ? activeIdx * 100 : 0}%)"></div>
-      <a href="#catalog" class="sticky-item ${hash === '#catalog' ? 'active' : ''}">
+      <a href="#catalog" class="sticky-item ${hash === '#catalog' ? 'active' : ''}" onclick="window.app.onNavClick('#catalog')">
         <span class="iconify" data-icon="lucide:shopping-cart"></span>
         <span>${t('nav.catalog')}</span>
       </a>
-      <a href="#configurator" class="sticky-item ${hash === '#configurator' ? 'active' : ''}">
+      <a href="#configurator" class="sticky-item ${hash === '#configurator' ? 'active' : ''}" onclick="window.app.onNavClick('#configurator')">
         <span class="iconify" data-icon="lucide:settings"></span>
         <span>${t('nav.configurator')}</span>
       </a>
-      <a href="#home" class="sticky-item ${hash === '#home' ? 'active' : ''}" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+      <a href="#home" class="sticky-item ${hash === '#home' ? 'active' : ''}" onclick="window.app.onNavClick('#home')">
         <span class="iconify" data-icon="lucide:home"></span>
         <span>${homeLabel}</span>
       </a>
-      <a href="#about" class="sticky-item ${hash === '#about' ? 'active' : ''}">
+      <a href="#about" class="sticky-item ${hash === '#about' ? 'active' : ''}" onclick="window.app.onNavClick('#about')">
         <span class="iconify" data-icon="lucide:info"></span>
         <span>${t('nav.about')}</span>
       </a>
-      <a href="#contacts" class="sticky-item ${hash === '#contacts' ? 'active' : ''}">
+      <a href="#contacts" class="sticky-item ${hash === '#contacts' ? 'active' : ''}" onclick="window.app.onNavClick('#contacts')">
         <span class="iconify" data-icon="lucide:phone"></span>
         <span>${t('nav.contacts')}</span>
       </a>
@@ -285,24 +285,24 @@ const MobileNav = () => {
 const CatalogCard = (door) => `
   <div class="catalog-card" data-reveal>
     <div class="card-image-wrap">
-      <img src="${door.image}" alt="${door.name}" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDMwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSI0MDAiIGZpbGw9IiMyQTJBMkEiLz48cmVjdCB4PSI4MCIgeT0iNTAiIHdpZHRoPSIxNDAiIGhlaWdodD0iMzAwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiLz48bGluZSB4MT0iODkiIHkxPSI1MCIgeDI9Ijg5IiB5Mj0iMzUwIiBzdHJva2U9IndoaXRlIiBzdHJva2Utb3BhY2l0eT0iMC4zIi8+PHJlY3QgeD0iMTkwIiB5PSIyMDAiIHdpZHRoPSIxMiIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPjwvc3ZnPg=='">
-      <span class="series-badge">${door.series}</span>
+      <img src="${door?.image || ''}" alt="${door?.name || ''}" onerror="this.src='data:image/svg+xml;base64,...'">
+      <span class="series-badge">${door?.series || ''}</span>
     </div>
     <div class="card-body">
-      <h3 class="card-name">${door.name}</h3>
-      <p class="card-desc">${currentLang === 'ua' ? door.desc : door.desc_en}</p>
+      <h3 class="card-name">${door?.name || ''}</h3>
+      <p class="card-desc">${currentLang === 'ua' ? (door?.desc || '') : (door?.desc_en || '')}</p>
       <div class="spec-tags">
         <span class="spec-tag">Aluminum</span>
-        <span class="spec-tag">${door.specs.mat}</span>
+        <span class="spec-tag">${door?.specs?.mat || ''}</span>
       </div>
       <div class="button-group" style="margin-top:32px; gap:12px;">
-        <button class="btn btn-secondary" onclick="window.app.toggleSpecs(${door.id})">${t('catalog.more')}</button>
+        <button class="btn btn-secondary" onclick="window.app.toggleSpecs(${door?.id})">${t('catalog.more')}</button>
         <button class="btn btn-primary" onclick="window.location.hash = '#configurator'">${t('catalog.order')}</button>
       </div>
     </div>
-    <div class="specs-expandable" id="specs-${door.id}">
+    <div class="specs-expandable" id="specs-${door?.id}">
       <div class="specs-table">
-        ${Object.entries(door.specs).map(([label, val]) => `
+        ${Object.entries(door?.specs || {}).map(([label, val]) => `
           <div class="spec-row">
             <span class="spec-label">${t('catalog.specs.' + label)}</span>
             <span class="spec-value">${val}</span>
@@ -393,17 +393,13 @@ const HomePage = () => {
         <h2 class="section-title reveal" data-reveal>${t('catalog.title')}</h2>
         <a href="#catalog" style="border-bottom:1px solid #FFF; padding-bottom:4px; font-size:14px;">${t('catalog.all')}</a>
       </div>
-      <div class="catalog-grid-wrapper" style="position:relative;">
-        <div class="catalog-nav-arrow left mobile-only" onclick="window.app.scrollCatalog(this, -1)">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-        </div>
+      <div class="catalog-grid-outer-wrap">
         <div class="catalog-grid">
           ${catalog.slice(0, 3).map(door => CatalogCard(door)).join('')}
         </div>
-        <div class="catalog-nav-arrow right mobile-only" onclick="window.app.scrollCatalog(this, 1)">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-        </div>
       </div>
+
+
       <div style="margin-top:60px;" data-reveal>
         <a href="#catalog" class="btn btn-secondary">${t('catalog.view_all_btn')}</a>
       </div>
@@ -429,7 +425,7 @@ const HomePage = () => {
 };
 
 const CatalogPage = () => `
-  <section class="section" style="padding-top:160px;">
+  <section class="section catalog-page-section" style="padding-top:160px;">
     <div class="container">
       <h1 data-reveal style="font-size:56px; margin-bottom:20px;">${t('catalog.title')}</h1>
       <p data-reveal="delay-1" style="color:var(--text-secondary); margin-bottom:60px;">${t('catalog.title')} — Leoni & FiloMuro</p>
@@ -443,17 +439,15 @@ const CatalogPage = () => `
         </div>
       </div>
 
-      <div class="catalog-grid-wrapper" style="position:relative;">
-        <div class="catalog-nav-arrow left mobile-only" onclick="window.app.scrollCatalog(this, -1)">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-        </div>
+      <div class="catalog-grid-outer-wrap">
         <div class="catalog-grid" id="catalog-grid-full">
-          ${catalog.filter(d => (window.app.catalogFilter.series === 'All' || d.series === window.app.catalogFilter.series)).map(door => CatalogCard(door)).join('')}
-        </div>
-        <div class="catalog-nav-arrow right mobile-only" onclick="window.app.scrollCatalog(this, 1)">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          ${(!catalog || catalog.length === 0) 
+            ? `<div style="padding:100px 0; text-align:center; width:100%; color:var(--text-secondary);">${t('catalog.loading') || 'Loading...'}</div>` 
+            : (catalog || []).filter(d => (window.app.catalogFilter?.series === 'All' || d?.series === window.app.catalogFilter?.series)).map(door => CatalogCard(door)).join('')}
         </div>
       </div>
+
+
     </div>
   </section>
 `;
@@ -558,8 +552,11 @@ const AboutPage = () => {
 `;
 };
 
-const ContactsPage = () => `
+const ContactsPage = () => {
+  const isEn = currentLang === 'en';
+  return `
   <section class="section" style="padding-top:160px; padding-bottom:100px;">
+
     <div class="container">
       <h1 data-reveal style="font-size:56px; margin-bottom:12px;">Контакти</h1>
       <p data-reveal="delay-1" style="color:#989490; margin-bottom:80px;">Ми в Ужгороді. Приїжджайте або залиште заявку онлайн.</p>
@@ -618,6 +615,8 @@ const ContactsPage = () => `
     </div>
   </section>
 `;
+};
+
 
 const initMap = () => {
   const mapEl = document.getElementById('map');
@@ -1026,6 +1025,32 @@ const renderStepContent = () => {
 window.app = {
   catalogFilter: { series: 'All' },
   activeAccordion: 'dimensions',
+  currentView: (window.location.hash || '#home').replace('#', ''),
+
+
+  onNavClick: (hash) => {
+    window.app.currentView = hash.replace('#', '') || 'home';
+    // Reset Constructor state if navigating away
+
+    if (hash !== '#configurator') {
+      doorConfig.configStep = 1;
+    }
+    
+    // Reset horizontal scroll for Catalog
+    if (hash === '#catalog') {
+      const grids = document.querySelectorAll('.catalog-grid');
+      grids.forEach(g => {
+        g.scrollTo({ left: 0, behavior: 'instant' });
+      });
+    }
+
+    // Force Global Scroll Reset
+    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+
+    // Close mobile menu if open
+    window.app.toggleMenu(false);
+  },
 
   toggleLang: () => {
     saveLang(currentLang === 'ua' ? 'en' : 'ua');
@@ -1037,37 +1062,7 @@ window.app = {
     window.location.reload();
   },
 
-  scrollCatalog: (btn, dir) => {
-    if (window.app._isScrolling) return;
-    const grid = btn.parentElement.querySelector('.catalog-grid');
-    if (!grid) return;
-    const card = grid.querySelector('.catalog-card');
-    if (!card) return;
 
-    const gap = 16;
-    const cardWidth = card.offsetWidth + gap;
-    
-    // Get current index based on scroll position
-    const currentIndex = Math.round(grid.scrollLeft / cardWidth);
-    let nextIndex = currentIndex + dir;
-    
-    // Hard Boundaries
-    const totalCards = grid.querySelectorAll('.catalog-card').length;
-    if (nextIndex < 0) nextIndex = 0;
-    if (nextIndex >= totalCards) nextIndex = totalCards - 1;
-    
-    if (nextIndex === currentIndex) return;
-
-    window.app._isScrolling = true;
-    grid.scrollTo({ 
-      left: nextIndex * cardWidth, 
-      behavior: 'smooth' 
-    });
-    
-    setTimeout(() => {
-      window.app._isScrolling = false;
-    }, 250); // Debounce to prevent click spamming
-  },
 
   initParallax: () => {
     const parallaxEl = document.querySelector('.hero-bg-parallax');
@@ -1235,68 +1230,93 @@ window.app = {
     const hash = window.location.hash || '#home';
 
     const finalize = () => {
-      header.innerHTML = Header();
-      footer.innerHTML = `
-          <div class="container footer-grid">
-            <div style="display:grid; gap:24px;">
-              <h3 style="margin-bottom:12px; letter-spacing:0.1em;">MONODOOR</h3>
-              <p style="font-size:14px; color:#989490; line-height:1.6;">${t('footer.address')}<br>Пн–Пт: 09:00 – 18:00</p>
+      try {
+        // --- CLEANUP & RESET ---
+        const mount = document.getElementById('config-svg-mount');
+        if (mount) mount.innerHTML = ''; // Memory management: clear WebGL/SVG refs
+
+        header.innerHTML = Header();
+        footer.innerHTML = `
+            <div class="container footer-grid">
+              <div class="footer-address-block" style="display:grid; gap:24px;">
+                <h3 style="margin-bottom:12px; letter-spacing:0.1em;">MONODOOR</h3>
+                <p style="font-size:14px; color:#989490; line-height:1.6;">${t('footer.address')}<br>Пн–Пт: 09:00 – 18:00</p>
+              </div>
+
+              <div style="display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-end;">
+                <p style="font-size:12px; color:rgba(152,148,144,0.5);">${t('footer.rights')}</p>
+              </div>
             </div>
-            <div style="display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-end;">
-              <p style="font-size:12px; color:rgba(152,148,144,0.5);">${t('footer.rights')}</p>
-            </div>
-          </div>
-        `;
+          `;
 
-      if (hash === '#home') { slot.innerHTML = HomePage(); document.body.classList.remove('mobile-configurator-active'); }
-      else if (hash === '#catalog') { slot.innerHTML = CatalogPage(); document.body.classList.remove('mobile-configurator-active'); }
-      else if (hash.startsWith('#configurator')) {
-        document.body.classList.add('mobile-configurator-active');
-        slot.innerHTML = ConfiguratorPage();
-        setTimeout(() => window.dispatchEvent(new Event('resize')), 50); // critical fix
-      }
-      else if (hash === '#about') { slot.innerHTML = AboutPage(); document.body.classList.remove('mobile-configurator-active'); }
-      else if (hash === '#contacts') {
-        slot.innerHTML = ContactsPage();
-        document.body.classList.remove('mobile-configurator-active');
-        setTimeout(initMap, 100);
-      }
-
-      document.getElementById('app').classList.remove('page-fade-out');
-      applyI18nAttributes(slot);
-      initRevealSystem();
-      window.app.initParallax();
-      window.app.initCinematicScroll();
-
-      const counters = document.querySelectorAll('.counter');
-      if (counters.length > 0) {
-        const observer = new IntersectionObserver(entries => {
-          entries.forEach(e => {
-            if (e.isIntersecting) {
-              countUp(e.target, parseInt(e.target.dataset.target));
-              observer.unobserve(e.target);
-            }
-          });
-        });
-        counters.forEach(c => observer.observe(c));
-      }
-
-      if (hash.startsWith('#configurator')) {
-        drawDoor();
-        updateSummary();
-        if (doorConfig.configStep === 4) {
-          setTimeout(() => {
-            const bars = document.querySelectorAll('.sound-bar');
-            bars.forEach(b => {
-              b.style.width = b.dataset.target + '%';
-            });
-          }, 50);
+        if (hash === '#home') { 
+          slot.innerHTML = HomePage(); 
+          document.body.classList.remove('mobile-configurator-active'); 
         }
-      }
+        else if (hash === '#catalog') { 
+          slot.innerHTML = CatalogPage(); 
+          document.body.classList.remove('mobile-configurator-active'); 
+          window.scrollTo({ top: 0, behavior: 'instant' }); // Force top reset
+          // Ensure first card is centered on load
+          const fullGrid = document.getElementById('catalog-grid-full');
+          if (fullGrid) fullGrid.scrollLeft = 0;
+        }
+        else if (hash.startsWith('#configurator')) {
+          document.body.classList.add('mobile-configurator-active');
+          slot.innerHTML = ConfiguratorPage();
+          setTimeout(() => window.dispatchEvent(new Event('resize')), 50); // critical fix
+        }
+        else if (hash === '#about') { 
+          slot.innerHTML = AboutPage(); 
+          document.body.classList.remove('mobile-configurator-active'); 
+        }
+        else if (hash === '#contacts') {
+          slot.innerHTML = ContactsPage();
+          document.body.classList.remove('mobile-configurator-active');
+          setTimeout(initMap, 100);
+        }
 
-      const mobileBar = document.getElementById('mobile-bar');
-      if (mobileBar) {
-        mobileBar.innerHTML = MobileNav();
+        document.getElementById('app').classList.remove('page-fade-out');
+        applyI18nAttributes(slot);
+        initRevealSystem();
+        window.app.initParallax();
+        window.app.initCinematicScroll();
+
+        const counters = document.querySelectorAll('.counter');
+        if (counters.length > 0) {
+          const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+              if (e.isIntersecting) {
+                countUp(e.target, parseInt(e.target.dataset.target));
+                observer.unobserve(e.target);
+              }
+            });
+          });
+          counters.forEach(c => observer.observe(c));
+        }
+
+        if (hash.startsWith('#configurator')) {
+          drawDoor();
+          updateSummary();
+          if (doorConfig.configStep === 4) {
+            setTimeout(() => {
+              const bars = document.querySelectorAll('.sound-bar');
+              bars.forEach(b => {
+                if (b.dataset.target) b.style.width = b.dataset.target + '%';
+              });
+            }, 50);
+          }
+        }
+
+        const mobileBar = document.getElementById('mobile-bar');
+        if (mobileBar) {
+          mobileBar.innerHTML = MobileNav();
+        }
+      } catch (err) {
+        console.error("Render Error:", err);
+        // Fallback for critical error - keep app functional
+        slot.innerHTML = `<div style="padding:100px 20px; text-align:center; color:#999;">Error loading view. Please refresh.</div>`;
+        document.getElementById('app').classList.remove('page-fade-out');
       }
     };
 
