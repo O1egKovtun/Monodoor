@@ -221,7 +221,7 @@ const Modal = () => {
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
         </button>
         <div class="grid-modal-layout" style="display:grid; grid-template-columns: 1fr 1.2fr; gap:48px;">
-          <div style="background:#000; border-radius:16px; overflow:hidden; aspect-ratio:3/4;">
+          <div style="background:transparent; border-radius:16px; overflow:hidden; aspect-ratio:3/4;">
             <img src="${door.image}" alt="${door.name}" style="width:100%; height:100%; object-fit:cover;">
           </div>
           <div style="display:flex; flex-direction:column; justify-content:center; text-align:left;">
@@ -300,7 +300,7 @@ const MobileNav = () => {
   const activeIdx = sections.indexOf(hash);
 
   return `
-    <div class="sticky-bar-mobile fixed bottom-0 left-0 w-full z-[100] bg-black border-t border-zinc-900 pb-[env(safe-area-inset-bottom)]">
+    <div class="sticky-bar-mobile fixed bottom-0 left-0 w-full z-[100] bg-zinc-950 border-t border-zinc-900 pb-[env(safe-area-inset-bottom)]">
       <div class="nav-indicator-slider" style="transform: translateX(${activeIdx >= 0 ? activeIdx * 100 : 0}%); background: #FFFFFF;"></div>
       <a href="#catalog" class="sticky-item ${hash === '#catalog' ? 'active' : ''}" onclick="window.app.onNavClick('#catalog')">
         <span class="iconify" data-icon="lucide:shopping-cart"></span>
@@ -500,42 +500,46 @@ const AboutPage = () => {
     </div>
   </section>
 
-  <!-- Luxury Dark About Section -->
-  <div class="about-luxury-section" id="about-cinematic">
-    <!-- Pinned Visual Side -->
-    <div class="about-visual-side">
-      <div class="visual-inner">
-        <img src="/assets/images/visible_concealed_door_bedroom.png" alt="Monodoor Visible Concealed Door">
-        <div class="visual-overlay"></div>
-      </div>
-    </div>
-
+  <!-- About Story Section -->
+  <div class="about-story container" id="about-story-section">
     <!-- Scrolling Content Side -->
-    <div class="about-content-side">
+    <div class="about-story__text">
       <div class="value-block" data-reveal>
-        <span class="value-accent">01 / VALUES</span>
+        <span class="value-accent">01 / STORY</span>
+        <h2 class="value-title">${t('about.title')}</h2>
+        <p class="value-desc" style="margin-bottom: 40px;">${t('about.sub')}</p>
+        <div class="value-line"></div>
+      </div>
+
+      <div class="value-block" data-reveal="delay-1">
+        <span class="value-accent">02 / VALUES</span>
         <h2 class="value-title">${t('about.values.v1')}</h2>
         <p class="value-desc">${t('about.values.v1_desc')}</p>
         <div class="value-line"></div>
       </div>
 
-      <div class="value-block" data-reveal="delay-1">
-        <span class="value-accent">02 / MATERIALS</span>
+      <div class="value-block" data-reveal="delay-2">
+        <span class="value-accent">03 / MATERIALS</span>
         <h2 class="value-title">${t('about.values.v2')}</h2>
         <p class="value-desc">${t('about.values.v2_desc')}</p>
         <div class="value-line"></div>
       </div>
 
-      <div class="value-block" data-reveal="delay-2">
-        <span class="value-accent">03 / DESIGN</span>
+      <div class="value-block" data-reveal="delay-3">
+        <span class="value-accent">04 / DESIGN</span>
         <h2 class="value-title">${t('about.values.v3')}</h2>
         <p class="value-desc">${t('about.values.v3_desc')}</p>
         <div class="value-line"></div>
       </div>
     </div>
+
+    <!-- Pinned Visual Side -->
+    <div class="about-story__image-wrap">
+      <img src="/assets/images/visible_concealed_door_bedroom.png" alt="Monodoor Luxury Interior">
+    </div>
   </div>
 
-  <div class="stats-strip" style="background:#000; border-top: 1px solid rgba(255,255,255,0.05);">
+  <div class="stats-strip" style="background:transparent; border-top: 1px solid rgba(255,255,255,0.05);">
     <div class="container stats-grid">
       <div class="stat-item" data-reveal>
         <span class="stat-val counter" data-target="7" data-suffix="+">0</span>
