@@ -300,8 +300,8 @@ const MobileNav = () => {
   const activeIdx = sections.indexOf(hash);
 
   return `
-    <div class="sticky-bar-mobile fixed bottom-0 left-0 w-full z-[100] bg-zinc-950 pb-[env(safe-area-inset-bottom)]">
-      <div class="nav-indicator-slider" style="transform: translateX(${activeIdx >= 0 ? activeIdx * 100 : 0}%)"></div>
+    <div class="sticky-bar-mobile fixed bottom-0 left-0 w-full z-[100] bg-black border-t border-zinc-900 pb-[env(safe-area-inset-bottom)]">
+      <div class="nav-indicator-slider" style="transform: translateX(${activeIdx >= 0 ? activeIdx * 100 : 0}%); background: #FFFFFF;"></div>
       <a href="#catalog" class="sticky-item ${hash === '#catalog' ? 'active' : ''}" onclick="window.app.onNavClick('#catalog')">
         <span class="iconify" data-icon="lucide:shopping-cart"></span>
         <span>${t('nav.catalog')}</span>
@@ -347,8 +347,8 @@ const CatalogCard = (door) => `
       </div>
 
       <div class="button-group" style="margin-top:16px; gap:12px;">
-        <button class="btn btn-secondary" onclick="window.app.openModal(${door?.id})">${currentLang === 'ua' ? 'Детальніше' : 'Details'}</button>
-        <a href="#configurator" class="btn btn-primary" onclick="doorConfig.series='${door.series}'; window.app.render();" style="flex:1; justify-content:center;">${currentLang === 'ua' ? 'Зібрати двері' : 'Configure'}</a>
+        <button class="btn btn-secondary" onclick="window.app.openModal(${door?.id})">${t('catalog.more')}</button>
+        <a href="#configurator" class="btn btn-primary" onclick="doorConfig.series='${door.series}'; window.app.render();" style="flex:1; justify-content:center;">${t('hero.btn_config')}</a>
       </div>
     </div>
   </div>
@@ -495,63 +495,43 @@ const AboutPage = () => {
       <img src="/assets/images/logo.png" style="max-height:60px; filter:brightness(100); margin:0 0 24px 0;" alt="Monodoor">
       <h1 data-reveal style="font-size: clamp(40px, 8vw, 80px); color:#FFF; font-weight:800; margin-bottom:10px; letter-spacing:-0.04em;">MONODOOR</h1>
       <p data-reveal="delay-1" style="font-size:14px; color:#989490; letter-spacing:0.3em; text-transform:uppercase;">
-        ${isEn ? 'Cinematic Engineering · Uzhhorod' : 'Синематична Інженерія · Ужгород'}
+        ${t('about.eyebrow')}
       </p>
     </div>
   </section>
 
-  <!-- Cinematic Scroller Section -->
-  <div class="about-cinematic-section relative" id="about-cinematic">
-    <!-- Dedicated Background Layer -->
-    <div class="absolute inset-0 z-0 overflow-hidden">
-      <div class="about-sticky-bg sticky top-0 w-full h-[100dvh] bg-cover bg-center bg-no-repeat"></div>
+  <!-- Luxury Dark About Section -->
+  <div class="about-luxury-section" id="about-cinematic">
+    <!-- Pinned Visual Side -->
+    <div class="about-visual-side">
+      <div class="visual-inner">
+        <img src="/assets/images/visible_concealed_door_bedroom.png" alt="Monodoor Visible Concealed Door">
+        <div class="visual-overlay"></div>
+      </div>
     </div>
 
-    <div class="cinematic-content relative z-10">
-      <!-- Block 1: Partnership -->
-      <section class="cinematic-block">
-        <div class="container">
-          <div class="cinematic-card" data-reveal>
-            <h2>${isEn ? 'Direct Partnership.' : 'Пряме партнерство.'}</h2>
-            <p>
-              ${isEn
-      ? `Monodoor works directly with the <span class="text-highlight">PortaNova</span> factory. This ensures perfect quality control at every stage and fast delivery.`
-      : `Monodoor працює безпосередньо з заводом <span class="text-highlight">PortaNova</span>. Це гарантує бездоганний контроль якості на кожному етапі виробництва та забезпечує швидку доставку.`
-    }
-            </p>
-          </div>
-        </div>
-      </section>
+    <!-- Scrolling Content Side -->
+    <div class="about-content-side">
+      <div class="value-block" data-reveal>
+        <span class="value-accent">01 / VALUES</span>
+        <h2 class="value-title">${t('about.values.v1')}</h2>
+        <p class="value-desc">${t('about.values.v1_desc')}</p>
+        <div class="value-line"></div>
+      </div>
 
-      <!-- Block 2: Technology -->
-      <section class="cinematic-block">
-        <div class="container">
-          <div class="cinematic-card" data-reveal>
-            <h2>${isEn ? 'Invisible Technology.' : 'Технологія Invisible.'}</h2>
-            <p>
-              ${isEn
-      ? `Our <span class="text-highlight">flush-mounted doors</span> are designed to be "invisible" — they blend perfectly with the wall. The core structure is a durable <span class="text-highlight">aluminum profile</span>.`
-      : `Наші двері <span class="text-highlight">прихованого монтажу</span> створені бути «невидимими» — вони ідеально зливаються зі стіною. В основі конструкції лежить міцний <span class="text-highlight">алюмінієвий профіль</span>.`
-    }
-            </p>
-          </div>
-        </div>
-      </section>
+      <div class="value-block" data-reveal="delay-1">
+        <span class="value-accent">02 / MATERIALS</span>
+        <h2 class="value-title">${t('about.values.v2')}</h2>
+        <p class="value-desc">${t('about.values.v2_desc')}</p>
+        <div class="value-line"></div>
+      </div>
 
-      <!-- Block 3: Philosophy -->
-      <section class="cinematic-block">
-        <div class="container">
-          <div class="cinematic-card" data-reveal>
-            <h2>${isEn ? 'Philosophy.' : 'Філософія.'}</h2>
-            <p>
-              ${isEn
-      ? `Minimalism and modern Ukrainian production. We remove the unnecessary, leaving only perfect geometry and clean lines for your space.`
-      : `Мінімалізм та сучасне українське виробництво. Ми прибираємо зайве, залишаючи лише бездоганну геометрію та чисті лінії вашого простору.`
-    }
-            </p>
-          </div>
-        </div>
-      </section>
+      <div class="value-block" data-reveal="delay-2">
+        <span class="value-accent">03 / DESIGN</span>
+        <h2 class="value-title">${t('about.values.v3')}</h2>
+        <p class="value-desc">${t('about.values.v3_desc')}</p>
+        <div class="value-line"></div>
+      </div>
     </div>
   </div>
 
@@ -1347,7 +1327,7 @@ window.app = {
 
         header.innerHTML = Header();
         footer.innerHTML = `
-            <div class="container footer-grid relative z-20" style="background:#09090b;">
+            <div class="container footer-grid relative z-20 bg-transparent">
               <div class="footer-address-block" style="display:grid; gap:24px;">
                 <h3 style="margin-bottom:12px; letter-spacing:0.1em;">MONODOOR</h3>
                 <p style="font-size:14px; color:#989490; line-height:1.6;">${t('footer.address')}<br>${t('contacts.mon_fri')}: 09:00 – 18:00</p>

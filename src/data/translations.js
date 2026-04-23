@@ -80,16 +80,16 @@ export const translations = {
       success: "Дякуємо! Ми зв'яжемося з вами найближчим часом."
     },
     about: {
-      title: "<div>Ми робимо двері,</div><div>які зникають</div>",
-      sub: "Monodoor — офіційний партнер заводу PortaNova. Наш магазин знаходиться в Ужгороді. Ми спеціалізуємося на високоякісних дверях прихованого монтажу.",
-      production: "Партнерство з PortaNova",
+      eyebrow: "Синематична Інженерія · Ужгород",
+      title: "<div>Ми робимо двері,</div><div>які стають частиною архітектури</div>",
+      sub: "Monodoor — це простір, де інженерна точність зустрічається з мінімалізмом. Ми спеціалізуємося на дверях прихованого монтажу, що інтегруються в інтер’єр без жодного зайвого елемента.",
       values: {
-        v1: "Точність",
-        v1_desc: "Кожен міліметр має значення.",
-        v2: "Чесність",
-        v2_desc: "Ніяких прихованих умов.",
-        v3: "Сервіс",
-        v3_desc: "Безкоштовний замір та консультація."
+        v1: "Виняткова Майстерність",
+        v1_desc: "Кожен стик та кожна текстура обробляються майстрами, які присвятили життя мистецтву столярної справи.",
+        v2: "Преміальні Матеріали",
+        v2_desc: "Ми використовуємо лише добірну деревину та екологічні матеріали, що пройшли багатоступеневий контроль якості.",
+        v3: "Прихований Монтаж",
+        v3_desc: "Абсолютна інтеграція в інтер’єр. Двері, що стають непомітною частиною архітектурного простору."
       }
     },
     footer: {
@@ -193,16 +193,16 @@ export const translations = {
       success: "Thank you! We'll contact you shortly."
     },
     about: {
-      title: "<div>We make doors</div><div>that disappear</div>",
-      sub: "Monodoor is the official partner of the PortaNova factory. Our store is located in Uzhhorod. We specialize in high-quality flush-mounted doors.",
-      production: "PortaNova Partnership",
+      eyebrow: "Cinematic Engineering · Uzhhorod",
+      title: "<div>We create doors</div><div>that become part of architecture</div>",
+      sub: "Monodoor is a space where engineering precision meets minimalism. We specialize in flush-mounted doors that integrate into the interior without a single redundant element.",
       values: {
-        v1: "Precision",
-        v1_desc: "Every millimeter counts.",
-        v2: "Honesty",
-        v2_desc: "No hidden conditions.",
-        v3: "Service",
-        v3_desc: "Free measurement and consultation."
+        v1: "Exquisite Craftsmanship",
+        v1_desc: "Every joint and every texture is handled by master artisans who have dedicated their lives to the art of joinery.",
+        v2: "Premium Materials",
+        v2_desc: "We use only selected wood and eco-friendly materials that undergo multi-stage quality control.",
+        v3: "Concealed Mounting",
+        v3_desc: "Absolute integration into the interior. Doors that become an invisible part of the architectural space."
       }
     },
     footer: {
