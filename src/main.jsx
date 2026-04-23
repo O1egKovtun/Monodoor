@@ -1123,12 +1123,13 @@ window.app = {
     const wrapper = btn.closest('.catalog-master-wrapper') || btn.closest('.catalog-grid-outer-wrap');
     if (!wrapper) return;
     const grid = wrapper.querySelector('.catalog-grid');
-    if (!grid) return;
-    const card = grid.querySelector('.catalog-card');
-    if (!card) return;
-    
-    const scrollAmount = card.offsetWidth + 16; 
-    grid.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+    if (grid && grid.children.length > 0) {
+      const scrollAmount = grid.children[0].clientWidth;
+      grid.scrollBy({
+        left: dir === 1 ? scrollAmount : -scrollAmount,
+        behavior: 'smooth'
+      });
+    }
   },
 
   updateCatalogArrows: (grid) => {
