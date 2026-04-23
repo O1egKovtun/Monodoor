@@ -173,43 +173,39 @@ img {
 
 .section-alt { background-color: var(--bg-section); }
 
-/* FAIL-SAFE FIXED BACKGROUND */
+/* STICKY BACKGROUND PATTERN */
 .about-cinematic-section {
   position: relative;
   background: #000;
-  overflow: hidden;
+  overflow: clip; /* Important for sticky children to work correctly */
 }
 
-.about-bg-absolute-layer {
-  position: absolute;
+.about-sticky-bg {
+  position: sticky;
   top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
+  height: 100dvh;
   z-index: 0;
   background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/assets/images/gallery_3.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: scroll; /* Mobile default for stability */
 }
 
-@media (min-width: 1024px) {
-  .about-bg-absolute-layer {
-    background-attachment: fixed; /* Desktop parallax effect maintained */
-  }
-}
-
-/* iOS Fix: background-attachment: fixed is broken on iOS */
-@supports (-webkit-touch-callout: none) {
-  .about-bg-absolute-layer {
-    background-attachment: scroll;
-    /* On iOS, we let it scroll but ensure it covers the whole area */
-  }
-}
+.relative { position: relative; }
+.absolute { position: absolute; }
+.inset-0 { top: 0; left: 0; right: 0; bottom: 0; }
+.z-0 { z-index: 0; }
+.z-10 { z-index: 10; }
+.overflow-hidden { overflow: hidden; }
+.sticky { position: sticky; }
+.top-0 { top: 0; }
+.w-full { width: 100%; }
+.h-\[100dvh\] { height: 100dvh; }
 
 .cinematic-content {
   position: relative;
+  z-index: 10;
   z-index: 10;
   background: transparent !important;
 }
