@@ -389,10 +389,11 @@ const HomePage = () => {
 
   <section class="section">
     <div class="container">
-      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:60px;">
+      <div class="section-header-wrap">
         <h2 class="section-title reveal" data-reveal>${t('catalog.title')}</h2>
-        <a href="#catalog" style="border-bottom:1px solid #FFF; padding-bottom:4px; font-size:14px;">${t('catalog.all')}</a>
+        <a href="#catalog" class="view-all-link reveal" data-reveal="delay-1">${t('catalog.all')} <span class="arrow">→</span></a>
       </div>
+
       <div class="catalog-grid-outer-wrap">
         <div class="catalog-grid">
           ${catalog.slice(0, 3).map(door => CatalogCard(door)).join('')}
@@ -409,15 +410,17 @@ const HomePage = () => {
   <section class="section section-alt">
     <div class="container">
       <h2 class="section-title reveal" data-reveal style="margin-bottom:80px;">${t('how_it_works.title')}</h2>
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:40px;">
+      <div class="process-grid">
+
         ${[1, 2, 3, 4].map(i => `
-          <div class="step-card" data-reveal="delay-${i}" style="position:relative; padding:40px; background:var(--bg-card); border-radius:6px;">
-            <span style="position:absolute; top:20px; right:20px; font-size:60px; font-weight:800; opacity:0.03;">0${i}</span>
-            <h3 style="margin-bottom:16px;">${t(`how_it_works.step${i}.name`)}</h3>
-            <p style="color:var(--text-secondary); font-size:14px;">${t(`how_it_works.step${i}.desc`)}</p>
-            <div style="width:40px; height:2px; background:#FFF; margin-top:24px;"></div>
+          <div class="step-card" data-reveal="delay-${i}">
+            <span class="step-number">0${i}</span>
+            <h3 class="step-title-small">${t(`how_it_works.step${i}.name`)}</h3>
+            <p class="step-desc">${t(`how_it_works.step${i}.desc`)}</p>
+            <div class="step-line"></div>
           </div>
         `).join('')}
+
       </div>
     </div>
   </section>
@@ -878,6 +881,7 @@ const ConfiguratorPage = () => {
     return `
       <div class="mobile-configurator-message">
         <div class="mcm-icon">🖥</div>
+
         <h2 class="mcm-title" data-ua="Конструктор доступний лише на комп'ютері" data-en="The configurator is available on desktop only"></h2>
         <p class="mcm-sub" data-ua="Для зручного підбору дверей скористайтесь конструктором на ноутбуці або ПК." data-en="For a comfortable door configuration experience, please use a laptop or desktop computer."></p>
         <a href="#contacts" class="mcm-btn" data-ua="Залишити заявку" data-en="Leave a request"></a>

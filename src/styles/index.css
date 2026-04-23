@@ -261,7 +261,12 @@ input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: rgba(255,255,255,0.4);
 }
-input::placeholder, textarea::placeholder {
+input::placeholder {
+  color: #5A5A58;
+}
+
+
+textarea::placeholder {
   color: #5A5A58;
 }
 
@@ -978,7 +983,120 @@ h1.hero-h1-animate {
   padding: 40px 28px;
   text-align: left;
 }
+.section-title {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.section-header-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 80px; /* Increased gap for 'air' */
+}
+
+.view-all-link {
+  font-size: 14px;
+  color: #FFFFFF;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.view-all-link .arrow {
+  transition: transform 0.3s ease;
+}
+
+.view-all-link:hover {
+  border-bottom-color: rgba(255, 255, 255, 1);
+}
+
+.view-all-link:hover .arrow {
+  transform: translateX(5px);
+}
+
+/* --- STEP CARDS --- */
+.step-card {
+  position: relative;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow: hidden;
+}
+
+.step-card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.step-number {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 64px;
+  font-weight: 800;
+  color: #222;
+  opacity: 0.15;
+}
+
+.step-title-small {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.step-desc {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.step-line {
+  width: 40px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.5);
+  margin-top: 32px;
+}
+
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  margin-top: 40px;
+}
+
+@media (max-width: 1024px) {
+  .process-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .process-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* Global Header Consistency */
+h1, h2, h3, h4, .section-title {
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+}
+
 .mcm-icon {
+
   font-size: 48px;
   margin-bottom: 24px;
   opacity: 0.6;
