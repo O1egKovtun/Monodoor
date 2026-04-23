@@ -300,7 +300,7 @@ const MobileNav = () => {
   const activeIdx = sections.indexOf(hash);
 
   return `
-    <div class="sticky-bar-mobile">
+    <div class="sticky-bar-mobile fixed bottom-0 left-0 w-full z-[100] bg-zinc-950 pb-[env(safe-area-inset-bottom)]">
       <div class="nav-indicator-slider" style="transform: translateX(${activeIdx >= 0 ? activeIdx * 100 : 0}%)"></div>
       <a href="#catalog" class="sticky-item ${hash === '#catalog' ? 'active' : ''}" onclick="window.app.onNavClick('#catalog')">
         <span class="iconify" data-icon="lucide:shopping-cart"></span>
