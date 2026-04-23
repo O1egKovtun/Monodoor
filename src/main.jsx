@@ -255,9 +255,9 @@ const Header = () => {
   const isActive = (h) => (hash.startsWith(h) ? 'active' : '');
 
   return `
-    <div class="nav-inner">
-      <a href="#" class="nav-logo">
-        <img src="/assets/images/logo.png" alt="Monodoor">
+    <div class="nav-inner" style="display:flex; align-items:center; justify-content:space-between; width:100%; height:100%; padding: 0 20px;">
+      <a href="#" class="nav-logo" style="display:flex; align-items:center; margin:0; padding:0;">
+        <img src="/assets/images/logo.png" alt="Monodoor" style="margin:0; display:block;">
       </a>
       <nav class="nav-links">
         <a href="#catalog" class="${isActive('#catalog')}">${t('nav.catalog')}</a>
@@ -265,14 +265,16 @@ const Header = () => {
         <a href="#about" class="${isActive('#about')}">${t('nav.about')}</a>
         <a href="#contacts" class="${isActive('#contacts')}">${t('nav.contacts')}</a>
       </nav>
-      <div class="nav-right">
-        <button class="lang-toggle" onclick="window.app.toggleLang()">${currentLang.toUpperCase()}</button>
-        <button class="btn btn-primary" onclick="window.location.hash='#contacts'">${t('nav.apply')}</button>
-        <a href="https://instagram.com/monodoor_uzh" target="_blank" class="mobile-only" style="color:#FFF; display:flex; align-items:center;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+      <div class="nav-right" style="display:flex; align-items:center; gap:16px; margin:0; padding:0;">
+        <button class="lang-toggle" onclick="window.app.toggleLang()" style="display:flex !important; align-items:center; justify-content:center; margin:0; font-family:inherit;">${currentLang.toUpperCase()}</button>
+        <button class="btn btn-primary hide-on-mobile" onclick="window.location.hash='#contacts'">${t('nav.apply')}</button>
+        <a href="https://instagram.com/monodoor_uzh" target="_blank" class="mobile-only" style="color:#FFF; display:flex; align-items:center; margin:0; padding:0; line-height:0;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
         </a>
       </div>
     </div>
+
+
   <div class="mobile-menu-overlay" id="mobile-overlay">
     <span class="menu-close" onclick="window.app.toggleMenu(false)">&times;</span>
     <ul class="mobile-nav-list">
@@ -297,8 +299,6 @@ const MobileNav = () => {
   const sections = ['#catalog', '#configurator', '#home', '#about', '#contacts'];
   const activeIdx = sections.indexOf(hash);
 
-  const homeLabel = window.currentLang === 'en' ? 'Home' : 'Головна';
-
   return `
     <div class="sticky-bar-mobile">
       <div class="nav-indicator-slider" style="transform: translateX(${activeIdx >= 0 ? activeIdx * 100 : 0}%)"></div>
@@ -312,7 +312,7 @@ const MobileNav = () => {
       </a>
       <a href="#home" class="sticky-item ${hash === '#home' ? 'active' : ''}" onclick="window.app.onNavClick('#home')">
         <span class="iconify" data-icon="lucide:home"></span>
-        <span>${homeLabel}</span>
+        <span>${t('nav.home')}</span>
       </a>
       <a href="#about" class="sticky-item ${hash === '#about' ? 'active' : ''}" onclick="window.app.onNavClick('#about')">
         <span class="iconify" data-icon="lucide:info"></span>
@@ -325,6 +325,7 @@ const MobileNav = () => {
     </div>
   `;
 };
+
 
 const CatalogCard = (door) => `
   <div class="catalog-card" data-series="${door?.series}">
@@ -354,7 +355,8 @@ const HomePage = () => {
   const isEn = currentLang === 'en';
 
   return `
-  <section id="hero" class="hero-new-layout" style="position:relative; background:#000; overflow:hidden; min-height: 100vh; display: flex; align-items: center;">
+  <section id="hero" class="hero-new-layout" style="position:relative; background:#000; overflow:hidden; min-height: 100vh; min-height: 100dvh; display: flex; align-items: center;">
+
     <!-- Restored Hero Photo for Desktop -->
     <div class="hero-image-container desktop-only" style="position:absolute; top:0; right:0; width:55%; height:100%; z-index:1;">
       <img src="/assets/images/hero_door_right.png" alt="Luxury Door" style="width:100%; height:100%; object-fit:cover; mask-image: linear-gradient(to right, transparent, black 20%); -webkit-mask-image: linear-gradient(to right, transparent, black 20%);">
@@ -362,13 +364,15 @@ const HomePage = () => {
 
     <div class="container hero-grid-wrap" style="position:relative; z-index:10; width: 100%;">
       <div class="hero-text-column" style="display: flex; flex-direction: column; align-items: flex-start; text-align: left; padding-left: 5vw; margin-left: 0; max-width: 800px;">
-        <span class="eyebrow reveal" data-reveal style="font-size: 14px; letter-spacing: 0.3em; margin-bottom: 24px; color: #989490; font-weight: 500;">УЖГОРОД · ЗАВОД PORTANOVA</span>
-        <h1 class="hero-h1-new reveal" data-reveal="delay-1" style="font-size: 64px !important; font-weight: 700; color: #FFFFFF; line-height: 1.1; margin: 0 0 24px 0; text-align: left; white-space: nowrap;">Двері, яких не видно.</h1>
-        <p class="hero-p-new reveal" data-reveal="delay-2" style="font-size: 24px !important; font-weight: 300; color: rgba(255,255,255,0.7); line-height: 1.4; margin: 0 0 48px 0; text-align: left; max-width: 540px;">Геометрія без компромісів. Двері прихованого монтажу.</p>
+        <span class="eyebrow reveal" data-reveal style="font-size: 14px; letter-spacing: 0.3em; margin-bottom: 24px; color: #989490; font-weight: 500;">${t('hero.eyebrow')}</span>
+        <h1 class="hero-h1-new reveal" data-reveal="delay-1" style="font-size: 64px !important; font-weight: 700; color: #FFFFFF; line-height: 1.1; margin: 0 0 24px 0; text-align: left; white-space: nowrap;">${t('hero.h1')}</h1>
+        <p class="hero-p-new reveal" data-reveal="delay-2" style="font-size: 24px !important; font-weight: 300; color: rgba(255,255,255,0.7); line-height: 1.4; margin: 0 0 48px 0; text-align: left; max-width: 540px;">${t('hero.sub')}</p>
         <div class="hero-btns-new reveal" data-reveal="delay-3" style="display: flex; gap: 20px; align-items: flex-start;">
-          <a href="#catalog" class="btn btn-primary" style="height: 56px; padding: 0 32px; display: flex; align-items: center; font-weight: 600; text-transform: none;">Переглянути каталог</a>
-          <a href="#configurator" class="btn btn-secondary" style="height: 56px; padding: 0 32px; display: flex; align-items: center; font-weight: 600; text-transform: none;">Зібрати двері</a>
+
+          <a href="#catalog" class="btn btn-primary" style="height: 56px; padding: 0 32px; display: flex; align-items: center; font-weight: 600; text-transform: none;">${t('hero.btn_catalog')}</a>
+          <a href="#configurator" class="btn btn-secondary" style="height: 56px; padding: 0 32px; display: flex; align-items: center; font-weight: 600; text-transform: none;">${t('hero.btn_config')}</a>
         </div>
+
       </div>
     </div>
   </section>

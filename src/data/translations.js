@@ -6,8 +6,10 @@ export const translations = {
       about: "Про нас",
       contacts: "Контакти",
       call: "Зателефонувати",
-      apply: "Залишити заявку"
+      apply: "Залишити заявку",
+      home: "Головна"
     },
+
     hero: {
       eyebrow: "УЖГОРОД · ЗАВОД PORTANOVA",
       h1: "Двері, яких не видно.",
@@ -117,8 +119,10 @@ export const translations = {
       about: "About",
       contacts: "Contacts",
       call: "Call Us",
-      apply: "Leave a Request"
+      apply: "Leave a Request",
+      home: "Home"
     },
+
     hero: {
       eyebrow: "UZHHOROD · PORTANOVA FACTORY",
       h1: "Doors that are invisible.",

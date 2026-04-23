@@ -355,6 +355,13 @@ header {
   height: 64px;
 }
 
+@media (max-width: 768px) {
+  header {
+    height: 80px; /* Increased height for mobile */
+  }
+}
+
+
 .nav-inner {
   max-width: 1280px;
   margin: 0 auto;
@@ -378,6 +385,13 @@ header {
   display: block;
   filter: brightness(100);
 }
+
+@media (max-width: 768px) {
+  .nav-logo img, .nav-logo svg {
+    height: 48px; /* Substantial logo size for mobile */
+  }
+}
+
 
 .nav-links {
   display: flex;
@@ -410,10 +424,10 @@ header {
 
 @media (max-width: 768px) {
   .nav-links { display: none; }
-  .nav-right .lang-toggle { display: none; }
   .nav-inner { padding: 0 20px; }
   .menu-btn { display: block; }
 }
+
 
 .lang-toggle {
   background: transparent;
@@ -424,6 +438,19 @@ header {
   padding: 6px 10px;
   border-radius: 4px;
 }
+
+@media (max-width: 768px) {
+  .lang-toggle {
+    font-size: 14px;
+    padding: 8px 14px;
+    min-width: 48px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 
 /* MOBILE NAV OVERLAY */
 .mobile-menu-overlay {
@@ -1517,9 +1544,12 @@ footer { padding: 100px 0 60px; }
   .hero-image { display: none !important; }
 
   .hero-new-layout {
-    padding-top: 120px;
-    align-items: flex-start;
+    padding-top: 80px !important;
+    align-items: flex-start !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
   }
+
 
   .hero-grid-wrap {
     grid-template-columns: 1fr;
@@ -1544,10 +1574,23 @@ footer { padding: 100px 0 60px; }
   }
   .hero-h1-new {
     text-align: left !important;
-    margin-bottom: 16px !important;
+    margin-bottom: 12px !important;
     font-size: clamp(32px, 10vw, 48px) !important;
-    white-space: normal !important; /* Allow wrap on very small screens if needed */
+    white-space: normal !important;
   }
+  .hero-p-new {
+    margin-bottom: 24px !important;
+  }
+  .hero-btns-new {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 12px !important;
+  }
+  .hero-btns-new .btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
 
 
   .hero-p-new {
