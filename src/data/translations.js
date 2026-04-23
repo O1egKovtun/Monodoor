@@ -90,8 +90,23 @@ export const translations = {
       }
     },
     footer: {
-      address: "вул. Баб'яка, 18, Ужгород",
+      address: "вул. Баб'яка, 48, Ужгород",
       rights: "© 2024 Monodoor. Всі права захищені."
+    },
+    contacts: {
+      title: "Контакти",
+      subtitle: "Ми в Ужгороді. Приїжджайте або залиште заявку онлайн.",
+      showroom: "Наш офіс / Шоурум",
+      showroom_desc: "Шоурум прихованого монтажу",
+      working_hours: "Графік роботи",
+      mon_fri: "Пн–Пт",
+      sat_sun: "Сб–Нд",
+      closed: "Вихідний",
+      form_title: "Зв’язатися з нами",
+      form_name: "Ім'я",
+      form_phone: "Телефон",
+      form_message: "Повідомлення",
+      form_submit: "Надіслати"
     }
   },
   en: {
@@ -185,8 +200,23 @@ export const translations = {
       }
     },
     footer: {
-      address: "18 Babyaka St, Uzhhorod",
+      address: "48 Babyaka St, Uzhhorod",
       rights: "© 2024 Monodoor. All rights reserved."
+    },
+    contacts: {
+      title: "Contacts",
+      subtitle: "We are in Uzhhorod. Visit us or leave an online request.",
+      showroom: "Our Office / Showroom",
+      showroom_desc: "Hidden Mounting Showroom",
+      working_hours: "Working Hours",
+      mon_fri: "Mon–Fri",
+      sat_sun: "Sat–Sun",
+      closed: "Closed",
+      form_title: "Get in Touch",
+      form_name: "Name",
+      form_phone: "Phone",
+      form_message: "Message",
+      form_submit: "Send Message"
     }
   }
 };

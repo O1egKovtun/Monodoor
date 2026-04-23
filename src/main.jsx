@@ -561,8 +561,8 @@ const ContactsPage = () => {
   <section class="section" style="padding-top:160px; padding-bottom:100px;">
 
     <div class="container">
-      <h1 data-reveal style="font-size:56px; margin-bottom:12px;">Контакти</h1>
-      <p data-reveal="delay-1" style="color:#989490; margin-bottom:80px;">Ми в Ужгороді. Приїжджайте або залиште заявку онлайн.</p>
+      <h1 data-reveal style="font-size:56px; margin-bottom:12px;">${t('contacts.title')}</h1>
+      <p data-reveal="delay-1" style="color:#989490; margin-bottom:80px;">${t('contacts.subtitle')}</p>
       
       <div class="grid-contacts">
         <div data-reveal>
@@ -570,8 +570,8 @@ const ContactsPage = () => {
             <div style="display:flex; gap:20px; align-items:flex-start;">
               <span style="font-size:24px;">📍</span>
               <div>
-                <p style="font-weight:600; color:#FFF; margin-bottom:4px;">вул. Баб'яка, 18, Ужгород, 88000</p>
-                <p style="font-size:14px; color:#989490;">Шоурум прихованого монтажу</p>
+                <p style="font-weight:600; color:#FFF; margin-bottom:4px;">${t('footer.address')}</p>
+                <p style="font-size:14px; color:#989490;">${t('contacts.showroom_desc')}</p>
               </div>
             </div>
             <div style="display:flex; gap:20px; align-items:flex-start;">
@@ -583,7 +583,9 @@ const ContactsPage = () => {
             <div style="display:flex; gap:20px; align-items:flex-start;">
               <span style="font-size:24px;">🕐</span>
               <div>
-                <p style="color:#989490;">Пн–Пт: 09:00 – 18:00</p>
+                <p style="font-weight:600; color:#FFF; margin-bottom:4px;">${t('contacts.working_hours')}</p>
+                <p style="color:#989490;">${t('contacts.mon_fri')}: 09:00 – 18:00</p>
+                <p style="color:#989490;">${t('contacts.sat_sun')}: ${t('contacts.closed')}</p>
               </div>
             </div>
             <div style="display:flex; gap:20px; align-items:flex-start;">
@@ -593,24 +595,25 @@ const ContactsPage = () => {
           </div>
 
           <form id="contacts-form" action="#" class="contacts-form-wrap" style="background:#202020; padding:40px; border-radius:8px;" onsubmit="window.app.handleContactSubmit(event, this)">
-            <h3 style="margin-bottom:16px; color:#FFF;">Залишити заявку</h3>
+            <h3 style="margin-bottom:16px; color:#FFF;">${t('contacts.form_title')}</h3>
             <div style="margin-bottom:16px;">
-              <label for="contact-name" class="visually-hidden">Ім'я</label>
-              <input type="text" id="contact-name" name="contact_name" placeholder="Ім'я" required style="width:100%;">
+              <label for="contact-name" class="visually-hidden">${t('contacts.form_name')}</label>
+              <input type="text" id="contact-name" name="contact_name" placeholder="${t('contacts.form_name')}" required style="width:100%;">
             </div>
             <div style="margin-bottom:16px;">
-              <label for="contact-phone" class="visually-hidden">Телефон</label>
-              <input type="tel" id="contact-phone" name="contact_phone" placeholder="Телефон" required style="width:100%;">
+              <label for="contact-phone" class="visually-hidden">${t('contacts.form_phone')}</label>
+              <input type="tel" id="contact-phone" name="contact_phone" placeholder="${t('contacts.form_phone')}" required style="width:100%;">
             </div>
             <div style="margin-bottom:16px;">
-              <label for="contact-message" class="visually-hidden">Повідомлення</label>
-              <textarea id="contact-message" name="contact_message" placeholder="Повідомлення" style="width:100%;"></textarea>
+              <label for="contact-message" class="visually-hidden">${t('contacts.form_message')}</label>
+              <textarea id="contact-message" name="contact_message" placeholder="${t('contacts.form_message')}" style="width:100%;"></textarea>
             </div>
           <div class="button-group" style="margin-top:32px;">
-            <button class="btn btn-primary" type="submit" id="contact-submit" style="width:100%;">${isEn ? 'Send Message' : 'Надіслати'}</button>
+            <button class="btn btn-primary" type="submit" id="contact-submit" style="width:100%;">${t('contacts.form_submit')}</button>
           </div>
           </form>
         </div>
+
         <div data-reveal="delay-1">
           <div id="map" class="contacts-map" style="height:500px; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); background:#121212;"></div>
         </div>
@@ -1244,13 +1247,14 @@ window.app = {
             <div class="container footer-grid">
               <div class="footer-address-block" style="display:grid; gap:24px;">
                 <h3 style="margin-bottom:12px; letter-spacing:0.1em;">MONODOOR</h3>
-                <p style="font-size:14px; color:#989490; line-height:1.6;">${t('footer.address')}<br>Пн–Пт: 09:00 – 18:00</p>
+                <p style="font-size:14px; color:#989490; line-height:1.6;">${t('footer.address')}<br>${t('contacts.mon_fri')}: 09:00 – 18:00</p>
               </div>
 
               <div style="display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-end;">
                 <p style="font-size:12px; color:rgba(152,148,144,0.5);">${t('footer.rights')}</p>
               </div>
             </div>
+
           `;
 
         if (hash === '#home') { 
