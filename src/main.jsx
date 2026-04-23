@@ -359,109 +359,100 @@ const HomePage = () => {
   const isEn = currentLang === 'en';
 
   return `
-  <section id="hero" class="hero-new-layout" style="position:relative; background:#000; overflow:hidden; min-height: 100vh; min-height: 100dvh; display: flex; align-items: center;">
-
-    <!-- Restored Hero Photo for Desktop -->
-    <div class="hero-image-container desktop-only" style="position:absolute; top:0; right:0; width:55%; height:100%; z-index:1;">
-      <img src="/assets/images/hero_door_right.png" alt="Luxury Door" style="width:100%; height:100%; object-fit:cover; mask-image: linear-gradient(to right, transparent, black 20%); -webkit-mask-image: linear-gradient(to right, transparent, black 20%);">
+  <div class="relative">
+    <!-- Global Fixed Background Layer -->
+    <div class="absolute inset-0 z-0 overflow-hidden">
+      <div class="about-sticky-bg sticky top-0 w-full h-[100dvh] bg-cover bg-center bg-no-repeat"></div>
     </div>
 
-    <div class="container hero-grid-wrap" style="position:relative; z-index:10; width: 100%;">
-      <div class="hero-text-column" style="display: flex; flex-direction: column; align-items: flex-start; text-align: left; padding-left: 5vw; margin-left: 0; max-width: 800px;">
-        <span class="eyebrow reveal" data-reveal style="font-size: 14px; letter-spacing: 0.3em; margin-bottom: 24px; color: #989490; font-weight: 500;">${t('hero.eyebrow')}</span>
-        <h1 class="hero-h1-new reveal" data-reveal="delay-1" style="font-size: 64px !important; font-weight: 700; color: #FFFFFF; line-height: 1.1; margin: 0 0 24px 0; text-align: left; white-space: nowrap;">${t('hero.h1')}</h1>
-        <p class="hero-p-new reveal" data-reveal="delay-2" style="font-size: 24px !important; font-weight: 300; color: rgba(255,255,255,0.7); line-height: 1.4; margin: 0 0 48px 0; text-align: left; max-width: 540px;">${t('hero.sub')}</p>
-        <div class="hero-btns-new reveal" data-reveal="delay-3" style="display: flex; gap: 20px; align-items: flex-start;">
-
-          <a href="#catalog" class="btn btn-primary" style="height: 56px; padding: 0 32px; display: flex; align-items: center; font-weight: 600; text-transform: none;">${t('hero.btn_catalog')}</a>
-          <a href="#configurator" class="btn btn-secondary" style="height: 56px; padding: 0 32px; display: flex; align-items: center; font-weight: 600; text-transform: none;">${t('hero.btn_config')}</a>
+    <!-- Content Layer -->
+    <div class="relative z-10">
+      <section id="hero" class="hero-new-layout" style="position:relative; background:transparent; overflow:hidden; min-height: 100vh; min-height: 100dvh; display: flex; align-items: center;">
+        <!-- Restored Hero Photo for Desktop -->
+        <div class="hero-image-container desktop-only" style="position:absolute; top:0; right:0; width:55%; height:100%; z-index:1;">
+          <img src="/assets/images/hero_door_right.png" alt="Luxury Door" style="width:100%; height:100%; object-fit:cover; mask-image: linear-gradient(to right, transparent, black 20%); -webkit-mask-image: linear-gradient(to right, transparent, black 20%);">
         </div>
 
-      </div>
-    </div>
-  </section>
+        <div class="container hero-grid-wrap" style="position:relative; z-index:10; width: 100%;">
+          <div class="hero-text-column" style="display: flex; flex-direction: column; align-items: flex-start; text-align: left; padding-left: 5vw; margin-left: 0; max-width: 800px;">
+            <span class="eyebrow reveal" data-reveal style="font-size: 14px; letter-spacing: 0.3em; margin-bottom: 24px; color: #989490; font-weight: 500;">${t('hero.eyebrow')}</span>
+            <h1 class="hero-h1-new reveal" data-reveal="delay-1" style="font-size: 64px !important; font-weight: 700; color: #FFFFFF; line-height: 1.1; margin: 0 0 24px 0; text-align: left; white-space: nowrap;">${t('hero.h1')}</h1>
+            <p class="hero-p-new reveal" data-reveal="delay-2" style="font-size: 24px !important; font-weight: 300; color: rgba(255,255,255,0.7); line-height: 1.4; margin: 0 0 48px 0; text-align: left; max-width: 540px;">${t('hero.sub')}</p>
+            <div class="hero-btns-new reveal" data-reveal="delay-3" style="display: flex; gap: 20px; align-items: flex-start;">
+              <a href="#catalog" class="btn btn-primary" style="height: 56px; padding: 0 32px; display: flex; align-items: center; font-weight: 600; text-transform: none;">${t('hero.btn_catalog')}</a>
+              <a href="#configurator" class="btn btn-secondary" style="height: 56px; padding: 0 32px; display: flex; align-items: center; font-weight: 600; text-transform: none;">${t('hero.btn_config')}</a>
+            </div>
+          </div>
+        </div>
+      </section>
 
-  <section class="section section-alt">
-    <div class="container grid-2-col">
+      <section class="section" style="background:transparent;">
+        <div class="container grid-2-col">
+          <div data-reveal>
+            <h2 class="section-title" style="font-size:40px; margin-bottom:40px;">${t('concept.title')}</h2>
+            <div style="display:grid; gap:20px;">
+              ${[1, 2, 3].map(i => `
+                <div style="padding-left:24px; border-left:2px solid #FFF; opacity:0.8;">
+                  ${t('concept.item' + i)}
+                </div>
+              `).join('')}
+            </div>
+          </div>
+          <div data-reveal="delay-1">
+            <img src="/assets/images/gallery_1.png" style="width:100%; border-radius:6px; height:500px; object-fit:cover;">
+          </div>
+        </div>
+      </section>
 
-      <div data-reveal>
-        <h2 class="section-title" style="font-size:40px; margin-bottom:40px;">${t('concept.title')}</h2>
-        <div style="display:grid; gap:20px;">
-          ${[1, 2, 3].map(i => `
-            <div style="padding-left:24px; border-left:2px solid #FFF; opacity:0.8;">
-              ${t('concept.item' + i)}
+      <div class="stats-strip" style="background:transparent; border-color:rgba(255,255,255,0.1);">
+        <div class="container stats-grid">
+          ${[
+            {t: 'years', v: '7', s: '+'},
+            {t: 'projects', v: '200', s: '+'},
+            {t: 'hidden', v: '100', s: '%'},
+            {t: 'guarantee', v: '5', s: ''}
+          ].map((item, i) => `
+            <div class="stat-item" data-reveal="delay-${i}">
+              <span class="stat-val counter" data-target="${item.v}" data-suffix="${item.s}">0</span>
+              <span class="stat-label">${t('stats.' + item.t)}</span>
             </div>
           `).join('')}
         </div>
       </div>
-      <div data-reveal="delay-1">
-        <img src="/assets/images/gallery_1.png" style="width:100%; border-radius:6px; height:500px; object-fit:cover;">
-      </div>
-    </div>
-  </section>
 
-  <div class="stats-strip">
-    <div class="container stats-grid">
-      <div class="stat-item" data-reveal>
-        <span class="stat-val counter" data-target="7" data-suffix="+">0</span>
-        <span class="stat-label">${t('stats.years')}</span>
-      </div>
-      <div class="stat-item" data-reveal="delay-1">
-        <span class="stat-val counter" data-target="200" data-suffix="+">0</span>
-        <span class="stat-label">${t('stats.projects')}</span>
-      </div>
-      <div class="stat-item" data-reveal="delay-2">
-        <span class="stat-val counter" data-target="100" data-suffix="%">0</span>
-        <span class="stat-label">${t('stats.hidden')}</span>
-      </div>
-      <div class="stat-item" data-reveal="delay-3">
-        <span class="stat-val counter" data-target="5">0</span>
-        <span class="stat-label">${t('stats.guarantee')}</span>
-      </div>
+      <section class="section" style="background:transparent;">
+        <div class="container">
+          <div class="section-header-wrap">
+            <h2 class="section-title reveal" data-reveal>${t('catalog.title')}</h2>
+          </div>
+          <div class="catalog-master-wrapper" style="position:relative; width:100%; overflow: visible; padding: 0;">
+            <div class="catalog-grid catalog-grid-responsive" onscroll="window.app.updateCatalogArrows(this)">
+              ${catalog.slice(0, 3).map(door => CatalogCard(door)).join('')}
+            </div>
+          </div>
+          <div style="width:100%; display:flex; justify-content:center; margin: 40px 0;" data-reveal>
+            <a href="#catalog" class="btn btn-secondary">${t('catalog.view_all_btn')}</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" style="background:transparent;">
+        <div class="container">
+          <h2 class="section-title reveal" data-reveal style="margin-bottom:80px;">${t('how_it_works.title')}</h2>
+          <div class="process-grid">
+            ${[1, 2, 3, 4].map(i => `
+              <div class="step-card" data-reveal="delay-${i}">
+                <span class="step-number">0${i}</span>
+                <h3 class="step-title-small">${t(`how_it_works.step${i}.name`)}</h3>
+                <p class="step-desc">${t(`how_it_works.step${i}.desc`)}</p>
+                <div class="step-line"></div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </section>
     </div>
   </div>
-
-  <section class="section">
-    <div class="container">
-      <div class="section-header-wrap">
-        <h2 class="section-title reveal" data-reveal>${t('catalog.title')}</h2>
-      </div>
-
-
-      <div class="catalog-master-wrapper" style="position:relative; width:100%; overflow: visible; padding: 0;">
-        <div class="catalog-grid catalog-grid-responsive" onscroll="window.app.updateCatalogArrows(this)">
-          ${catalog.slice(0, 3).map(door => CatalogCard(door)).join('')}
-        </div>
-      </div>
-
-
-
-
-
-      <div style="width:100%; display:flex; justify-content:center; margin: 40px 0;" data-reveal>
-        <a href="#catalog" class="btn btn-secondary">${t('catalog.view_all_btn')}</a>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="section section-alt">
-    <div class="container">
-      <h2 class="section-title reveal" data-reveal style="margin-bottom:80px;">${t('how_it_works.title')}</h2>
-      <div class="process-grid">
-
-        ${[1, 2, 3, 4].map(i => `
-          <div class="step-card" data-reveal="delay-${i}">
-            <span class="step-number">0${i}</span>
-            <h3 class="step-title-small">${t(`how_it_works.step${i}.name`)}</h3>
-            <p class="step-desc">${t(`how_it_works.step${i}.desc`)}</p>
-            <div class="step-line"></div>
-          </div>
-        `).join('')}
-
-      </div>
-    </div>
-  </section>
 `;
 };
 
@@ -1356,7 +1347,7 @@ window.app = {
 
         header.innerHTML = Header();
         footer.innerHTML = `
-            <div class="container footer-grid">
+            <div class="container footer-grid relative z-20" style="background:#09090b;">
               <div class="footer-address-block" style="display:grid; gap:24px;">
                 <h3 style="margin-bottom:12px; letter-spacing:0.1em;">MONODOOR</h3>
                 <p style="font-size:14px; color:#989490; line-height:1.6;">${t('footer.address')}<br>${t('contacts.mon_fri')}: 09:00 – 18:00</p>
@@ -1366,7 +1357,6 @@ window.app = {
                 <p style="font-size:12px; color:rgba(152,148,144,0.5);">${t('footer.rights')}</p>
               </div>
             </div>
-
           `;
 
         if (hash === '#home') { 
