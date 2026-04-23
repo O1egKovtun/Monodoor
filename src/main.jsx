@@ -557,9 +557,9 @@ const AboutPage = () => {
       </div>
 
       <div class="value-block" style="min-height: 100vh; display: flex; flex-direction: column; justify-content: center;" data-reveal>
-        <span class="value-accent">PORTOFINO / FACTORY</span>
+        <span class="value-accent">PORTANOVA / FACTORY</span>
         <h2 class="value-title">Власне виробництво у Львові</h2>
-        <p class="value-desc">Наше серце — завод PortoFino у Львові. Це сучасний виробничий комплекс, де поєднуються італійські технології та українська майстерність для створення ідеальних дверей прихованого монтажу.</p>
+        <p class="value-desc">Наше серце — завод PortaNova у Львові. Це сучасний виробничий комплекс, де поєднуються італійські технології та українська майстерність для створення ідеальних дверей прихованого монтажу.</p>
         <div class="value-line"></div>
       </div>
 
@@ -587,7 +587,7 @@ const AboutPage = () => {
 
     <!-- Pinned Visual Side -->
     <div class="about-story__image-wrap">
-      <img src="/assets/images/visible_concealed_door_bedroom.png" alt="Monodoor PortoFino Factory">
+      <img src="/assets/images/visible_concealed_door_bedroom.png" alt="Monodoor PortaNova Factory">
     </div>
   </div>
 

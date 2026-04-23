@@ -105,7 +105,7 @@ const AboutSection = () => {
           <div className="about-story__image-wrap bg-transparent">
             <img 
               src="/assets/images/visible_concealed_door_bedroom.png" 
-              alt="Monodoor PortoFino Factory"
+              alt="Monodoor PortaNova Factory"
               onError={(e) => { e.target.src = 'https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=2069&auto=format&fit=crop'; }}
             />
           </div>
