@@ -512,7 +512,7 @@ const AboutPage = () => {
   <!-- Cinematic Scroller Section -->
   <div class="about-cinematic-section" id="about-cinematic">
     <!-- Fail-Safe Background Layer -->
-    <div class="about-bg-absolute-layer"></div>
+    <div class="about-bg-absolute-layer bg-cover bg-no-repeat bg-center bg-scroll md:bg-fixed min-h-[100dvh]"></div>
 
     <div class="cinematic-content">
       <!-- Block 1: Partnership -->

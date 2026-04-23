@@ -190,7 +190,14 @@ img {
   background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/assets/images/gallery_3.png');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed; /* Fixed relative to viewport */
+  background-repeat: no-repeat;
+  background-attachment: scroll; /* Mobile default for stability */
+}
+
+@media (min-width: 1024px) {
+  .about-bg-absolute-layer {
+    background-attachment: fixed; /* Desktop parallax effect maintained */
+  }
 }
 
 /* iOS Fix: background-attachment: fixed is broken on iOS */
