@@ -328,6 +328,8 @@ const MobileNav = () => {
 
 const CatalogCard = (door) => `
   <div class="catalog-card" data-series="${door?.series}">
+
+
     <div class="card-image-wrap" style="aspect-ratio: 1/1; background: #000; overflow: hidden;">
       <img src="${door?.image || ''}" alt="${door?.name || ''}" style="width:100%; height:100%; object-fit:cover;">
       <span class="series-badge">${door?.series || ''}</span>
@@ -424,9 +426,11 @@ const HomePage = () => {
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         </div>
         
-        <div class="catalog-grid" onscroll="window.app.updateCatalogArrows(this)" style="display: flex; flex-direction: row; overflow-x: scroll; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; gap: 16px; padding: 0 12.5vw 24px; scroll-behavior: smooth;">
+        <div class="catalog-grid catalog-grid-responsive" onscroll="window.app.updateCatalogArrows(this)">
           ${catalog.slice(0, 3).map(door => CatalogCard(door)).join('')}
         </div>
+
+
         
         <div class="catalog-nav-arrow right mobile-only" style="position: absolute; right: 0; top: 70%; transform: translateY(-50%); z-index: 55; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); border-radius: 50%; color: white; border: 1px solid rgba(255,255,255,0.1);" onclick="window.app.scrollCatalog(this, 1)">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
@@ -488,11 +492,13 @@ const CatalogPage = () => `
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         </div>
         
-        <div class="catalog-grid" id="catalog-grid-full" onscroll="window.app.updateCatalogArrows(this)" style="scroll-behavior: smooth;">
+        <div class="catalog-grid catalog-grid-responsive" id="catalog-grid-full" onscroll="window.app.updateCatalogArrows(this)">
           ${(!catalog || catalog.length === 0) 
             ? `<div style="padding:100px 0; text-align:center; width:100%; color:var(--text-secondary);">${t('catalog.loading') || 'Loading...'}</div>` 
             : (catalog || []).filter(d => (window.app.catalogFilter?.series === 'All' || d?.series === window.app.catalogFilter?.series)).map(door => CatalogCard(door)).join('')}
         </div>
+
+
         
         <div class="catalog-nav-arrow right mobile-only" style="position: absolute; right: 0; top: 70%; transform: translateY(-50%); z-index: 55; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); border-radius: 50%; color: white; border: 1px solid rgba(255,255,255,0.1);" onclick="window.app.scrollCatalog(this, 1)">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>

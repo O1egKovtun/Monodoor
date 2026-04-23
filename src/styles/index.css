@@ -1639,39 +1639,30 @@ footer { padding: 100px 0 60px; }
     overflow: hidden !important;
   }
 
-  .catalog-grid {
+  .catalog-grid-responsive {
     display: flex !important;
-    flex-direction: row !important;
-    overflow-x: scroll !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
     scroll-snap-type: x mandatory !important;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    overscroll-behavior-x: contain;
-    gap: 16px;
-    padding-left: 10vw !important; /* Forces the first card to the center */
-    padding-right: 10vw !important; /* Forces the last card to the center */
-    padding-bottom: 24px;
-    z-index: 20 !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+    gap: 16px !important;
+    padding: 0 12.5vw 24px !important;
+    margin: 0 !important;
     width: 100% !important;
-    overflow-y: visible !important;
-    scroll-behavior: smooth !important;
   }
+  .catalog-grid-responsive::-webkit-scrollbar { display: none; }
 
   .catalog-card {
     flex: 0 0 75vw !important;
     width: 75vw !important;
-    margin: 0 !important;
     scroll-snap-align: center !important;
-    height: auto;
+    margin: 0 !important;
     background: #181818;
     border: 1px solid rgba(255,255,255,0.05);
     border-radius: 12px;
     overflow: hidden;
   }
-
-
-
-
 
   .catalog-nav-arrow {
     display: flex !important;
@@ -1680,7 +1671,6 @@ footer { padding: 100px 0 60px; }
     position: absolute;
     top: 70% !important;
     transform: translateY(-50%) !important;
-
     width: 44px !important;
     height: 44px !important;
     background: rgba(0, 0, 0, 0.4) !important;
@@ -1694,37 +1684,33 @@ footer { padding: 100px 0 60px; }
     -webkit-tap-highlight-color: transparent;
     transition: all 0.2s ease;
   }
-
   .catalog-nav-arrow.left { left: 0 !important; border-radius: 0 50% 50% 0 !important; }
   .catalog-nav-arrow.right { right: 0 !important; border-radius: 50% 0 0 50% !important; }
 
-  @media (min-width: 1025px) {
-    .catalog-grid {
+  @media (min-width: 1024px) {
+    .catalog-grid-responsive {
       display: grid !important;
       grid-template-columns: repeat(3, 1fr) !important;
-      overflow: visible !important;
       gap: 32px !important;
       padding: 0 !important;
+      overflow: visible !important;
+      scroll-snap-type: none !important;
     }
     .catalog-card {
       width: 100% !important;
       flex: none !important;
       scroll-snap-align: none !important;
-      border: 1px solid rgba(255,255,255,0.1);
-      transition: transform 0.3s ease, border-color 0.3s ease;
+      transition: transform 0.3s ease;
     }
     .catalog-card:hover {
       transform: translateY(-8px);
-      border-color: var(--accent);
     }
     .catalog-nav-arrow {
       display: none !important;
     }
-
-    .catalog-master-wrapper {
-      overflow: visible !important;
-    }
   }
+
+
 
 
 
