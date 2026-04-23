@@ -206,6 +206,50 @@ const updateSummary = () => {
 
 // --- COMPONENTS ---
 
+const Modal = () => {
+  const doorId = window.app.selectedDoorId;
+  if (!doorId) return '';
+  const door = catalog.find(d => d.id === parseInt(doorId));
+  if (!door) return '';
+  
+  const isEn = currentLang === 'en';
+  
+  return `
+    <div class="modal-overlay" onclick="if(event.target===this) window.app.closeModal()">
+      <div class="modal-container">
+        <button class="modal-close-btn" onclick="window.app.closeModal()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="grid-modal-layout" style="display:grid; grid-template-columns: 1fr 1.2fr; gap:48px;">
+          <div style="background:#000; border-radius:16px; overflow:hidden; aspect-ratio:3/4;">
+            <img src="${door.image}" alt="${door.name}" style="width:100%; height:100%; object-fit:cover;">
+          </div>
+          <div style="display:flex; flex-direction:column; justify-content:center; text-align:left;">
+            <span class="eyebrow" style="color:var(--accent); font-size:14px; margin-bottom:12px;">${door.series}</span>
+            <h2 style="font-size:48px; font-weight:700; color:#FFF; line-height:1.1; margin-bottom:24px;">${door.name}</h2>
+            <p style="color:rgba(255,255,255,0.7); font-size:18px; line-height:1.6; margin-bottom:40px;">
+              ${isEn ? (door.desc_en || 'Premium architectural door system with hidden frame.') : (door.desc || 'Преміальна система прихованих дверей з алюмінієвим коробом.')}
+            </p>
+            
+            <div style="display:grid; gap:16px; margin-bottom:48px;">
+              ${Object.entries(door.specs || {}).map(([k, v]) => `
+                <div style="display:flex; justify-content:space-between; padding-bottom:12px; border-bottom:1px solid rgba(255,255,255,0.08);">
+                  <span style="color:#666; font-size:14px;">${t('catalog.specs.' + k)}</span>
+                  <span style="color:#FFF; font-weight:500;">${v}</span>
+                </div>
+              `).join('')}
+            </div>
+            
+            <a href="#configurator" class="btn btn-primary" onclick="window.app.closeModal(); doorConfig.series='${door.series}'; window.app.render();" style="height:60px; justify-content:center; font-size:16px;">
+              ${t('hero.btn_config')}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+};
+
 const Header = () => {
   const hash = window.location.hash || '#home';
   const isActive = (h) => (hash.startsWith(h) ? 'active' : '');
@@ -283,9 +327,9 @@ const MobileNav = () => {
 };
 
 const CatalogCard = (door) => `
-  <div class="catalog-card" data-reveal>
-    <div class="card-image-wrap">
-      <img src="${door?.image || ''}" alt="${door?.name || ''}" onerror="this.src='data:image/svg+xml;base64,...'">
+  <div class="catalog-card" data-series="${door?.series}">
+    <div class="card-image-wrap" style="aspect-ratio: 1/1; background: #000; overflow: hidden;">
+      <img src="${door?.image || ''}" alt="${door?.name || ''}" style="width:100%; height:100%; object-fit:cover;">
       <span class="series-badge">${door?.series || ''}</span>
     </div>
     <div class="card-body">
@@ -296,60 +340,40 @@ const CatalogCard = (door) => `
         <span class="spec-tag">${door?.specs?.mat || ''}</span>
       </div>
       <div class="button-group" style="margin-top:32px; gap:12px;">
-        <button class="btn btn-secondary" onclick="window.app.toggleSpecs(${door?.id})">${t('catalog.more')}</button>
-        <button class="btn btn-primary" onclick="window.location.hash = '#configurator'">${t('catalog.order')}</button>
-      </div>
-    </div>
-    <div class="specs-expandable" id="specs-${door?.id}">
-      <div class="specs-table">
-        ${Object.entries(door?.specs || {}).map(([label, val]) => `
-          <div class="spec-row">
-            <span class="spec-label">${t('catalog.specs.' + label)}</span>
-            <span class="spec-value">${val}</span>
-          </div>
-        `).join('')}
+        <button class="btn btn-secondary" onclick="window.app.openModal(${door?.id})">Детальніше</button>
+        <a href="#configurator" class="btn btn-primary" onclick="doorConfig.series='${door.series}'; window.app.render();" style="flex:1; justify-content:center;">Зібрати двері</a>
       </div>
     </div>
   </div>
 `;
 
+
 const HomePage = () => {
   const isEn = currentLang === 'en';
-  const heroSubLine1 = isEn ? "Geometry without compromise" : "Геометрія без компромісів";
-  const heroSubLine2 = isEn ? "Flush-mounted doors" : "Двері прихованого монтажу";
 
   return `
-  <section id="hero" style="position:relative; overflow:hidden; background:#181818;">
-    <!-- Parallax Background for Desktop & Mobile -->
-    <div class="hero-bg-parallax" style="position:absolute; top:-10%; left:-10%; width:120%; height:120%; background-image: linear-gradient(to right, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 40%, rgba(0, 0, 0, 0.4) 100%), url('/assets/images/hero_door_right.png'); background-size:cover; background-position:center; z-index:0; transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);"></div>
-    
-    <div class="container hero-content" style="position:relative; z-index:10;">
-      <div class="hero-text-block">
-        <span class="eyebrow" data-reveal>${t('hero.eyebrow')}</span>
-        <h1 class="hero-h1-animate" data-reveal="delay-1">${t('hero.h1')}</h1>
-        <div class="hero-sub" data-reveal="delay-2">
-          <div>${heroSubLine1}</div>
-          <div>${heroSubLine2}</div>
-        </div>
-        <div class="hero-btns" data-reveal="delay-3" style="display:flex; gap:20px;">
-          <a href="#catalog" class="btn btn-primary">${t('hero.btn_catalog')}</a>
-          <a href="#configurator" class="btn btn-secondary">${t('hero.btn_config')}</a>
+  <section id="hero" class="hero-new-layout" style="position:relative; background:#000; overflow:hidden; min-height: 100vh; display: flex; align-items: center;">
+    <!-- Restored Hero Photo for Desktop -->
+    <div class="hero-image-container desktop-only" style="position:absolute; top:0; right:0; width:55%; height:100%; z-index:1;">
+      <img src="/assets/images/hero_door_right.png" alt="Luxury Door" style="width:100%; height:100%; object-fit:cover; mask-image: linear-gradient(to right, transparent, black 20%); -webkit-mask-image: linear-gradient(to right, transparent, black 20%);">
+    </div>
+
+    <div class="container hero-grid-wrap" style="position:relative; z-index:10; width: 100%;">
+      <div class="hero-text-column" style="display: flex; flex-direction: column; align-items: flex-start; text-align: left; padding-left: 5vw; margin-left: 0; max-width: 800px;">
+        <span class="eyebrow reveal" data-reveal style="font-size: 14px; letter-spacing: 0.3em; margin-bottom: 24px; color: #989490; font-weight: 500;">УЖГОРОД · ЗАВОД PORTANOVA</span>
+        <h1 class="hero-h1-new reveal" data-reveal="delay-1" style="font-size: 64px !important; font-weight: 700; color: #FFFFFF; line-height: 1.1; margin: 0 0 24px 0; text-align: left; white-space: nowrap;">Двері, яких не видно.</h1>
+        <p class="hero-p-new reveal" data-reveal="delay-2" style="font-size: 24px !important; font-weight: 300; color: rgba(255,255,255,0.7); line-height: 1.4; margin: 0 0 48px 0; text-align: left; max-width: 540px;">Геометрія без компромісів. Двері прихованого монтажу.</p>
+        <div class="hero-btns-new reveal" data-reveal="delay-3" style="display: flex; gap: 20px; align-items: flex-start;">
+          <a href="#catalog" class="btn btn-primary" style="height: 56px; padding: 0 32px; display: flex; align-items: center; font-weight: 600; text-transform: none;">Переглянути каталог</a>
+          <a href="#configurator" class="btn btn-secondary" style="height: 56px; padding: 0 32px; display: flex; align-items: center; font-weight: 600; text-transform: none;">Зібрати двері</a>
         </div>
       </div>
-    </div>
-    
-    <!-- Desktop-only hero image on the right -->
-    <img src="/assets/images/hero_door_right.png" class="hero-image desktop-only" alt="Luxury Door" style="position:absolute; top:0; right:0; width:50%; height:100%; object-fit:cover; z-index:1; mask-image: linear-gradient(to right, transparent 0%, black 20%);">
-    
-    <div class="scroll-indicator" style="position:absolute; bottom:40px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; z-index:10;">
-       <div style="width:1px; height:40px; background:rgba(255,255,255,0.2); position:relative; overflow:hidden;">
-          <div style="position:absolute; top:0; left:0; width:100%; height:4px; background:#FFF; animation: scrollDot 2s infinite;"></div>
-       </div>
     </div>
   </section>
 
   <section class="section section-alt">
     <div class="container grid-2-col">
+
       <div data-reveal>
         <h2 class="section-title" style="font-size:40px; margin-bottom:40px;">${t('concept.title')}</h2>
         <div style="display:grid; gap:20px;">
@@ -394,11 +418,23 @@ const HomePage = () => {
         <a href="#catalog" class="view-all-link reveal" data-reveal="delay-1">${t('catalog.all')} <span class="arrow">→</span></a>
       </div>
 
-      <div class="catalog-grid-outer-wrap">
-        <div class="catalog-grid">
+      <div class="catalog-master-wrapper" style="position:relative; width:100%; overflow: visible; padding: 0;">
+        <!-- Arrows placed outside/above the scroll container -->
+        <div class="catalog-nav-arrow left" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); z-index: 55; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); border-radius: 50%; color: white; border: 1px solid rgba(255,255,255,0.1); opacity: 0; pointer-events: none;" onclick="window.app.scrollCatalog(this, -1)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </div>
+        
+        <div class="catalog-grid" onscroll="window.app.updateCatalogArrows(this)" style="display: flex; flex-direction: row; overflow-x: scroll; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; gap: 16px; padding: 0 12.5vw 24px; scroll-behavior: smooth;">
           ${catalog.slice(0, 3).map(door => CatalogCard(door)).join('')}
         </div>
+        
+        <div class="catalog-nav-arrow right" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 55; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); border-radius: 50%; color: white; border: 1px solid rgba(255,255,255,0.1);" onclick="window.app.scrollCatalog(this, 1)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </div>
       </div>
+
+
+
 
 
       <div style="margin-top:60px;" data-reveal>
@@ -430,27 +466,36 @@ const HomePage = () => {
 const CatalogPage = () => `
   <section class="section catalog-page-section" style="padding-top:160px;">
     <div class="container">
-      <h1 data-reveal style="font-size:56px; margin-bottom:20px;">${t('catalog.title')}</h1>
-      <p data-reveal="delay-1" style="color:var(--text-secondary); margin-bottom:60px;">${t('catalog.title')} — Leoni & FiloMuro</p>
+      <div class="catalog-header-pc" style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 48px; text-align: left;">
+        <h1 data-reveal style="font-size: 64px !important; font-weight: 800; white-space: nowrap; margin: 0;">${t('catalog.title')}</h1>
+        <p data-reveal="delay-1" style="color:var(--text-secondary); font-size: 20px; white-space: nowrap; margin: 0;">Leoni & FiloMuro</p>
+      </div>
+
       
       <div class="filter-bar">
         <div style="display:flex; align-items:center; gap:12px;">
            <span style="font-size:12px; color:var(--text-muted);">${t('catalog.filters.series')}:</span>
-           ${['All', 'Leoni 40', 'FiloMuro 45', 'FiloMuro 50'].map(s => `
+           ${['All', 'Leoni', 'FiloMuro'].map(s => `
              <button class="btn ${window.app.catalogFilter.series === s ? 'btn-primary' : 'btn-secondary'}" onclick="window.app.setFilter('series', '${s}')" style="padding:6px 14px; font-size:12px; height:auto;">${s}</button>
            `).join('')}
         </div>
       </div>
 
-      <div class="catalog-grid-outer-wrap">
-        <div class="catalog-grid" id="catalog-grid-full">
+      <div class="catalog-master-wrapper" style="position:relative; width:100%; overflow: visible; padding: 0;">
+        <div class="catalog-nav-arrow left" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); z-index: 55; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); border-radius: 50%; color: white; border: 1px solid rgba(255,255,255,0.1); opacity: 0; pointer-events: none;" onclick="window.app.scrollCatalog(this, -1)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </div>
+        
+        <div class="catalog-grid" id="catalog-grid-full" onscroll="window.app.updateCatalogArrows(this)" style="scroll-behavior: smooth;">
           ${(!catalog || catalog.length === 0) 
             ? `<div style="padding:100px 0; text-align:center; width:100%; color:var(--text-secondary);">${t('catalog.loading') || 'Loading...'}</div>` 
             : (catalog || []).filter(d => (window.app.catalogFilter?.series === 'All' || d?.series === window.app.catalogFilter?.series)).map(door => CatalogCard(door)).join('')}
         </div>
+        
+        <div class="catalog-nav-arrow right" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 55; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); border-radius: 50%; color: white; border: 1px solid rgba(255,255,255,0.1);" onclick="window.app.scrollCatalog(this, 1)">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </div>
       </div>
-
-
     </div>
   </section>
 `;
@@ -1034,11 +1079,80 @@ window.app = {
   activeAccordion: 'dimensions',
   currentView: (window.location.hash || '#home').replace('#', ''),
 
+  selectedDoorId: null,
+
+  openModal: (id) => {
+    window.app.selectedDoorId = id;
+    const portal = document.getElementById('modal-portal');
+    if (portal) {
+      portal.innerHTML = Modal();
+      setTimeout(() => {
+        const overlay = portal.querySelector('.modal-overlay');
+        if (overlay) overlay.classList.add('active');
+      }, 10);
+    }
+  },
+
+  closeModal: () => {
+    const portal = document.getElementById('modal-portal');
+    if (portal) {
+      const overlay = portal.querySelector('.modal-overlay');
+      if (overlay) overlay.classList.remove('active');
+      setTimeout(() => {
+        window.app.selectedDoorId = null;
+        portal.innerHTML = '';
+      }, 300);
+    }
+  },
+
+  scrollCatalog: (btn, dir) => {
+    if (!btn) return;
+    const wrapper = btn.closest('.catalog-master-wrapper') || btn.closest('.catalog-grid-outer-wrap');
+    if (!wrapper) return;
+    const grid = wrapper.querySelector('.catalog-grid');
+    if (!grid) return;
+    const card = grid.querySelector('.catalog-card');
+    if (!card) return;
+    
+    const scrollAmount = card.offsetWidth + 16; 
+    grid.scrollBy({ left: dir * scrollAmount, behavior: 'smooth' });
+  },
+
+  updateCatalogArrows: (grid) => {
+    if (!grid || typeof grid.scrollLeft === 'undefined') return;
+    
+    const wrapper = grid.closest('.catalog-master-wrapper');
+    if (!wrapper) return;
+    
+    const leftArrow = wrapper.querySelector('.catalog-nav-arrow.left');
+    const rightArrow = wrapper.querySelector('.catalog-nav-arrow.right');
+    if (!leftArrow || !rightArrow) return;
+
+    const maxScroll = grid.scrollWidth - grid.clientWidth;
+    
+    // Smooth opacity transitions
+    if (grid.scrollLeft <= 20) {
+      leftArrow.style.opacity = '0';
+      leftArrow.style.pointerEvents = 'none';
+    } else {
+      leftArrow.style.opacity = '1';
+      leftArrow.style.pointerEvents = 'auto';
+    }
+    
+    if (grid.scrollLeft >= maxScroll - 20) {
+      rightArrow.style.opacity = '0';
+      rightArrow.style.pointerEvents = 'none';
+    } else {
+      rightArrow.style.opacity = '1';
+      rightArrow.style.pointerEvents = 'auto';
+    }
+  },
+
 
   onNavClick: (hash) => {
+
     window.app.currentView = hash.replace('#', '') || 'home';
     // Reset Constructor state if navigating away
-
     if (hash !== '#configurator') {
       doorConfig.configStep = 1;
     }
@@ -1057,6 +1171,7 @@ window.app = {
 
     // Close mobile menu if open
     window.app.toggleMenu(false);
+    window.app.render();
   },
 
   toggleLang: () => {

@@ -10,7 +10,8 @@ export const translations = {
     },
     hero: {
       eyebrow: "УЖГОРОД · ЗАВОД PORTANOVA",
-      h1: "<div>Двері,</div><div>яких не видно.</div>",
+      h1: "Двері, яких не видно.",
+
       sub: "Геометрія без компромісів. Двері прихованого монтажу.",
       btn_catalog: "Переглянути каталог",
       btn_config: "Зібрати двері"
@@ -120,7 +121,8 @@ export const translations = {
     },
     hero: {
       eyebrow: "UZHHOROD · PORTANOVA FACTORY",
-      h1: "<div>Doors</div><div>that are invisible.</div>",
+      h1: "Doors that are invisible.",
+
       sub: "Geometry without compromise. Flush-mounted doors.",
       btn_catalog: "Browse Catalog",
       btn_config: "Build a Door"
