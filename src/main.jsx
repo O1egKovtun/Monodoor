@@ -415,12 +415,12 @@ const HomePage = () => {
     <div class="container">
       <div class="section-header-wrap">
         <h2 class="section-title reveal" data-reveal>${t('catalog.title')}</h2>
-        <a href="#catalog" class="view-all-link reveal" data-reveal="delay-1">${t('catalog.all')} <span class="arrow">→</span></a>
       </div>
+
 
       <div class="catalog-master-wrapper" style="position:relative; width:100%; overflow: visible; padding: 0;">
         <!-- Arrows placed outside/above the scroll container -->
-        <div class="catalog-nav-arrow left" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); z-index: 55; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); border-radius: 50%; color: white; border: 1px solid rgba(255,255,255,0.1); opacity: 0; pointer-events: none;" onclick="window.app.scrollCatalog(this, -1)">
+        <div class="catalog-nav-arrow left mobile-only" style="position: absolute; left: 0; top: 70%; transform: translateY(-50%); z-index: 55; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); border-radius: 50%; color: white; border: 1px solid rgba(255,255,255,0.1); opacity: 0; pointer-events: none;" onclick="window.app.scrollCatalog(this, -1)">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         </div>
         
@@ -428,18 +428,20 @@ const HomePage = () => {
           ${catalog.slice(0, 3).map(door => CatalogCard(door)).join('')}
         </div>
         
-        <div class="catalog-nav-arrow right" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 55; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); border-radius: 50%; color: white; border: 1px solid rgba(255,255,255,0.1);" onclick="window.app.scrollCatalog(this, 1)">
+        <div class="catalog-nav-arrow right mobile-only" style="position: absolute; right: 0; top: 70%; transform: translateY(-50%); z-index: 55; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); border-radius: 50%; color: white; border: 1px solid rgba(255,255,255,0.1);" onclick="window.app.scrollCatalog(this, 1)">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
         </div>
+
       </div>
 
 
 
 
 
-      <div style="margin-top:60px;" data-reveal>
+      <div style="width:100%; display:flex; justify-content:center; margin: 40px 0;" data-reveal>
         <a href="#catalog" class="btn btn-secondary">${t('catalog.view_all_btn')}</a>
       </div>
+
     </div>
   </section>
 
@@ -482,7 +484,7 @@ const CatalogPage = () => `
       </div>
 
       <div class="catalog-master-wrapper" style="position:relative; width:100%; overflow: visible; padding: 0;">
-        <div class="catalog-nav-arrow left" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); z-index: 55; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); border-radius: 50%; color: white; border: 1px solid rgba(255,255,255,0.1); opacity: 0; pointer-events: none;" onclick="window.app.scrollCatalog(this, -1)">
+        <div class="catalog-nav-arrow left mobile-only" style="position: absolute; left: 0; top: 70%; transform: translateY(-50%); z-index: 55; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); border-radius: 50%; color: white; border: 1px solid rgba(255,255,255,0.1); opacity: 0; pointer-events: none;" onclick="window.app.scrollCatalog(this, -1)">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         </div>
         
@@ -492,9 +494,10 @@ const CatalogPage = () => `
             : (catalog || []).filter(d => (window.app.catalogFilter?.series === 'All' || d?.series === window.app.catalogFilter?.series)).map(door => CatalogCard(door)).join('')}
         </div>
         
-        <div class="catalog-nav-arrow right" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 55; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); border-radius: 50%; color: white; border: 1px solid rgba(255,255,255,0.1);" onclick="window.app.scrollCatalog(this, 1)">
+        <div class="catalog-nav-arrow right mobile-only" style="position: absolute; right: 0; top: 70%; transform: translateY(-50%); z-index: 55; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); border-radius: 50%; color: white; border: 1px solid rgba(255,255,255,0.1);" onclick="window.app.scrollCatalog(this, 1)">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
         </div>
+
       </div>
     </div>
   </section>
