@@ -127,6 +127,26 @@ img {
   .desktop-only { display: none !important; }
 }
 
+.swipe-cue {
+  display: none;
+  width: 100%;
+  padding: 12px 0;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  color: rgba(156, 163, 175, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .swipe-cue {
+    display: flex;
+  }
+}
+
 .container {
   max-width: 1440px;
   margin: 0 auto;
